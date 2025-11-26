@@ -40,21 +40,22 @@ This repository contains a complete set of GitHub configuration files, workflow 
 │   ├── ai-review.yml           # AI code review integration
 │   ├── dependency-updates.yml  # Dependency management
 │   └── performance.yml         # Performance testing
-├── CODEOWNERS                  # Code ownership definitions
-├── CONTRIBUTING.md             # Contribution guidelines
-├── FUNDING.yml                 # Sponsorship configuration
-├── PULL_REQUEST_TEMPLATE.md    # PR template
-├── SECURITY.md                 # Security policy
-├── SUPPORT.md                  # Support information
-├── dependabot.yml              # Dependabot configuration
-├── labels.yml                  # Repository labels
-├── labeler.yml                 # Auto-labeler configuration
-├── lighthouserc.json           # Lighthouse CI config
-├── markdown-link-check-config.json
-└── cspell.json                 # Spell check configuration
-├── .editorconfig               # Editor configuration
-├── CODE_OF_CONDUCT.md          # Code of Conduct
-└── README.md                   # This file
+│   ├── CODEOWNERS                  # Code ownership definitions
+│   ├── CONTRIBUTING.md             # Contribution guidelines
+│   ├── FUNDING.yml                 # Sponsorship configuration
+│   ├── PULL_REQUEST_TEMPLATE.md    # PR template
+│   ├── SECURITY.md                 # Security policy
+│   ├── SUPPORT.md                  # Support information
+│   ├── dependabot.yml              # Dependabot configuration
+│   ├── labels.yml                  # Repository labels
+│   ├── labeler.yml                 # Auto-labeler configuration
+│   ├── lighthouserc.json           # Lighthouse CI config
+│   ├── markdown-link-check-config.json
+│   └── cspell.json                 # Spell check configuration
+├── .editorconfig                   # Editor configuration
+├── .gitignore                      # Git ignore rules
+├── CODE_OF_CONDUCT.md              # Code of Conduct
+└── README.md                       # This file
 ```
 
 ## 🚀 Getting Started
