@@ -1,0 +1,181 @@
+# Issue Triage Automation
+# Automatically labels and assigns issues based on content
+
+name: Issue Triage
+
+on:
+  issues:
+    types: [opened, edited, reopened]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  triage:
+    name: Triage Issue
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto-label based on title/body
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const title = issue.title.toLowerCase();
+            const body = (issue.body || '').toLowerCase();
+            const labels = [];
+            
+            // Bug detection
+            if (title.includes('[bug]') || title.includes('bug:') || 
+                body.includes('steps to reproduce') || body.includes('expected behavior')) {
+              labels.push('bug');
+            }
+            
+            // Feature request detection
+            if (title.includes('[feature]') || title.includes('feature:') ||
+                title.includes('[enhancement]') || body.includes('feature request')) {
+              labels.push('enhancement');
+            }
+            
+            // Question detection
+            if (title.includes('[question]') || title.includes('question:') ||
+                title.includes('how to') || title.includes('how do')) {
+              labels.push('question');
+            }
+            
+            // Documentation
+            if (title.includes('[docs]') || title.includes('documentation') ||
+                body.includes('documentation')) {
+              labels.push('documentation');
+            }
+            
+            // Priority detection
+            if (body.includes('critical') || body.includes('urgent') ||
+                body.includes('production')) {
+              labels.push('priority: high');
+            }
+            
+            // Component detection
+            if (body.includes('api') || title.includes('api')) {
+              labels.push('component: api');
+            }
+            if (body.includes('ui') || body.includes('frontend') || title.includes('ui')) {
+              labels.push('component: ui');
+            }
+            if (body.includes('database') || body.includes('db')) {
+              labels.push('component: database');
+            }
+            if (body.includes('auth') || body.includes('login') || body.includes('authentication')) {
+              labels.push('component: auth');
+            }
+            
+            // Add triage label for new issues
+            if (!issue.labels.some(l => l.name === 'triaged')) {
+              labels.push('needs-triage');
+            }
+            
+            // Apply labels
+            if (labels.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: labels
+              });
+              console.log(`Added labels: ${labels.join(', ')}`);
+            }
+
+      - name: Welcome first-time issue creators
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const creator = issue.user.login;
+            
+            // Check if this is the user's first issue
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              creator: creator,
+              state: 'all'
+            });
+            
+            if (issues.length === 1) {
+              const welcomeMessage = `👋 Welcome @${creator}! Thanks for opening your first issue in this repository.
+              
+              Here's what happens next:
+              1. A maintainer will review your issue and may ask for more details
+              2. Once triaged, appropriate labels will be added
+              3. Feel free to provide any additional information that might help
+              
+              In the meantime, please make sure you've:
+              - [ ] Searched existing issues for duplicates
+              - [ ] Provided all requested information in the template
+              - [ ] Followed our [Code of Conduct](../../CODE_OF_CONDUCT.md)
+              
+              Thanks for contributing! 🎉`;
+              
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: welcomeMessage
+              });
+            }
+
+      - name: Check for duplicate issues
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const title = issue.title.toLowerCase();
+            
+            // Get open issues
+            const { data: openIssues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              per_page: 100
+            });
+            
+            // Simple duplicate detection
+            const potentialDuplicates = openIssues.filter(i => {
+              if (i.number === issue.number) return false;
+              const otherTitle = i.title.toLowerCase();
+              
+              // Check for similar titles (simple word overlap)
+              const words1 = title.split(/\s+/).filter(w => w.length > 3);
+              const words2 = otherTitle.split(/\s+/).filter(w => w.length > 3);
+              const overlap = words1.filter(w => words2.includes(w));
+              
+              return overlap.length >= 3;
+            });
+            
+            if (potentialDuplicates.length > 0) {
+              const duplicateLinks = potentialDuplicates
+                .slice(0, 5)
+                .map(i => `- #${i.number}: ${i.title}`)
+                .join('\n');
+              
+              const message = `⚠️ This issue might be related to existing issues:
+              
+              ${duplicateLinks}
+              
+              Please check if any of these address your concern. If so, consider adding your input there instead.
+              
+              If this is a new issue, please disregard this message.`;
+              
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: message
+              });
+              
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: ['potential-duplicate']
+              });
+            }

@@ -1,0 +1,156 @@
+# Stale Issues and PRs Management
+# Automatically marks and closes stale issues and PRs
+
+name: Stale Management
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Run daily at midnight UTC
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  stale:
+    name: Mark Stale Issues and PRs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/stale@v9
+        with:
+          # General settings
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          
+          # Issue settings
+          stale-issue-message: |
+            👋 This issue has been automatically marked as stale because it has not had recent activity.
+
+            It will be closed in 14 days if no further activity occurs.
+
+            If this issue is still relevant:
+            - Add a comment with an update or additional context
+            - Remove the `stale` label
+
+            If you believe this was marked stale in error, please let us know!
+          
+          close-issue-message: |
+            🔒 This issue has been automatically closed due to inactivity.
+
+            If you believe this issue should be reopened:
+            - Add a new comment explaining why
+            - Or open a new issue with updated information
+
+            Thank you for your contribution!
+          
+          stale-issue-label: 'stale'
+          close-issue-label: 'closed-stale'
+          days-before-issue-stale: 60
+          days-before-issue-close: 14
+          
+          # PR settings
+          stale-pr-message: |
+            👋 This pull request has been automatically marked as stale because it has not had recent activity.
+
+            It will be closed in 7 days if no further activity occurs.
+
+            If you're still working on this:
+            - Push new commits to update the PR
+            - Add a comment with your progress
+            - Remove the `stale` label
+
+            If you need help or have questions, please let us know!
+          
+          close-pr-message: |
+            🔒 This pull request has been automatically closed due to inactivity.
+
+            If you'd like to continue working on this:
+            - Reopen this PR and push new changes
+            - Or open a new PR with your updated changes
+
+            Thank you for your contribution!
+          
+          stale-pr-label: 'stale'
+          close-pr-label: 'closed-stale'
+          days-before-pr-stale: 30
+          days-before-pr-close: 7
+          
+          # Exempt labels
+          exempt-issue-labels: 'pinned,security,blocked,in-progress,help-wanted,good-first-issue'
+          exempt-pr-labels: 'pinned,security,blocked,in-progress,work-in-progress,wip'
+          
+          # Exempt assignees
+          exempt-all-assignees: true
+          
+          # Exempt milestones
+          exempt-all-milestones: true
+          
+          # Operations per run
+          operations-per-run: 100
+          
+          # Remove stale label when updated
+          remove-stale-when-updated: true
+          
+          # Only process issues/PRs created before a certain date
+          # start-date: '2023-01-01'
+          
+          # Ascending order (oldest first)
+          ascending: true
+          
+          # Enable debug logging
+          debug-only: false
+
+  # Additional cleanup for very old items
+  cleanup-old:
+    name: Cleanup Very Old Items
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const daysOld = 365;
+            const cutoffDate = new Date();
+            cutoffDate.setDate(cutoffDate.getDate() - daysOld);
+            
+            // Find very old open issues
+            const { data: oldIssues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              sort: 'created',
+              direction: 'asc',
+              per_page: 50
+            });
+            
+            for (const issue of oldIssues) {
+              if (issue.pull_request) continue; // Skip PRs
+              
+              const createdAt = new Date(issue.created_at);
+              const updatedAt = new Date(issue.updated_at);
+              
+              // Check if issue is very old and hasn't been updated recently
+              if (createdAt < cutoffDate && updatedAt < cutoffDate) {
+                // Check for exempt labels
+                const exemptLabels = ['pinned', 'security', 'blocked', 'long-term'];
+                const hasExemptLabel = issue.labels.some(l => exemptLabels.includes(l.name));
+                
+                if (!hasExemptLabel) {
+                  console.log(`Very old issue found: #${issue.number} - ${issue.title}`);
+                  
+                  // Add a comment instead of closing automatically
+                  await github.rest.issues.createComment({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issue.number,
+                    body: `⏰ This issue is over ${daysOld} days old with no recent activity.\n\nPlease update with current status or it may be closed for housekeeping purposes.`
+                  });
+                  
+                  await github.rest.issues.addLabels({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issue.number,
+                    labels: ['needs-attention']
+                  });
+                }
+              }
+            }

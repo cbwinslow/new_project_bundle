@@ -1,0 +1,246 @@
+# Repository Labels Configuration
+# This file is used by the label-sync workflow to ensure consistent labels
+
+# Issue Type Labels
+- name: bug
+  color: "d73a4a"
+  description: "Something isn't working"
+
+- name: enhancement
+  color: "a2eeef"
+  description: "New feature or request"
+
+- name: question
+  color: "d876e3"
+  description: "Further information is requested"
+
+- name: documentation
+  color: "0075ca"
+  description: "Improvements or additions to documentation"
+
+- name: security
+  color: "ee0701"
+  description: "Security related issue"
+
+# Status Labels
+- name: needs-triage
+  color: "fbca04"
+  description: "Needs to be triaged by maintainers"
+
+- name: triaged
+  color: "c2e0c6"
+  description: "Issue has been triaged"
+
+- name: in-backlog
+  color: "bfd4f2"
+  description: "In backlog for future work"
+
+- name: in-progress
+  color: "0e8a16"
+  description: "Currently being worked on"
+
+- name: in-review
+  color: "5319e7"
+  description: "Under review"
+
+- name: blocked
+  color: "b60205"
+  description: "Blocked by another issue or external dependency"
+
+- name: done
+  color: "0e8a16"
+  description: "Work completed"
+
+- name: wont-fix
+  color: "ffffff"
+  description: "This will not be worked on"
+
+# Priority Labels
+- name: "priority: critical"
+  color: "b60205"
+  description: "Critical priority - needs immediate attention"
+
+- name: "priority: high"
+  color: "d93f0b"
+  description: "High priority"
+
+- name: "priority: medium"
+  color: "fbca04"
+  description: "Medium priority"
+
+- name: "priority: low"
+  color: "0e8a16"
+  description: "Low priority"
+
+# Size Labels (for PRs)
+- name: "size/XS"
+  color: "3CBF00"
+  description: "Extra small change (< 10 lines)"
+
+- name: "size/S"
+  color: "5D9801"
+  description: "Small change (10-50 lines)"
+
+- name: "size/M"
+  color: "7F7203"
+  description: "Medium change (50-200 lines)"
+
+- name: "size/L"
+  color: "A14C05"
+  description: "Large change (200-500 lines)"
+
+- name: "size/XL"
+  color: "C32607"
+  description: "Extra large change (> 500 lines)"
+
+# Component Labels
+- name: "component: api"
+  color: "c5def5"
+  description: "Related to API"
+
+- name: "component: ui"
+  color: "c5def5"
+  description: "Related to user interface"
+
+- name: "component: database"
+  color: "c5def5"
+  description: "Related to database"
+
+- name: "component: auth"
+  color: "c5def5"
+  description: "Related to authentication/authorization"
+
+- name: "component: ci/cd"
+  color: "c5def5"
+  description: "Related to CI/CD pipeline"
+
+- name: "component: infrastructure"
+  color: "c5def5"
+  description: "Related to infrastructure"
+
+# Automation Labels
+- name: stale
+  color: "fef2c0"
+  description: "Issue/PR has not had recent activity"
+
+- name: closed-stale
+  color: "ededed"
+  description: "Closed due to inactivity"
+
+- name: auto-merge
+  color: "0e8a16"
+  description: "Automatically merge when checks pass"
+
+- name: has-conflicts
+  color: "d73a4a"
+  description: "PR has merge conflicts"
+
+- name: potential-duplicate
+  color: "cfd3d7"
+  description: "Potential duplicate of another issue"
+
+# Contribution Labels
+- name: first-contribution
+  color: "7057ff"
+  description: "First contribution from this user"
+
+- name: good-first-issue
+  color: "7057ff"
+  description: "Good for newcomers"
+
+- name: help-wanted
+  color: "008672"
+  description: "Extra attention is needed"
+
+- name: needs-attention
+  color: "e99695"
+  description: "Needs maintainer attention"
+
+# Dependency Labels
+- name: dependencies
+  color: "0366d6"
+  description: "Pull requests that update a dependency"
+
+- name: github-actions
+  color: "000000"
+  description: "Related to GitHub Actions"
+
+- name: npm
+  color: "cb3837"
+  description: "Related to npm dependencies"
+
+- name: python
+  color: "3572A5"
+  description: "Related to Python dependencies"
+
+- name: docker
+  color: "0db7ed"
+  description: "Related to Docker"
+
+- name: major-update
+  color: "d73a4a"
+  description: "Major version update"
+
+- name: needs-review
+  color: "fbca04"
+  description: "Needs human review"
+
+# Release Labels
+- name: merged
+  color: "6f42c1"
+  description: "PR has been merged"
+
+- name: closed
+  color: "ededed"
+  description: "Issue/PR was closed"
+
+- name: breaking-change
+  color: "d73a4a"
+  description: "Contains breaking changes"
+
+# Work Type Labels
+- name: refactoring
+  color: "FEF2C0"
+  description: "Code refactoring"
+
+- name: performance
+  color: "0052CC"
+  description: "Performance improvement"
+
+- name: testing
+  color: "BFD4F2"
+  description: "Related to testing"
+
+- name: technical-debt
+  color: "D4C5F9"
+  description: "Technical debt to address"
+
+# Platform Labels
+- name: "platform: windows"
+  color: "1e90ff"
+  description: "Windows specific"
+
+- name: "platform: macos"
+  color: "1e90ff"
+  description: "macOS specific"
+
+- name: "platform: linux"
+  color: "1e90ff"
+  description: "Linux specific"
+
+# Special Labels
+- name: pinned
+  color: "006b75"
+  description: "Important issue - do not close automatically"
+
+- name: long-term
+  color: "bfd4f2"
+  description: "Long-term project or goal"
+
+- name: work-in-progress
+  color: "fbca04"
+  description: "Work in progress - not ready for review"
+
+- name: wip
+  color: "fbca04"
+  description: "Work in progress"

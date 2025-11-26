@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: GitHub Discussions
+    url: https://github.com/cbwinslow/new_project_bundle/discussions
+    about: Please ask and answer questions here.
+  - name: Documentation
+    url: https://github.com/cbwinslow/new_project_bundle#readme
+    about: Read the documentation
+  - name: Security Issues
+    url: https://github.com/cbwinslow/new_project_bundle/security/advisories
+    about: Report security vulnerabilities privately

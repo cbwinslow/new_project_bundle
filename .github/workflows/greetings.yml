@@ -1,0 +1,55 @@
+# Greetings for First-Time Contributors
+# Welcomes new contributors to the project
+
+name: Greetings
+
+on:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  greeting:
+    name: Greet New Contributors
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/first-interaction@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          issue-message: |
+            👋 Hello @${{ github.actor }}! Thanks for opening your first issue in this repository!
+
+            We appreciate your feedback and will review it as soon as possible. While you wait, please make sure you've:
+
+            - Searched for existing issues that might be similar
+            - Provided all the information requested in the template
+            - Followed our [Code of Conduct](CODE_OF_CONDUCT.md)
+
+            If you have any questions, feel free to ask here or join our discussions!
+
+            Thanks for being part of our community! 🙏
+          
+          pr-message: |
+            🎉 Hello @${{ github.actor }}! Thank you for your first pull request to this repository!
+
+            We're excited to review your contribution. Here's what happens next:
+
+            1. **Automated Checks**: Our CI will run tests, linting, and security scans
+            2. **Code Review**: A maintainer (and/or AI reviewer) will review your changes
+            3. **Feedback**: You may receive suggestions or requests for changes
+            4. **Merge**: Once approved, your PR will be merged!
+
+            While you wait, please ensure:
+            - [ ] Your code follows our style guidelines
+            - [ ] You've added/updated tests as needed
+            - [ ] Documentation is up to date
+            - [ ] All CI checks pass
+
+            Need help? Don't hesitate to ask questions in the comments!
+
+            Welcome to the team! 🚀

@@ -1,0 +1,53 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "codex",
+    "openhands",
+    "gemini",
+    "github",
+    "devops",
+    "cbwinslow",
+    "dependabot",
+    "codeql",
+    "sarif",
+    "trivy",
+    "gitleaks",
+    "trufflehog",
+    "checkov",
+    "semgrep",
+    "snyk",
+    "codecov",
+    "mkdocs",
+    "docusaurus",
+    "vitepress",
+    "jekyll",
+    "yaml",
+    "toml",
+    "dockerfile",
+    "kubernetes",
+    "terraform",
+    "ansible",
+    "cicd",
+    "linter",
+    "eslint",
+    "prettier",
+    "precommit",
+    "gitignore",
+    "gitattributes",
+    "editorconfig"
+  ],
+  "ignorePaths": [
+    "node_modules/**",
+    "dist/**",
+    "build/**",
+    ".git/**",
+    "*.min.js",
+    "package-lock.json"
+  ],
+  "ignoreWords": [],
+  "ignoreRegExpList": [
+    "/[A-Za-z0-9]{7}/",
+    "/v\\d+\\.\\d+\\.\\d+/"
+  ]
+}

@@ -1,0 +1,72 @@
+# Pull Request Labeler Configuration
+# Labels PRs based on changed files
+
+# Documentation changes
+documentation:
+  - changed-files:
+      - any-glob-to-any-file: ['*.md', 'docs/**/*', 'README*']
+
+# Source code changes
+source:
+  - changed-files:
+      - any-glob-to-any-file: ['src/**/*', 'lib/**/*', 'app/**/*']
+
+# Test changes
+testing:
+  - changed-files:
+      - any-glob-to-any-file: ['tests/**/*', 'test/**/*', '__tests__/**/*', '*.test.*', '*.spec.*']
+
+# Configuration changes
+configuration:
+  - changed-files:
+      - any-glob-to-any-file: ['*.json', '*.yml', '*.yaml', '*.toml', '*.ini', '*.config.*']
+
+# CI/CD changes
+'component: ci/cd':
+  - changed-files:
+      - any-glob-to-any-file: ['.github/workflows/**/*', '.github/actions/**/*', 'Jenkinsfile', '.circleci/**/*', '.gitlab-ci.yml']
+
+# Docker changes
+docker:
+  - changed-files:
+      - any-glob-to-any-file: ['Dockerfile*', 'docker-compose*.yml', '.dockerignore']
+
+# Infrastructure changes
+'component: infrastructure':
+  - changed-files:
+      - any-glob-to-any-file: ['terraform/**/*', 'infrastructure/**/*', 'k8s/**/*', 'kubernetes/**/*', 'helm/**/*']
+
+# Frontend changes
+'component: ui':
+  - changed-files:
+      - any-glob-to-any-file: ['*.css', '*.scss', '*.less', '*.html', '*.jsx', '*.tsx', 'components/**/*', 'pages/**/*', 'views/**/*']
+
+# API changes
+'component: api':
+  - changed-files:
+      - any-glob-to-any-file: ['api/**/*', 'routes/**/*', 'controllers/**/*', 'handlers/**/*']
+
+# Database changes
+'component: database':
+  - changed-files:
+      - any-glob-to-any-file: ['migrations/**/*', 'db/**/*', 'database/**/*', '*.sql', 'prisma/**/*', 'models/**/*']
+
+# Security-related files
+security:
+  - changed-files:
+      - any-glob-to-any-file: ['**/security/**/*', '.github/SECURITY.md', 'auth/**/*', 'authentication/**/*', 'authorization/**/*']
+
+# Dependencies
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file: ['package.json', 'package-lock.json', 'yarn.lock', 'pnpm-lock.yaml', 'requirements.txt', 'Pipfile*', 'poetry.lock', 'go.mod', 'go.sum', 'Cargo.toml', 'Cargo.lock', 'Gemfile*', 'composer.json', 'composer.lock']
+
+# GitHub-specific
+github:
+  - changed-files:
+      - any-glob-to-any-file: ['.github/**/*']
+
+# Scripts
+scripts:
+  - changed-files:
+      - any-glob-to-any-file: ['scripts/**/*', 'bin/**/*', '*.sh']

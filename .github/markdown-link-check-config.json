@@ -1,0 +1,25 @@
+{
+  "retryOn429": true,
+  "retryCount": 3,
+  "timeout": "20s",
+  "httpHeaders": [
+    {
+      "urls": ["https://api.github.com/"],
+      "headers": {
+        "Accept": "application/vnd.github.v3+json"
+      }
+    }
+  ],
+  "ignorePatterns": [
+    {
+      "pattern": "^https://github.com/.*/(issues|pull|compare)/.*$"
+    },
+    {
+      "pattern": "^https://github.com/.*/security/.*$"
+    },
+    {
+      "pattern": "^mailto:.*$"
+    }
+  ],
+  "aliveStatusCodes": [200, 206, 301, 302, 303, 307, 308]
+}
