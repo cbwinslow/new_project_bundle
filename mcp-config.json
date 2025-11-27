@@ -1,0 +1,11 @@
+{
+  "$schema": "https://raw.githubusercontent.com/modelcontextprotocol/servers/main/schema/config.json",
+  "mcpServers": {
+    "new-project-bundle": {
+      "command": "node",
+      "args": ["dist/mcp-server/index.js"],
+      "cwd": "${workspaceFolder}",
+      "env": {}
+    }
+  }
+}

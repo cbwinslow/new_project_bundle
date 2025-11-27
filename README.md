@@ -1,6 +1,6 @@
 # New Project Bundle 🚀
 
-> A comprehensive bundle of DevOps project files and GitHub configurations for AI-assisted development
+> A comprehensive bundle of DevOps project files, GitHub configurations, and an MCP server for AI-assisted development
 
 [![CI](https://github.com/cbwinslow/new_project_bundle/actions/workflows/ci.yml/badge.svg)](https://github.com/cbwinslow/new_project_bundle/actions/workflows/ci.yml)
 [![Security](https://github.com/cbwinslow/new_project_bundle/actions/workflows/security.yml/badge.svg)](https://github.com/cbwinslow/new_project_bundle/actions/workflows/security.yml)
@@ -9,8 +9,9 @@
 
 ## 📋 Overview
 
-This repository contains a complete set of GitHub configuration files, workflow scripts, and DevOps automation tools designed to jumpstart new projects with AI agent integration. It includes configurations for:
+This repository contains a complete set of GitHub configuration files, workflow scripts, DevOps automation tools, and an **MCP (Model Context Protocol) server** designed to jumpstart new projects with AI agent integration. It includes configurations for:
 
+- **🤖 MCP Server** - Built-in Model Context Protocol server with useful tools for AI agents
 - **Issue & PR Templates** - Structured templates for bug reports, features, and questions
 - **GitHub Actions Workflows** - Comprehensive CI/CD, security scanning, and automation (18 workflows)
 - **AI Code Review** - Integration points for Copilot, OpenHands, Gemini, CodeRabbit, and more
@@ -60,6 +61,17 @@ This repository contains a complete set of GitHub configuration files, workflow 
 ├── markdown-link-check-config.json
 └── cspell.json                 # Spell check configuration
 │
+# MCP Server (Model Context Protocol)
+src/mcp-server/
+├── index.ts                    # MCP server entry point
+└── tools/
+    ├── filesystem.ts           # File system operations
+    ├── git.ts                  # Git repository tools
+    ├── time.ts                 # Time and timezone tools
+    ├── fetch.ts                # HTTP fetch tools
+    ├── memory.ts               # In-memory storage tools
+    └── system.ts               # System information tools
+│
 # Root Files
 ├── .editorconfig               # Editor configuration
 ├── .gitattributes              # Git attributes
@@ -72,6 +84,8 @@ This repository contains a complete set of GitHub configuration files, workflow 
 ├── LICENSE                     # MIT License
 ├── Makefile                    # Make targets
 ├── README.md                   # This file
+├── mcp-config.json             # MCP server configuration template
+├── tsconfig.json               # TypeScript configuration
 ├── renovate.json               # Renovate config (alt to Dependabot)
 │
 # Package Manager Files (with lock files)
@@ -148,6 +162,126 @@ This bundle is configured to work with multiple AI code review services:
 1. Install from [GitHub Marketplace](https://github.com/marketplace/coderabbit-ai-code-reviews)
 2. Add to repository
 3. Automatic PR reviews begin immediately
+
+## 🤖 MCP Server
+
+This bundle includes a built-in **Model Context Protocol (MCP) server** that provides AI agents with useful tools and services.
+
+### What is MCP?
+
+MCP (Model Context Protocol) is a standardized protocol that allows AI models to securely interact with external tools, data sources, and services. Our MCP server provides a collection of useful tools that AI agents can use.
+
+### Available Tools
+
+The MCP server includes the following tool categories:
+
+#### 📁 File System Tools
+- `read_file` - Read file contents
+- `write_file` - Write content to files
+- `list_directory` - List directory contents
+- `file_info` - Get file/directory information
+- `search_files` - Search for files by pattern
+
+#### 🔧 Git Tools
+- `git_status` - Get repository status
+- `git_log` - View commit history
+- `git_diff` - Show changes
+- `git_branch` - Manage branches
+- `git_show` - Show commit details
+- `git_remote` - Manage remotes
+- `git_blame` - Show line-by-line blame
+
+#### ⏰ Time Tools
+- `get_current_time` - Get current time in any timezone
+- `convert_timezone` - Convert between timezones
+- `time_difference` - Calculate time differences
+- `format_time` - Format timestamps
+- `list_timezones` - List available timezones
+
+#### 🌐 Fetch Tools
+- `http_get` - Fetch content via HTTP GET
+- `http_post` - Send data via HTTP POST
+- `check_url` - Check URL availability
+- `fetch_webpage` - Extract text from webpages
+
+#### 🧠 Memory Tools
+- `memory_set` - Store values with tags
+- `memory_get` - Retrieve stored values
+- `memory_delete` - Delete values
+- `memory_list` - List all stored keys
+- `memory_search` - Search stored content
+- `memory_clear` - Clear all memory
+- `memory_append` - Append to existing entries
+- `memory_stats` - Get memory statistics
+
+#### 💻 System Tools
+- `system_info` - Get system information
+- `get_env` - Get environment variables
+- `list_env` - List environment variables
+- `run_command` - Execute safe read-only commands
+- `calculate_hash` - Calculate string hashes
+- `random_generate` - Generate random values
+- `base64` - Encode/decode base64
+- `json_format` - Format/validate JSON
+
+### Quick Start
+
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Build the server:**
+   ```bash
+   npm run build
+   ```
+
+3. **Run the server:**
+   ```bash
+   npm start
+   ```
+
+   Or for development:
+   ```bash
+   npm run start:dev
+   ```
+
+### Configuration for AI Clients
+
+#### Claude Desktop
+
+Add to your Claude Desktop config (`~/.config/claude/claude_desktop_config.json`):
+
+```json
+{
+  "mcpServers": {
+    "new-project-bundle": {
+      "command": "node",
+      "args": ["/path/to/new_project_bundle/dist/mcp-server/index.js"],
+      "env": {}
+    }
+  }
+}
+```
+
+#### Cursor IDE
+
+Add to your Cursor settings (`~/.cursor/mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "new-project-bundle": {
+      "command": "node",
+      "args": ["/path/to/new_project_bundle/dist/mcp-server/index.js"]
+    }
+  }
+}
+```
+
+#### Generic MCP Client
+
+Use the provided `mcp-config.json` as a template for your MCP client configuration.
 
 ## 📦 Included Workflows
 
