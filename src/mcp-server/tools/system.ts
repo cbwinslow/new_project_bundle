@@ -43,13 +43,18 @@ function isCommandSafe(command: string): boolean {
   const baseCommand = command.split(/\s+/)[0]?.toLowerCase();
   if (!baseCommand) return false;
 
+  // Reject commands with path components (path traversal attempts)
+  if (baseCommand.includes("/") || baseCommand.includes("\\") || baseCommand.startsWith(".")) {
+    return false;
+  }
+
   // Check for dangerous patterns
   const dangerousPatterns = [
     /[;&|`$(){}]/,
     /\bsudo\b/,
     /\brm\b/,
     /\bmv\b/,
-    /\bcp\b.*(-r|-f)/,
+    /\bcp\b.*(-[rf]|--recursive|--force)/i,
     /\bchmod\b/,
     /\bchown\b/,
     /\bkill\b/,
