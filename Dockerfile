@@ -4,7 +4,7 @@
 # ============================================
 # Stage 1: Dependencies
 # ============================================
-FROM node:20-alpine AS deps
+FROM node:25-alpine AS deps
 
 WORKDIR /app
 
@@ -17,7 +17,7 @@ RUN npm ci --only=production
 # ============================================
 # Stage 2: Builder
 # ============================================
-FROM node:20-alpine AS builder
+FROM node:25-alpine AS builder
 
 WORKDIR /app
 
@@ -31,7 +31,7 @@ RUN npm run build || echo "No build step configured"
 # ============================================
 # Stage 3: Production
 # ============================================
-FROM node:20-alpine AS production
+FROM node:25-alpine AS production
 
 # Set production environment
 ENV NODE_ENV=production
