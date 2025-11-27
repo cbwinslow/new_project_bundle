@@ -1,7 +1,7 @@
 name: Question
 description: Ask a question about the project
 title: "[Question]: "
-labels: ["question", "triage"]
+labels: ["question", "needs-triage"]
 assignees: []
 body:
   - type: markdown

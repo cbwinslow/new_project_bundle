@@ -1,0 +1,60 @@
+# Renovate configuration (alternative to Dependabot)
+# https://docs.renovatebot.com/configuration-options/
+
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":automergeMinor",
+    "group:allNonMajor"
+  ],
+  "labels": ["dependencies", "renovate"],
+  "reviewers": ["cbwinslow"],
+  "assignees": ["cbwinslow"],
+  "timezone": "America/New_York",
+  "schedule": ["after 6am and before 9am on Monday"],
+  "prConcurrentLimit": 10,
+  "prHourlyLimit": 5,
+  "stabilityDays": 3,
+  "vulnerabilityAlerts": {
+    "labels": ["security"],
+    "automerge": true
+  },
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["*"],
+      "matchUpdateTypes": ["patch"],
+      "automerge": true
+    },
+    {
+      "matchPackagePatterns": ["eslint", "prettier", "@types/*"],
+      "groupName": "linting and formatting",
+      "automerge": true
+    },
+    {
+      "matchPackagePatterns": ["jest", "vitest", "@testing-library/*"],
+      "groupName": "testing",
+      "automerge": true
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "labels": ["major-update"],
+      "automerge": false
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true
+    }
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": ["Dockerfile"],
+      "matchStrings": [
+        "FROM (?<depName>[^:]+):(?<currentValue>[^\\s]+)"
+      ],
+      "datasourceTemplate": "docker"
+    }
+  ]
+}

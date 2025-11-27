@@ -1,0 +1,104 @@
+# Git Attributes Configuration
+# Controls how Git handles line endings and file types
+
+# Default behavior
+* text=auto eol=lf
+
+# Explicitly declare text files
+*.md text
+*.txt text
+*.json text
+*.yml text
+*.yaml text
+*.xml text
+*.html text
+*.css text
+*.scss text
+*.less text
+*.js text
+*.jsx text
+*.ts text
+*.tsx text
+*.vue text
+*.py text
+*.rb text
+*.php text
+*.go text
+*.rs text
+*.java text
+*.kt text
+*.cs text
+*.sh text
+*.bash text
+*.zsh text
+*.fish text
+*.sql text
+*.graphql text
+*.toml text
+*.ini text
+*.cfg text
+*.conf text
+*.env text
+*.env.* text
+.gitignore text
+.gitattributes text
+.editorconfig text
+Makefile text
+Dockerfile text
+LICENSE text
+*.lock text
+
+# Windows-specific files
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.svg binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.pdf binary
+*.zip binary
+*.tar binary
+*.gz binary
+*.7z binary
+*.mp3 binary
+*.mp4 binary
+*.webm binary
+*.mov binary
+*.exe binary
+*.dll binary
+*.so binary
+*.dylib binary
+
+# Lock files - don't diff
+package-lock.json -diff
+yarn.lock -diff
+pnpm-lock.yaml -diff
+Gemfile.lock -diff
+Cargo.lock -diff
+composer.lock -diff
+go.sum -diff
+
+# GitHub Linguist overrides
+# https://github.com/github/linguist
+
+# Exclude from language stats
+docs/** linguist-documentation
+*.md linguist-documentation
+vendor/** linguist-vendored
+node_modules/** linguist-vendored
+
+# Generated files
+*.min.js linguist-generated
+*.min.css linguist-generated
+dist/** linguist-generated
+build/** linguist-generated

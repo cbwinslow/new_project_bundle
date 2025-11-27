@@ -80,14 +80,26 @@ jobs:
           cp README.md site/index.md || true
           cp -r docs/* site/ 2>/dev/null || true
 
+      - name: Determine docs output directory
+        id: docs-dir
+        run: |
+          if [ -d "site" ]; then
+            echo "docs_dir=site" >> $GITHUB_OUTPUT
+          elif [ -d "_site" ]; then
+            echo "docs_dir=_site" >> $GITHUB_OUTPUT
+          elif [ -d "build" ]; then
+            echo "docs_dir=build" >> $GITHUB_OUTPUT
+          elif [ -d "dist" ]; then
+            echo "docs_dir=dist" >> $GITHUB_OUTPUT
+          else
+            mkdir -p site
+            echo "docs_dir=site" >> $GITHUB_OUTPUT
+          fi
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: |
-            site/
-            _site/
-            build/
-            dist/
+          path: ${{ steps.docs-dir.outputs.docs_dir }}
 
   # Deploy to GitHub Pages
   deploy:

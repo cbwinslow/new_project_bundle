@@ -113,6 +113,6 @@ jobs:
           echo "## Dependency Status" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          npm outdated || true >> $GITHUB_STEP_SUMMARY
+          (npm outdated || true) >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
         continue-on-error: true

@@ -5,15 +5,19 @@
 [![CI](https://github.com/cbwinslow/new_project_bundle/actions/workflows/ci.yml/badge.svg)](https://github.com/cbwinslow/new_project_bundle/actions/workflows/ci.yml)
 [![Security](https://github.com/cbwinslow/new_project_bundle/actions/workflows/security.yml/badge.svg)](https://github.com/cbwinslow/new_project_bundle/actions/workflows/security.yml)
 [![CodeQL](https://github.com/cbwinslow/new_project_bundle/actions/workflows/codeql.yml/badge.svg)](https://github.com/cbwinslow/new_project_bundle/actions/workflows/codeql.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## 📋 Overview
 
 This repository contains a complete set of GitHub configuration files, workflow scripts, and DevOps automation tools designed to jumpstart new projects with AI agent integration. It includes configurations for:
 
 - **Issue & PR Templates** - Structured templates for bug reports, features, and questions
-- **GitHub Actions Workflows** - Comprehensive CI/CD, security scanning, and automation
-- **AI Code Review** - Integration points for Copilot, OpenHands, Gemini, and more
+- **GitHub Actions Workflows** - Comprehensive CI/CD, security scanning, and automation (18 workflows)
+- **AI Code Review** - Integration points for Copilot, OpenHands, Gemini, CodeRabbit, and more
 - **Project Management** - Automated triage, labeling, and project board management
+- **Docker & Container Support** - Production-ready Dockerfile and docker-compose configuration
+- **Pre-commit Hooks** - Code quality enforcement with pre-commit
+- **Multiple Package Managers** - Lock files for npm, pip, Ruby, Go, Rust, and PHP
 
 ## 📁 Repository Structure
 
@@ -39,36 +43,49 @@ This repository contains a complete set of GitHub configuration files, workflow 
 │   ├── docs.yml                # Documentation build & deploy
 │   ├── ai-review.yml           # AI code review integration
 │   ├── dependency-updates.yml  # Dependency management
-│   └── performance.yml         # Performance testing
-│   ├── CODEOWNERS                  # Code ownership definitions
-│   ├── CONTRIBUTING.md             # Contribution guidelines
-│   ├── FUNDING.yml                 # Sponsorship configuration
-│   ├── PULL_REQUEST_TEMPLATE.md    # PR template
-│   ├── SECURITY.md                 # Security policy
-│   ├── SUPPORT.md                  # Support information
-│   ├── dependabot.yml              # Dependabot configuration
-│   ├── labels.yml                  # Repository labels
-│   ├── labeler.yml                 # Auto-labeler configuration
-│   ├── lighthouserc.json           # Lighthouse CI config
-│   ├── markdown-link-check-config.json
-│   └── cspell.json                 # Spell check configuration
-├── .editorconfig                   # Editor configuration
-├── .gitignore                      # Git ignore rules
-├── CODE_OF_CONDUCT.md              # Code of Conduct
-├── README.md                       # This file
+│   ├── performance.yml         # Performance testing
+│   ├── maintenance.yml         # Scheduled maintenance tasks
+│   ├── discussions.yml         # Discussion automation
+│   └── metrics.yml             # Repository metrics
+├── CODEOWNERS                  # Code ownership definitions
+├── CONTRIBUTING.md             # Contribution guidelines
+├── FUNDING.yml                 # Sponsorship configuration
+├── PULL_REQUEST_TEMPLATE.md    # PR template
+├── SECURITY.md                 # Security policy
+├── SUPPORT.md                  # Support information
+├── dependabot.yml              # Dependabot configuration
+├── labels.yml                  # Repository labels
+├── labeler.yml                 # Auto-labeler configuration
+├── lighthouserc.json           # Lighthouse CI config
+├── markdown-link-check-config.json
+└── cspell.json                 # Spell check configuration
+│
+# Root Files
+├── .editorconfig               # Editor configuration
+├── .gitattributes              # Git attributes
+├── .gitignore                  # Git ignore rules
+├── .pre-commit-config.yaml     # Pre-commit hooks
+├── CHANGELOG.md                # Changelog
+├── CODE_OF_CONDUCT.md          # Code of Conduct
+├── Dockerfile                  # Docker container
+├── docker-compose.yml          # Docker Compose
+├── LICENSE                     # MIT License
+├── Makefile                    # Make targets
+├── README.md                   # This file
+├── renovate.json               # Renovate config (alt to Dependabot)
 │
 # Package Manager Files (with lock files)
-├── package.json                    # Node.js/npm manifest
-├── package-lock.json               # npm lock file
-├── requirements.txt                # Python dependencies
-├── Gemfile                         # Ruby dependencies
-├── Gemfile.lock                    # Ruby lock file
-├── go.mod                          # Go module file
-├── go.sum                          # Go checksums
-├── Cargo.toml                      # Rust manifest
-├── Cargo.lock                      # Rust lock file
-├── composer.json                   # PHP/Composer manifest
-└── composer.lock                   # PHP/Composer lock file
+├── package.json                # Node.js/npm manifest
+├── package-lock.json           # npm lock file
+├── requirements.txt            # Python dependencies
+├── Gemfile                     # Ruby dependencies
+├── Gemfile.lock                # Ruby lock file
+├── go.mod                      # Go module file
+├── go.sum                      # Go checksums
+├── Cargo.toml                  # Rust manifest
+├── Cargo.lock                  # Rust lock file
+├── composer.json               # PHP/Composer manifest
+└── composer.lock               # PHP/Composer lock file
 ```
 
 ## 🚀 Getting Started
@@ -98,9 +115,9 @@ This bundle is configured to work with multiple AI code review services:
 - Automatically provides code suggestions and review comments
 
 #### OpenHands (formerly OpenDevin)
-1. Install from [GitHub Marketplace](https://github.com/marketplace)
-2. Configure repository permissions
-3. AI agent will automatically review PRs
+1. Visit [OpenHands GitHub Repository](https://github.com/All-Hands-AI/OpenHands)
+2. Follow the installation instructions for self-hosted deployment
+3. Configure repository access for AI-assisted development
 
 #### Google Gemini Code Assist
 1. Set up via Google Cloud Console
@@ -139,6 +156,7 @@ This bundle is configured to work with multiple AI code review services:
 | `project-automation.yml` | Project board sync | Issue/PR events |
 | `stale.yml` | Mark/close stale items | Scheduled |
 | `greetings.yml` | Welcome new contributors | First issue/PR |
+| `discussions.yml` | Discussion automation | Discussion events |
 
 ### Quality Workflows
 
@@ -147,6 +165,71 @@ This bundle is configured to work with multiple AI code review services:
 | `docs.yml` | Build and deploy documentation | Push, PR |
 | `performance.yml` | Lighthouse and bundle analysis | Push, PR |
 | `ai-review.yml` | AI-assisted code review | PR |
+| `metrics.yml` | Repository metrics and insights | Monthly, manual |
+| `maintenance.yml` | Cache, artifact, branch cleanup | Weekly, manual |
+
+## 🐳 Docker Support
+
+The bundle includes production-ready Docker configuration:
+
+- **Dockerfile** - Multi-stage build for optimized images
+- **docker-compose.yml** - Local development with PostgreSQL and Redis
+
+### Quick Start with Docker
+
+```bash
+# Build and start all services
+docker-compose up -d
+
+# Start development mode
+docker-compose --profile dev up -d
+
+# View logs
+docker-compose logs -f
+```
+
+## 🛠️ Makefile Commands
+
+The included Makefile provides common development tasks:
+
+```bash
+make help           # Show all available commands
+make install        # Install dependencies
+make dev            # Start development server
+make build          # Build for production
+make test           # Run all tests
+make lint           # Run linter
+make format         # Format code
+make docker-build   # Build Docker image
+make docker-up      # Start Docker containers
+make release-patch  # Create patch release
+```
+
+## 🔗 Pre-commit Hooks
+
+Pre-commit hooks ensure code quality before commits:
+
+```bash
+# Install pre-commit
+pip install pre-commit
+
+# Install hooks
+pre-commit install
+
+# Run on all files
+pre-commit run --all-files
+```
+
+Included hooks:
+- Trailing whitespace removal
+- End of file fixer
+- YAML/JSON validation
+- Large file detection
+- Secret detection
+- Markdown linting
+- Shell script linting (shellcheck)
+- Dockerfile linting (hadolint)
+- Conventional commit validation
 
 ## 🏷️ Label System
 

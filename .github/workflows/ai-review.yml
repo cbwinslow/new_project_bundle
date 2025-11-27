@@ -1,5 +1,5 @@
 # AI Code Review Configuration
-# Configures AI reviewers like Codex, OpenHands, and Gemini
+# Configures AI reviewers like GitHub Copilot, OpenHands, and Gemini
 
 name: AI Review
 
