@@ -1,0 +1,156 @@
+# Documentation Build and Deploy Workflow
+# Builds and deploys documentation to GitHub Pages
+
+name: Documentation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - '*.md'
+      - 'mkdocs.yml'
+      - 'docusaurus.config.js'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - '*.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Build documentation
+  build:
+    name: Build Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Build with various documentation tools (whichever exists)
+      - name: Build with MkDocs
+        if: hashFiles('mkdocs.yml') != ''
+        run: |
+          pip install mkdocs mkdocs-material
+          mkdocs build --site-dir ./site
+
+      - name: Build with Docusaurus
+        if: hashFiles('docusaurus.config.js') != ''
+        run: |
+          npm ci
+          npm run build
+
+      - name: Build with VitePress
+        if: hashFiles('docs/.vitepress/config.js') != ''
+        run: |
+          npm ci
+          npm run docs:build
+
+      - name: Build with Jekyll
+        if: hashFiles('docs/_config.yml') != ''
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./docs
+          destination: ./_site
+
+      # If no docs framework, just copy markdown files
+      - name: Copy README
+        if: hashFiles('mkdocs.yml') == '' && hashFiles('docusaurus.config.js') == ''
+        run: |
+          mkdir -p site
+          cp README.md site/index.md || true
+          cp -r docs/* site/ 2>/dev/null || true
+
+      - name: Determine docs output directory
+        id: docs-dir
+        run: |
+          if [ -d "site" ]; then
+            echo "docs_dir=site" >> $GITHUB_OUTPUT
+          elif [ -d "_site" ]; then
+            echo "docs_dir=_site" >> $GITHUB_OUTPUT
+          elif [ -d "build" ]; then
+            echo "docs_dir=build" >> $GITHUB_OUTPUT
+          elif [ -d "dist" ]; then
+            echo "docs_dir=dist" >> $GITHUB_OUTPUT
+          else
+            mkdir -p site
+            echo "docs_dir=site" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ steps.docs-dir.outputs.docs_dir }}
+
+  # Deploy to GitHub Pages
+  deploy:
+    name: Deploy to Pages
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  # Check documentation quality
+  check-docs:
+    name: Check Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check markdown links
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          use-quiet-mode: 'yes'
+          config-file: '.github/markdown-link-check-config.json'
+        continue-on-error: true
+
+      - name: Spell check
+        uses: streetsidesoftware/cspell-action@v6
+        with:
+          files: |
+            **/*.md
+            **/*.txt
+          config: '.github/cspell.json'
+        continue-on-error: true
+
+      - name: Check for broken internal links
+        run: |
+          # Simple check for broken relative links in markdown
+          for file in $(find . -name "*.md" -type f); do
+            echo "Checking $file..."
+            grep -oP '\[.*?\]\(\K[^)]+' "$file" 2>/dev/null | while read link; do
+              if [[ "$link" != http* ]] && [[ "$link" != "#"* ]] && [[ "$link" != "mailto:"* ]]; then
+                dir=$(dirname "$file")
+                target="$dir/$link"
+                if [[ ! -f "$target" ]] && [[ ! -d "$target" ]]; then
+                  echo "Warning: Broken link in $file: $link"
+                fi
+              fi
+            done
+          done
+        continue-on-error: true

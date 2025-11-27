@@ -1,0 +1,6 @@
+# Python dependencies
+# Add your Python dependencies here
+# Example: requests==2.31.0
+
+# This file serves as both the dependency manifest and lock file for pip
+# Pin versions for reproducible builds

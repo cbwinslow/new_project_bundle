@@ -1,0 +1,30 @@
+{
+  "name": "new-project-bundle",
+  "version": "1.0.0",
+  "description": "A bundle of files for a new DevOps project to be used with AI agents",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 0",
+    "lint": "echo \"No linting configured\" && exit 0",
+    "build": "echo \"No build step configured\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cbwinslow/new_project_bundle.git"
+  },
+  "keywords": [
+    "devops",
+    "ai",
+    "agents",
+    "github-actions",
+    "automation"
+  ],
+  "author": "cbwinslow",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cbwinslow/new_project_bundle/issues"
+  },
+  "homepage": "https://github.com/cbwinslow/new_project_bundle#readme",
+  "devDependencies": {},
+  "dependencies": {}
+}

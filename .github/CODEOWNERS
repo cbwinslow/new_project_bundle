@@ -1,0 +1,49 @@
+# CODEOWNERS file for automatic review requests
+# This file defines who should review pull requests for different parts of the codebase
+
+# Default owners for everything in the repo
+# These owners will be requested for review when someone opens a pull request
+*       @cbwinslow
+
+# AI Reviewers - These can be set up as GitHub Apps or team aliases
+# Configure these as appropriate for your organization's AI review tools:
+# - GitHub Copilot (built-in)
+# - OpenHands (configure as GitHub App)
+# - Gemini Code Assist (configure as GitHub App)
+
+# Documentation owners
+*.md    @cbwinslow
+/docs/  @cbwinslow
+
+# GitHub Actions and CI/CD
+/.github/   @cbwinslow
+
+# Configuration files
+*.yml       @cbwinslow
+*.yaml      @cbwinslow
+*.json      @cbwinslow
+
+# Source code directories (customize as needed)
+/src/       @cbwinslow
+/lib/       @cbwinslow
+/app/       @cbwinslow
+
+# Test files
+/tests/     @cbwinslow
+/test/      @cbwinslow
+/__tests__/ @cbwinslow
+*.test.*    @cbwinslow
+*.spec.*    @cbwinslow
+
+# Infrastructure and DevOps
+/infrastructure/    @cbwinslow
+/terraform/         @cbwinslow
+/k8s/               @cbwinslow
+/docker/            @cbwinslow
+Dockerfile          @cbwinslow
+docker-compose*.yml @cbwinslow
+
+# Security-sensitive files
+/security/          @cbwinslow
+*.pem               @cbwinslow
+*.key               @cbwinslow

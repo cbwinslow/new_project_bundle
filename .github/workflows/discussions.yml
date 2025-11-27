@@ -1,0 +1,91 @@
+# Discussion automation workflow
+# Manages GitHub Discussions
+
+name: Discussion Automation
+
+on:
+  discussion:
+    types: [created, answered]
+  discussion_comment:
+    types: [created]
+
+permissions:
+  discussions: write
+
+jobs:
+  # Welcome new discussion authors
+  welcome:
+    name: Welcome Discussion Author
+    runs-on: ubuntu-latest
+    if: github.event.action == 'created' && github.event.discussion
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const discussion = context.payload.discussion;
+            const author = discussion.user.login;
+            
+            // Check if this is the user's first discussion
+            const query = `
+              query($owner: String!, $repo: String!, $author: String!) {
+                repository(owner: $owner, name: $repo) {
+                  discussions(first: 10, filterBy: {authorLogin: $author}) {
+                    totalCount
+                  }
+                }
+              }
+            `;
+            
+            const result = await github.graphql(query, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              author: author
+            });
+            
+            if (result.repository.discussions.totalCount === 1) {
+              const welcomeMessage = `👋 Welcome @${author}! Thanks for starting your first discussion here.
+              
+              A community member or maintainer will respond soon. In the meantime:
+              
+              - Make sure you've provided enough context
+              - Check if similar discussions exist
+              - Be patient and respectful
+              
+              Thanks for being part of our community! 🎉`;
+              
+              // Note: Adding comments to discussions requires GraphQL mutation
+              console.log(`Would welcome first-time discussion author: ${author}`);
+            }
+
+  # Auto-label discussions based on category
+  auto-label:
+    name: Auto-label Discussion
+    runs-on: ubuntu-latest
+    if: github.event.action == 'created' && github.event.discussion
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const discussion = context.payload.discussion;
+            const category = discussion.category.name.toLowerCase();
+            
+            console.log(`Discussion created in category: ${category}`);
+            console.log(`Title: ${discussion.title}`);
+            
+            // Discussions use different labeling than issues
+            // This is informational for now
+
+  # Notify when discussion is answered
+  notify-answered:
+    name: Notify Answer
+    runs-on: ubuntu-latest
+    if: github.event.action == 'answered'
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const discussion = context.payload.discussion;
+            
+            console.log(`Discussion #${discussion.number} was answered!`);
+            console.log(`Title: ${discussion.title}`);
+            console.log(`Answer by: ${discussion.answer_chosen_by?.login || 'unknown'}`);

@@ -1,0 +1,116 @@
+# Performance Testing Workflow
+# Runs performance benchmarks and lighthouse audits
+
+name: Performance
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  # Lighthouse performance audit
+  lighthouse:
+    name: Lighthouse Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+        continue-on-error: true
+
+      - name: Build
+        run: npm run build --if-present
+        continue-on-error: true
+
+      - name: Run Lighthouse
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          configPath: '.github/lighthouserc.json'
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+        continue-on-error: true
+
+  # Bundle size analysis
+  bundle-analysis:
+    name: Bundle Size Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+        continue-on-error: true
+
+      - name: Build
+        run: npm run build --if-present
+        continue-on-error: true
+
+      - name: Analyze bundle
+        run: |
+          if [ -d "dist" ] || [ -d "build" ] || [ -d ".next" ]; then
+            echo "## Bundle Size Analysis" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            
+            for dir in dist build .next; do
+              if [ -d "$dir" ]; then
+                size=$(du -sh "$dir" | cut -f1)
+                echo "- **$dir**: $size" >> $GITHUB_STEP_SUMMARY
+              fi
+            done
+            
+            # List largest files
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### Largest Files" >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+            find dist build .next -type f -exec du -h {} + 2>/dev/null | sort -rh | head -10 >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          fi
+        continue-on-error: true
+
+  # Node.js benchmarks
+  benchmarks:
+    name: Benchmarks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+        continue-on-error: true
+
+      - name: Run benchmarks
+        run: npm run benchmark --if-present || echo "No benchmark script found"
+        continue-on-error: true
+
+      - name: Compare with baseline
+        if: github.event_name == 'pull_request'
+        run: |
+          echo "Benchmark comparison would go here"
+          # You can store baseline benchmarks and compare against them
+        continue-on-error: true

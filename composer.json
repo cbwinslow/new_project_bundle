@@ -1,0 +1,31 @@
+{
+    "name": "cbwinslow/new-project-bundle",
+    "description": "A bundle of files for a new DevOps project to be used with AI agents",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "cbwinslow"
+        }
+    ],
+    "require": {
+        "php": ">=8.1"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
