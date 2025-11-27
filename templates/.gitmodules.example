@@ -1,0 +1,27 @@
+# Git Submodules Configuration
+#
+# This file is used by Git to track submodules.
+# It is automatically generated when you add submodules.
+#
+# Example submodule entry:
+# [submodule "go-shell"]
+#     path = go-shell
+#     url = https://github.com/your-org/go-shell.git
+#     branch = main
+#
+# How to add a submodule:
+#   git submodule add https://github.com/your-org/go-shell.git go-shell
+#
+# How to clone with submodules:
+#   git clone --recurse-submodules https://github.com/your-org/repo.git
+#
+# How to update submodules:
+#   git submodule update --init --recursive
+#   git submodule update --remote
+#
+# Uncomment and customize the following section once you have a Go shell repository:
+
+# [submodule "go-shell"]
+#     path = go-shell
+#     url = https://github.com/your-org/go-shell.git
+#     branch = main
