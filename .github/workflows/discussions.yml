@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.action == 'created' && github.event.discussion
     steps:
-      - uses: actions/github-script@v7
+      - uses: actions/github-script@v8
         with:
           script: |
             const discussion = context.payload.discussion;
@@ -63,7 +63,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.action == 'created' && github.event.discussion
     steps:
-      - uses: actions/github-script@v7
+      - uses: actions/github-script@v8
         with:
           script: |
             const discussion = context.payload.discussion;
@@ -81,7 +81,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.action == 'answered'
     steps:
-      - uses: actions/github-script@v7
+      - uses: actions/github-script@v8
         with:
           script: |
             const discussion = context.payload.discussion;
