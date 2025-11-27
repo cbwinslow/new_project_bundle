@@ -287,7 +287,7 @@ tests/
 
 ## Exceptions Process
 
-Rules can be excepted with:
+Rules can be exempted with:
 
 1. **Documentation**: Explain why exception is needed
 2. **Approval**: Get maintainer approval

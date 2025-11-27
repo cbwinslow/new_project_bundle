@@ -86,7 +86,7 @@ This repository contains a complete set of GitHub configuration files, workflow 
 ├── Cargo.lock                  # Rust lock file
 ├── composer.json               # PHP/Composer manifest
 └── composer.lock               # PHP/Composer lock file
-│
+
 # Project Templates
 templates/
 ├── agents.md                   # AI coding agent configuration
@@ -99,7 +99,7 @@ templates/
 ├── .gitmodules.example         # Git submodules configuration example
 └── go-shell/                   # Go shell submodule template
     └── README.md               # Go shell documentation
-│
+
 # Additional Dotfiles
 ├── .nvmrc                      # Node.js version (nvm/fnm)
 ├── .tool-versions              # asdf version manager config
