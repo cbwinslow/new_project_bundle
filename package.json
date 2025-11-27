@@ -1,12 +1,22 @@
 {
   "name": "new-project-bundle",
   "version": "1.0.0",
-  "description": "A bundle of files for a new DevOps project to be used with AI agents",
-  "main": "index.js",
+  "description": "A bundle of files for a new DevOps project to be used with AI agents, including an MCP server",
+  "type": "module",
+  "main": "dist/mcp-server/index.js",
+  "bin": {
+    "new-project-bundle-mcp": "./dist/mcp-server/index.js"
+  },
   "scripts": {
-    "test": "echo \"No tests specified\" && exit 0",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "start": "node dist/mcp-server/index.js",
+    "start:dev": "npx tsx src/mcp-server/index.ts",
+    "typecheck": "tsc --noEmit",
     "lint": "echo \"No linting configured\" && exit 0",
-    "build": "echo \"No build step configured\" && exit 0"
+    "test": "echo \"No tests specified\" && exit 0",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -17,7 +27,10 @@
     "ai",
     "agents",
     "github-actions",
-    "automation"
+    "automation",
+    "mcp",
+    "model-context-protocol",
+    "ai-tools"
   ],
   "author": "cbwinslow",
   "license": "MIT",
@@ -25,6 +38,16 @@
     "url": "https://github.com/cbwinslow/new_project_bundle/issues"
   },
   "homepage": "https://github.com/cbwinslow/new_project_bundle#readme",
-  "devDependencies": {},
-  "dependencies": {}
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.23.0",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
 }
