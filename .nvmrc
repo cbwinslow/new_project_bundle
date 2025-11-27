@@ -1,0 +1,4 @@
+# Node.js Version
+# This file specifies the Node.js version for this project
+# Used by nvm, fnm, asdf, and other version managers
+20.10.0

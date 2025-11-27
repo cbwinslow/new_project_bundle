@@ -86,6 +86,26 @@ This repository contains a complete set of GitHub configuration files, workflow 
 ├── Cargo.lock                  # Rust lock file
 ├── composer.json               # PHP/Composer manifest
 └── composer.lock               # PHP/Composer lock file
+
+# Project Templates
+templates/
+├── agents.md                   # AI coding agent configuration
+├── rules.md                    # Project development rules
+├── SRS.md                      # Software Requirements Specification template
+├── features.md                 # Feature documentation template
+├── ADR.md                      # Architecture Decision Record template
+├── API.md                      # API documentation template
+├── RUNBOOK.md                  # Operations runbook template
+├── .gitmodules.example         # Git submodules configuration example
+└── go-shell/                   # Go shell submodule template
+    └── README.md               # Go shell documentation
+
+# Additional Dotfiles
+├── .nvmrc                      # Node.js version (nvm/fnm)
+├── .tool-versions              # asdf version manager config
+├── .dockerignore               # Docker build context exclusions
+├── .env.example                # Environment variables template
+└── .sops.yaml                  # SOPS encryption configuration
 ```
 
 ## 🚀 Getting Started
@@ -167,6 +187,58 @@ This bundle is configured to work with multiple AI code review services:
 | `ai-review.yml` | AI-assisted code review | PR |
 | `metrics.yml` | Repository metrics and insights | Monthly, manual |
 | `maintenance.yml` | Cache, artifact, branch cleanup | Weekly, manual |
+
+## 📄 Project Templates
+
+The bundle includes comprehensive templates for project documentation:
+
+### Documentation Templates
+
+| Template | Purpose |
+|----------|---------|
+| `templates/agents.md` | AI coding agent configuration and guidelines |
+| `templates/rules.md` | Project development rules and standards |
+| `templates/SRS.md` | Interactive Software Requirements Specification |
+| `templates/features.md` | Feature documentation and tracking |
+| `templates/ADR.md` | Architecture Decision Records |
+| `templates/API.md` | API documentation template |
+| `templates/RUNBOOK.md` | Operations runbook for incident response |
+
+### Using Templates
+
+1. Copy desired templates to your project root or `docs/` folder
+2. Customize placeholders marked with `[brackets]` or `YYYY-MM-DD`
+3. Fill in checkboxes as you complete sections
+4. Update version numbers with major changes
+
+### Go Shell Submodule
+
+The `templates/go-shell/` directory contains documentation for setting up an interactive Go shell as a submodule:
+
+```bash
+# Add Go shell as a submodule
+git submodule add https://github.com/your-org/go-shell.git go-shell
+
+# Initialize submodules
+git submodule update --init --recursive
+```
+
+See `templates/.gitmodules.example` for configuration reference.
+
+### Environment & Secrets
+
+The bundle includes secure environment configuration:
+
+- `.env.example` - Comprehensive environment variables template
+- `.sops.yaml` - Mozilla SOPS configuration for secrets encryption
+
+```bash
+# Encrypt secrets with SOPS
+sops --encrypt .env > .env.enc
+
+# Decrypt secrets
+sops --decrypt .env.enc > .env
+```
 
 ## 🐳 Docker Support
 

@@ -1,0 +1,77 @@
+# SOPS Configuration
+# Mozilla SOPS - Secrets OPerationS
+# https://github.com/getsops/sops
+#
+# This file configures how SOPS encrypts secrets in this repository.
+# SOPS supports multiple encryption backends: age, PGP, AWS KMS, GCP KMS, Azure Key Vault
+#
+# Setup Instructions:
+#
+# 1. Install SOPS:
+#    - macOS: brew install sops
+#    - Linux: Download from GitHub releases
+#    - Windows: Download from GitHub releases or use scoop
+#
+# 2. Install age (recommended for personal/small team use):
+#    - macOS: brew install age
+#    - Linux: apt install age or download from GitHub
+#
+# 3. Generate an age key:
+#    - mkdir -p ~/.sops
+#    - age-keygen -o ~/.sops/key.txt
+#    - Add public key to this file below
+#
+# 4. Encrypt a file:
+#    - sops --encrypt .env > .env.enc
+#    - sops --encrypt secrets.yaml > secrets.enc.yaml
+#
+# 5. Decrypt a file:
+#    - sops --decrypt .env.enc > .env
+#    - sops --decrypt secrets.enc.yaml > secrets.yaml
+#
+# 6. Edit encrypted file in place:
+#    - sops .env.enc
+
+creation_rules:
+  # Environment files - encrypt with age
+  - path_regex: \.env\.enc$
+    age: >-
+      age1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      # Add more public keys here for team members
+
+  # YAML secrets files
+  - path_regex: secrets\.enc\.yaml$
+    age: >-
+      age1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+  # JSON secrets files
+  - path_regex: secrets\.enc\.json$
+    age: >-
+      age1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+  # Kubernetes secrets
+  - path_regex: k8s/.*\.enc\.yaml$
+    age: >-
+      age1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+  # AWS KMS example (uncomment and configure if using AWS)
+  # - path_regex: \.env\.enc$
+  #   kms: 'arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012'
+  #   aws_profile: default
+
+  # GCP KMS example (uncomment and configure if using GCP)
+  # - path_regex: \.env\.enc$
+  #   gcp_kms: projects/my-project/locations/global/keyRings/my-keyring/cryptoKeys/my-key
+
+  # Azure Key Vault example (uncomment and configure if using Azure)
+  # - path_regex: \.env\.enc$
+  #   azure_keyvault: https://my-vault.vault.azure.net/keys/my-key/abc123
+
+# Store only the values encrypted, not the keys
+stores:
+  yaml:
+    indent: 2
+  json:
+    indent: 2
+  dotenv:
+    # For .env files, encrypt values only
