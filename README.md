@@ -55,7 +55,20 @@ This repository contains a complete set of GitHub configuration files, workflow 
 ├── .editorconfig                   # Editor configuration
 ├── .gitignore                      # Git ignore rules
 ├── CODE_OF_CONDUCT.md              # Code of Conduct
-└── README.md                       # This file
+├── README.md                       # This file
+│
+# Package Manager Files (with lock files)
+├── package.json                    # Node.js/npm manifest
+├── package-lock.json               # npm lock file
+├── requirements.txt                # Python dependencies
+├── Gemfile                         # Ruby dependencies
+├── Gemfile.lock                    # Ruby lock file
+├── go.mod                          # Go module file
+├── go.sum                          # Go checksums
+├── Cargo.toml                      # Rust manifest
+├── Cargo.lock                      # Rust lock file
+├── composer.json                   # PHP/Composer manifest
+└── composer.lock                   # PHP/Composer lock file
 ```
 
 ## 🚀 Getting Started

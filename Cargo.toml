@@ -1,0 +1,18 @@
+[package]
+name = "new_project_bundle"
+version = "1.0.0"
+edition = "2021"
+authors = ["cbwinslow"]
+description = "A bundle of files for a new DevOps project to be used with AI agents"
+repository = "https://github.com/cbwinslow/new_project_bundle"
+license = "MIT"
+keywords = ["devops", "ai", "agents", "automation"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+# Add your Rust dependencies here
+# Example: serde = "1.0"
+
+[dev-dependencies]
+# Add development dependencies here
