@@ -105,6 +105,8 @@ src/mcp-server/
 templates/
 ├── agents.md                   # AI coding agent configuration
 ├── rules.md                    # Project development rules
+├── ai-linting-rules.md         # AI agent linting & code quality rules
+├── ai-context-rules.md         # AI agent context & behavior rules
 ├── SRS.md                      # Software Requirements Specification template
 ├── features.md                 # Feature documentation template
 ├── ADR.md                      # Architecture Decision Record template
@@ -332,6 +334,8 @@ The bundle includes comprehensive templates for project documentation:
 |----------|---------|
 | `templates/agents.md` | AI coding agent configuration and guidelines |
 | `templates/rules.md` | Project development rules and standards |
+| `templates/ai-linting-rules.md` | **NEW** Comprehensive linting, formatting, spacing, and code quality rules for AI agents |
+| `templates/ai-context-rules.md` | **NEW** Rules for AI agents: documentation reading, existing tool usage, task breakdown, and logging |
 | `templates/SRS.md` | Interactive Software Requirements Specification |
 | `templates/features.md` | Feature documentation and tracking |
 | `templates/ADR.md` | Architecture Decision Records |
@@ -344,6 +348,41 @@ The bundle includes comprehensive templates for project documentation:
 2. Customize placeholders marked with `[brackets]` or `YYYY-MM-DD`
 3. Fill in checkboxes as you complete sections
 4. Update version numbers with major changes
+
+### AI Agent Rules System
+
+This bundle includes a comprehensive AI agent rules system designed to ensure consistent, high-quality code and thoughtful development practices:
+
+#### Linting & Code Quality Rules (`ai-linting-rules.md`)
+
+Covers all aspects of code formatting and quality:
+- **Indentation & Spacing**: Tabs vs spaces, consistent indentation
+- **Line Length & Wrapping**: Maximum line lengths, wrapping styles
+- **Whitespace Rules**: Trailing whitespace, blank lines
+- **Character Duplication**: Duplicate semicolons, operators, brackets
+- **Spelling & Typos**: Spell checking, common typo detection
+- **Syntax Errors**: Balanced brackets, valid strings
+- **ESLint Rules**: Complete ESLint configuration
+- **Pre-commit Checks**: Required pre-commit hooks
+
+#### Context & Behavior Rules (`ai-context-rules.md`)
+
+Guides AI agent behavior for better outcomes:
+- **Documentation First**: Always read project docs before coding
+- **Non-Destructive Actions**: Never delete without permission
+- **Use Existing Tools**: Discover before creating new utilities
+- **Question Asking**: Ask when unsure, clarify ambiguity
+- **Critical Reasoning**: Analyze before acting, consider edge cases
+- **Task Breakdown System**: Break complex tasks into subtasks
+- **Task Logging**: Save all task lists and solutions to files
+- **Configurable Repository**: Save completed tasks to a GitHub repo
+
+#### Quick Setup
+
+1. Copy both rules files to your project's `templates/` or `docs/` directory
+2. Configure the `TASK_LOG_REPOSITORY` variable in `ai-context-rules.md`
+3. Reference these rules in your AI agent prompts or configurations
+4. Create a `tasks/` directory for task logging
 
 ### Go Shell Submodule
 
