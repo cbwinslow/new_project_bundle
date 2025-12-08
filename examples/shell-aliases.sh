@@ -6,37 +6,44 @@
 # Add these to your ~/.bashrc or ~/.zshrc for quick access
 # Or source this file: source shell-aliases.sh
 #
+# To customize the repository, set NPB_GITHUB_REPO before sourcing:
+#   export NPB_GITHUB_REPO="yourorg/your-fork"
+#   source shell-aliases.sh
+#
+
+# Default repository (can be overridden)
+NPB_GITHUB_REPO="${NPB_GITHUB_REPO:-cbwinslow/new_project_bundle}"
 
 # Main bundle downloader alias
-alias npb='npx github:cbwinslow/new_project_bundle bundle-downloader'
+alias npb="npx github:${NPB_GITHUB_REPO} bundle-downloader"
 
 # Download a specific bundle
-alias npb-dl='npx github:cbwinslow/new_project_bundle bundle-downloader download'
+alias npb-dl="npx github:${NPB_GITHUB_REPO} bundle-downloader download"
 
 # List available bundles
-alias npb-list='npx github:cbwinslow/new_project_bundle bundle-downloader list'
+alias npb-list="npx github:${NPB_GITHUB_REPO} bundle-downloader list"
 
 # Show wget examples
-alias npb-wget='npx github:cbwinslow/new_project_bundle bundle-downloader wget'
+alias npb-wget="npx github:${NPB_GITHUB_REPO} bundle-downloader wget"
 
 # Help
-alias npb-help='npx github:cbwinslow/new_project_bundle bundle-downloader help'
+alias npb-help="npx github:${NPB_GITHUB_REPO} bundle-downloader help"
 
 # Common bundle shortcuts
-alias npb-ci='npx github:cbwinslow/new_project_bundle bundle-downloader download github-workflows-ci'
-alias npb-security='npx github:cbwinslow/new_project_bundle bundle-downloader download github-workflows-security'
-alias npb-docker='npx github:cbwinslow/new_project_bundle bundle-downloader download docker'
-alias npb-github='npx github:cbwinslow/new_project_bundle bundle-downloader download all-github'
-alias npb-templates='npx github:cbwinslow/new_project_bundle bundle-downloader download all-templates'
-alias npb-complete='npx github:cbwinslow/new_project_bundle bundle-downloader download complete'
+alias npb-ci="npx github:${NPB_GITHUB_REPO} bundle-downloader download github-workflows-ci"
+alias npb-security="npx github:${NPB_GITHUB_REPO} bundle-downloader download github-workflows-security"
+alias npb-docker="npx github:${NPB_GITHUB_REPO} bundle-downloader download docker"
+alias npb-github="npx github:${NPB_GITHUB_REPO} bundle-downloader download all-github"
+alias npb-templates="npx github:${NPB_GITHUB_REPO} bundle-downloader download all-templates"
+alias npb-complete="npx github:${NPB_GITHUB_REPO} bundle-downloader download complete"
 
 # Language-specific bundles
-alias npb-node='npx github:cbwinslow/new_project_bundle bundle-downloader download package-nodejs'
-alias npb-python='npx github:cbwinslow/new_project_bundle bundle-downloader download package-python'
-alias npb-go='npx github:cbwinslow/new_project_bundle bundle-downloader download package-go'
-alias npb-rust='npx github:cbwinslow/new_project_bundle bundle-downloader download package-rust'
-alias npb-ruby='npx github:cbwinslow/new_project_bundle bundle-downloader download package-ruby'
-alias npb-php='npx github:cbwinslow/new_project_bundle bundle-downloader download package-php'
+alias npb-node="npx github:${NPB_GITHUB_REPO} bundle-downloader download package-nodejs"
+alias npb-python="npx github:${NPB_GITHUB_REPO} bundle-downloader download package-python"
+alias npb-go="npx github:${NPB_GITHUB_REPO} bundle-downloader download package-go"
+alias npb-rust="npx github:${NPB_GITHUB_REPO} bundle-downloader download package-rust"
+alias npb-ruby="npx github:${NPB_GITHUB_REPO} bundle-downloader download package-ruby"
+alias npb-php="npx github:${NPB_GITHUB_REPO} bundle-downloader download package-php"
 
 # Function for custom output directory
 npb-to() {
@@ -45,7 +52,7 @@ npb-to() {
         echo "Example: npb-to all-templates ./my-project"
         return 1
     fi
-    npx github:cbwinslow/new_project_bundle bundle-downloader download "$1" --output "$2"
+    npx "github:${NPB_GITHUB_REPO}" bundle-downloader download "$1" --output "$2"
 }
 
 # Function for custom repo
@@ -55,7 +62,7 @@ npb-from() {
         echo "Example: npb-from myuser/my-fork docker"
         return 1
     fi
-    npx github:cbwinslow/new_project_bundle bundle-downloader download "$2" --repo "$1"
+    npx "github:${NPB_GITHUB_REPO}" bundle-downloader download "$2" --repo "$1"
 }
 
 # Print help for these aliases

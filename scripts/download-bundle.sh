@@ -91,10 +91,12 @@ parse_bundle_json() {
         jq -r ".bundles.\"$bundle_key\".files[]?" "$manifest_file" 2>/dev/null
     else
         # Fallback: basic grep-based extraction (limited)
+        # Note: This may not capture all files, especially those without standard extensions
         print_warning "jq not found. Using basic parsing (may be incomplete)."
+        print_warning "Install jq for full functionality: apt-get install jq / brew install jq"
         grep -A 100 "\"$bundle_key\"" "$manifest_file" | \
-            grep -o '"[^"]*\.(yml\|yaml\|json\|md\|txt\|ts\|js\|sh\|toml\|lock\|example)"' | \
-            tr -d '"' | head -20
+            grep -o '"[^"]*\.(yml\|yaml\|json\|md\|txt\|ts\|js\|sh\|toml\|lock\|example\|gitignore\|gitattributes)"' | \
+            tr -d '"' | head -30
     fi
 }
 
@@ -226,9 +228,9 @@ main() {
             local output_path="${output_dir}/${file}"
             
             if download_file "$file_url" "$output_path"; then
-                ((success++))
+                success=$((success + 1))
             else
-                ((failed++))
+                failed=$((failed + 1))
             fi
         fi
     done <<< "$files"
