@@ -11,6 +11,7 @@
 
 This repository contains a complete set of GitHub configuration files, workflow scripts, DevOps automation tools, and an **MCP (Model Context Protocol) server** designed to jumpstart new projects with AI agent integration. It includes configurations for:
 
+- **📦 Bundle Downloader** - Download curated file bundles without cloning the whole repo
 - **🤖 MCP Server** - Built-in Model Context Protocol server with useful tools for AI agents
 - **Issue & PR Templates** - Structured templates for bug reports, features, and questions
 - **GitHub Actions Workflows** - Comprehensive CI/CD, security scanning, and automation (18 workflows)
@@ -126,7 +127,24 @@ templates/
 
 ## 🚀 Getting Started
 
-### Using this Bundle
+### Quick Download (Recommended) 📥
+
+**Don't want to clone the whole repo?** Use our bundle downloader to get only what you need!
+
+```bash
+# Interactive bundle selector
+npx github:cbwinslow/new_project_bundle bundle-downloader
+
+# Download specific bundles
+npx github:cbwinslow/new_project_bundle bundle-downloader download github-workflows-ci
+
+# Or use shell script (no Node.js required)
+curl -sSL https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/scripts/download-bundle.sh | bash -s -- list
+```
+
+👉 **[See full bundle documentation](BUNDLES.md)** for all available bundles and download options.
+
+### Using this Bundle (Traditional Method)
 
 1. **Fork or Clone** this repository
 2. **Customize** the files for your project:
