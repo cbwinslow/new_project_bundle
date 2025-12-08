@@ -1,0 +1,275 @@
+{
+  "version": "1.0.0",
+  "bundles": {
+    "github-core": {
+      "name": "GitHub Core Configuration",
+      "description": "Essential GitHub repository files: CODEOWNERS, CONTRIBUTING, FUNDING, SECURITY, SUPPORT",
+      "files": [
+        ".github/CODEOWNERS",
+        ".github/CONTRIBUTING.md",
+        ".github/FUNDING.yml",
+        ".github/PULL_REQUEST_TEMPLATE.md",
+        ".github/SECURITY.md",
+        ".github/SUPPORT.md"
+      ]
+    },
+    "github-issue-templates": {
+      "name": "GitHub Issue Templates",
+      "description": "Complete issue template system with bug reports, feature requests, and questions",
+      "files": [
+        ".github/ISSUE_TEMPLATE/bug_report.yml",
+        ".github/ISSUE_TEMPLATE/feature_request.yml",
+        ".github/ISSUE_TEMPLATE/question.yml",
+        ".github/ISSUE_TEMPLATE/config.yml"
+      ]
+    },
+    "github-workflows-ci": {
+      "name": "CI/CD Workflows",
+      "description": "Continuous Integration and Deployment workflows",
+      "files": [
+        ".github/workflows/ci.yml",
+        ".github/workflows/cd.yml",
+        ".github/workflows/release.yml"
+      ]
+    },
+    "github-workflows-security": {
+      "name": "Security Workflows",
+      "description": "CodeQL, security scanning, and dependency update workflows",
+      "files": [
+        ".github/workflows/codeql.yml",
+        ".github/workflows/security.yml",
+        ".github/workflows/dependency-updates.yml"
+      ]
+    },
+    "github-workflows-automation": {
+      "name": "Automation Workflows",
+      "description": "Issue triage, PR automation, project boards, and stale item management",
+      "files": [
+        ".github/workflows/issue-triage.yml",
+        ".github/workflows/pull-request.yml",
+        ".github/workflows/project-automation.yml",
+        ".github/workflows/stale.yml",
+        ".github/workflows/greetings.yml",
+        ".github/workflows/discussions.yml"
+      ]
+    },
+    "github-workflows-quality": {
+      "name": "Quality & Performance Workflows",
+      "description": "Documentation, AI review, performance testing, and metrics",
+      "files": [
+        ".github/workflows/docs.yml",
+        ".github/workflows/ai-review.yml",
+        ".github/workflows/performance.yml",
+        ".github/workflows/metrics.yml",
+        ".github/workflows/maintenance.yml"
+      ]
+    },
+    "github-configs": {
+      "name": "GitHub Configuration Files",
+      "description": "Dependabot, labels, labeler, and other GitHub configurations",
+      "files": [
+        ".github/dependabot.yml",
+        ".github/labels.yml",
+        ".github/labeler.yml",
+        ".github/lighthouserc.json",
+        ".github/markdown-link-check-config.json",
+        ".github/cspell.json",
+        ".github/copilot-instructions.md"
+      ]
+    },
+    "docker": {
+      "name": "Docker Configuration",
+      "description": "Dockerfile, docker-compose, and Docker ignore files",
+      "files": [
+        "Dockerfile",
+        "docker-compose.yml",
+        ".dockerignore"
+      ]
+    },
+    "dotfiles": {
+      "name": "Essential Dotfiles",
+      "description": "Editor config, Git attributes/ignore, environment, and tool versions",
+      "files": [
+        ".editorconfig",
+        ".gitattributes",
+        ".gitignore",
+        ".nvmrc",
+        ".tool-versions",
+        ".env.example",
+        ".sops.yaml"
+      ]
+    },
+    "pre-commit": {
+      "name": "Pre-commit Hooks",
+      "description": "Pre-commit configuration for code quality checks",
+      "files": [
+        ".pre-commit-config.yaml"
+      ]
+    },
+    "root-docs": {
+      "name": "Root Documentation",
+      "description": "README, LICENSE, CHANGELOG, and CODE_OF_CONDUCT",
+      "files": [
+        "README.md",
+        "LICENSE",
+        "CHANGELOG.md",
+        "CODE_OF_CONDUCT.md"
+      ]
+    },
+    "makefile": {
+      "name": "Makefile",
+      "description": "Make targets for common development tasks",
+      "files": [
+        "Makefile"
+      ]
+    },
+    "package-nodejs": {
+      "name": "Node.js Package Files",
+      "description": "package.json, package-lock.json, and TypeScript config",
+      "files": [
+        "package.json",
+        "package-lock.json",
+        "tsconfig.json"
+      ]
+    },
+    "package-python": {
+      "name": "Python Package Files",
+      "description": "Python requirements.txt",
+      "files": [
+        "requirements.txt"
+      ]
+    },
+    "package-ruby": {
+      "name": "Ruby Package Files",
+      "description": "Gemfile and Gemfile.lock",
+      "files": [
+        "Gemfile",
+        "Gemfile.lock"
+      ]
+    },
+    "package-go": {
+      "name": "Go Package Files",
+      "description": "go.mod and go.sum",
+      "files": [
+        "go.mod",
+        "go.sum"
+      ]
+    },
+    "package-rust": {
+      "name": "Rust Package Files",
+      "description": "Cargo.toml and Cargo.lock",
+      "files": [
+        "Cargo.toml",
+        "Cargo.lock"
+      ]
+    },
+    "package-php": {
+      "name": "PHP Package Files",
+      "description": "composer.json and composer.lock",
+      "files": [
+        "composer.json",
+        "composer.lock"
+      ]
+    },
+    "renovate": {
+      "name": "Renovate Configuration",
+      "description": "Renovate config (alternative to Dependabot)",
+      "files": [
+        "renovate.json"
+      ]
+    },
+    "templates-docs": {
+      "name": "Documentation Templates",
+      "description": "SRS, features, ADR, API, and RUNBOOK templates",
+      "files": [
+        "templates/SRS.md",
+        "templates/features.md",
+        "templates/ADR.md",
+        "templates/API.md",
+        "templates/RUNBOOK.md"
+      ]
+    },
+    "templates-ai": {
+      "name": "AI Agent Templates",
+      "description": "AI agent configuration, rules, linting, and context rules",
+      "files": [
+        "templates/agents.md",
+        "templates/rules.md",
+        "templates/ai-linting-rules.md",
+        "templates/ai-context-rules.md"
+      ]
+    },
+    "templates-git": {
+      "name": "Git Templates",
+      "description": "Git submodules and Go shell templates",
+      "files": [
+        "templates/.gitmodules.example",
+        "templates/go-shell/README.md"
+      ]
+    },
+    "mcp-server": {
+      "name": "MCP Server",
+      "description": "Complete Model Context Protocol server with all tools",
+      "files": [
+        "src/mcp-server/index.ts",
+        "src/mcp-server/tools/filesystem.ts",
+        "src/mcp-server/tools/git.ts",
+        "src/mcp-server/tools/time.ts",
+        "src/mcp-server/tools/fetch.ts",
+        "src/mcp-server/tools/memory.ts",
+        "src/mcp-server/tools/system.ts",
+        "mcp-config.json"
+      ]
+    },
+    "all-github": {
+      "name": "Complete GitHub Configuration",
+      "description": "All GitHub-related files (meta-bundle)",
+      "includes": [
+        "github-core",
+        "github-issue-templates",
+        "github-workflows-ci",
+        "github-workflows-security",
+        "github-workflows-automation",
+        "github-workflows-quality",
+        "github-configs"
+      ]
+    },
+    "all-packages": {
+      "name": "All Package Manager Files",
+      "description": "All package manager lock files (meta-bundle)",
+      "includes": [
+        "package-nodejs",
+        "package-python",
+        "package-ruby",
+        "package-go",
+        "package-rust",
+        "package-php",
+        "renovate"
+      ]
+    },
+    "all-templates": {
+      "name": "All Templates",
+      "description": "All project templates (meta-bundle)",
+      "includes": [
+        "templates-docs",
+        "templates-ai",
+        "templates-git"
+      ]
+    },
+    "complete": {
+      "name": "Complete Bundle",
+      "description": "Everything in the repository (meta-bundle)",
+      "includes": [
+        "all-github",
+        "all-packages",
+        "all-templates",
+        "docker",
+        "dotfiles",
+        "pre-commit",
+        "root-docs",
+        "makefile",
+        "mcp-server"
+      ]
+    }
+  }
+}

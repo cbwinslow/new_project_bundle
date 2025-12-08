@@ -5,13 +5,15 @@
   "type": "module",
   "main": "dist/mcp-server/index.js",
   "bin": {
-    "new-project-bundle-mcp": "./dist/mcp-server/index.js"
+    "new-project-bundle-mcp": "./dist/mcp-server/index.js",
+    "bundle-downloader": "./dist/cli/bundle-downloader.js"
   },
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
     "start": "node dist/mcp-server/index.js",
     "start:dev": "npx tsx src/mcp-server/index.ts",
+    "bundle-downloader": "npx tsx src/cli/bundle-downloader.ts",
     "typecheck": "tsc --noEmit",
     "lint": "echo \"No linting configured\" && exit 0",
     "test": "echo \"No tests specified\" && exit 0",
