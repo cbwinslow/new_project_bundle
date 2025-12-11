@@ -39,7 +39,11 @@ Best practices for handling errors gracefully and providing useful feedback.
 ```python
 def load_user_data(user_id):
     try:
-        data = database.query(f"SELECT * FROM users WHERE id = {user_id}")
+        # Use parameterized query to prevent SQL injection
+        data = database.execute(
+            "SELECT * FROM users WHERE id = ?",
+            (user_id,)
+        ).fetchone()
         return parse_user(data)
     except DatabaseError as e:
         logger.error(f"Failed to load user {user_id}: {e}")
@@ -53,6 +57,7 @@ def load_user_data(user_id):
 ```python
 def load_user_data(user_id):
     try:
+        # UNSAFE: SQL injection vulnerability!
         data = database.query(f"SELECT * FROM users WHERE id = {user_id}")
         return parse_user(data)
     except:

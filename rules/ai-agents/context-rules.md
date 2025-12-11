@@ -173,7 +173,14 @@ TASK_FILE=$1
 TASK_REPO="${TASK_LOG_REPOSITORY}"
 
 if [ -n "$TASK_REPO" ]; then
-  cd /path/to/task-repo
+  # Clone or navigate to task repository
+  TASK_REPO_DIR="${TASK_REPO_DIR:-$HOME/.tasks/${TASK_REPO##*/}}"
+  
+  if [ ! -d "$TASK_REPO_DIR" ]; then
+    git clone "https://github.com/${TASK_REPO}.git" "$TASK_REPO_DIR"
+  fi
+  
+  cd "$TASK_REPO_DIR"
   cp "$TASK_FILE" ./tasks/
   git add tasks/
   git commit -m "Add task: $(basename "$TASK_FILE")"

@@ -500,7 +500,7 @@ if [ -n "$BASH_VERSION" ]; then
         local commands="list download update list-rules download-rule query browse install help"
         COMPREPLY=($(compgen -W "$commands" -- "$cur"))
     }
-    complete -F _npb_complete npb-download npb-list npb-download-rule
+    complete -F _npb_complete npb-list npb-download npb-list-rules npb-download-rule npb-query npb-browse npb-install npb-help
 fi
 
 # Initialize
