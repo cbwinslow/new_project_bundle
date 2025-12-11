@@ -119,6 +119,23 @@ chmod +x download-bundle.sh
 | `templates-git` | Git submodules and Go shell templates | 2 |
 | `all-templates` | **Meta:** All templates | 11 |
 
+### Shell Functions Bundle
+
+| Bundle | Description | Files |
+|--------|-------------|-------|
+| `shell-functions` | Interactive bash/zsh functions for bundle and rule management | 7 |
+
+### Development Rules Bundles
+
+| Bundle | Description | Files |
+|--------|-------------|-------|
+| `rules-all` | All development rules and best practices | 11 |
+| `rules-github` | GitHub workflow and configuration rules | 4 |
+| `rules-docker` | Docker and containerization best practices | 3 |
+| `rules-security` | Security scanning and compliance rules | 2 |
+| `rules-linting` | Code quality and formatting rules | 5 |
+| `all-rules` | **Meta:** All development rules | 4 bundles |
+
 ### MCP Server Bundle
 
 | Bundle | Description | Files |
@@ -132,6 +149,7 @@ chmod +x download-bundle.sh
 | `all-github` | All GitHub configurations | 7 bundles |
 | `all-packages` | All package manager files | 7 bundles |
 | `all-templates` | All project templates | 3 bundles |
+| `all-rules` | All development rules | 4 bundles |
 | `complete` | **Everything** in the repository | All bundles |
 
 ## 🔧 Advanced Usage
@@ -332,6 +350,40 @@ bundle-dl all-github
 
 ```bash
 bundle-dl all-templates --output ./docs
+```
+
+### Shell Functions Setup
+
+```bash
+# Download and install shell functions
+bundle-dl shell-functions ~/.local/lib
+
+# Or use the automated installer
+curl -sSL https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/scripts/setup-shell.sh | bash
+```
+
+### Development Rules
+
+```bash
+# Download all rules
+bundle-dl all-rules ./rules
+
+# Download specific rule categories
+bundle-dl rules-github ./.github/workflows
+bundle-dl rules-linting ./
+bundle-dl rules-docker ./
+```
+
+### Complete Project Setup
+
+```bash
+# Get everything
+bundle-dl complete ./my-new-project
+
+# Or get specific components
+bundle-dl all-github
+bundle-dl shell-functions
+bundle-dl all-rules
 ```
 
 ## 🔐 Security
