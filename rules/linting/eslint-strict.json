@@ -1,8 +1,3 @@
-# Strict ESLint Configuration
-# ID: lint-eslint-strict
-# Category: Linting
-# Tags: eslint, javascript, typescript
-
 {
   "env": {
     "browser": true,

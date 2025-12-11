@@ -18,7 +18,7 @@ NPB_BRANCH="${NPB_BRANCH:-main}"
 NPB_BASE_URL="https://raw.githubusercontent.com/${NPB_REPO}/${NPB_BRANCH}"
 NPB_MANIFEST_URL="${NPB_BASE_URL}/bundles.json"
 NPB_CACHE_DIR="${NPB_CACHE_DIR:-$HOME/.cache/npb}"
-NPB_INSTALL_DIR="${NPB_INSTALL_DIR:-$HOME/.local/share/npb}"
+NPB_DATA_DIR="${NPB_DATA_DIR:-$HOME/.local/share/npb}"
 
 # Colors for output
 NPB_COLOR_RED='\033[0;31m'
@@ -125,9 +125,9 @@ npb_search_bundles() {
     
     if _npb_has_jq; then
         jq -r --arg keyword "$keyword" '.bundles | to_entries[] | 
-            select(.key | contains($keyword)) or 
-            select(.value.name | contains($keyword)) or 
-            select(.value.description | contains($keyword)) | 
+            select(.key | ascii_downcase | contains($keyword | ascii_downcase)) or 
+            select(.value.name | ascii_downcase | contains($keyword | ascii_downcase)) or 
+            select(.value.description | ascii_downcase | contains($keyword | ascii_downcase)) | 
             "\u001b[1;36m\(.key)\u001b[0m\n  \u001b[1m\(.value.name)\u001b[0m\n  \(.value.description)\n"' \
             "$manifest"
     else

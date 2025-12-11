@@ -10,7 +10,7 @@ NPB_RULES_REPO="${NPB_REPO:-cbwinslow/new_project_bundle}"
 NPB_RULES_BRANCH="${NPB_BRANCH:-main}"
 NPB_RULES_BASE_URL="https://raw.githubusercontent.com/${NPB_RULES_REPO}/${NPB_RULES_BRANCH}/rules"
 NPB_RULES_CACHE="${NPB_CACHE_DIR:-$HOME/.cache/npb}/rules"
-NPB_RULES_INSTALLED="${NPB_INSTALL_DIR:-$HOME/.local/share/npb}/rules"
+NPB_RULES_INSTALLED="${NPB_DATA_DIR:-$HOME/.local/share/npb}/rules"
 
 # Ensure directories exist
 _npb_ensure_rules_dirs() {

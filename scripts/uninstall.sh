@@ -110,7 +110,7 @@ main() {
     local profile_file=$(get_profile_file)
     local install_dir="${NPB_INSTALL_DIR:-$HOME/.local/lib}"
     local cache_dir="${NPB_CACHE_DIR:-$HOME/.cache/npb}"
-    local data_dir="${NPB_INSTALL_DIR:-$HOME/.local/share/npb}"
+    local data_dir="${NPB_DATA_DIR:-$HOME/.local/share/npb}"
     
     print_warning "This will remove NPB shell functions and integration"
     echo ""
