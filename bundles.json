@@ -221,6 +221,74 @@
         "mcp-config.json"
       ]
     },
+    "shell-functions": {
+      "name": "Shell Functions",
+      "description": "Interactive bash/zsh functions for bundle and rule management",
+      "files": [
+        "lib/bundle-functions.sh",
+        "lib/profile-integration.sh",
+        "lib/tui-browser.sh",
+        "lib/rule-manager.sh",
+        "scripts/setup-shell.sh",
+        "scripts/uninstall.sh",
+        "SHELL_FUNCTIONS.md"
+      ]
+    },
+    "rules-all": {
+      "name": "All Development Rules",
+      "description": "Complete set of development rules and best practices",
+      "files": [
+        "rules/index.json",
+        "rules/github/ci-basic.yml",
+        "rules/github/security-scan.yml",
+        "rules/github/auto-merge.yml",
+        "rules/docker/multistage-build.Dockerfile",
+        "rules/docker/docker-compose-dev.yml",
+        "rules/security/secrets-scan.yml",
+        "rules/linting/eslint-strict.json",
+        "rules/linting/prettier-config.json",
+        "rules/linting/editorconfig",
+        "rules/linting/pre-commit-config.yaml"
+      ]
+    },
+    "rules-github": {
+      "name": "GitHub Rules",
+      "description": "GitHub workflow and configuration rules",
+      "files": [
+        "rules/index.json",
+        "rules/github/ci-basic.yml",
+        "rules/github/security-scan.yml",
+        "rules/github/auto-merge.yml"
+      ]
+    },
+    "rules-docker": {
+      "name": "Docker Rules",
+      "description": "Docker and containerization best practices",
+      "files": [
+        "rules/index.json",
+        "rules/docker/multistage-build.Dockerfile",
+        "rules/docker/docker-compose-dev.yml"
+      ]
+    },
+    "rules-security": {
+      "name": "Security Rules",
+      "description": "Security scanning and compliance rules",
+      "files": [
+        "rules/index.json",
+        "rules/security/secrets-scan.yml"
+      ]
+    },
+    "rules-linting": {
+      "name": "Linting Rules",
+      "description": "Code quality and formatting rules",
+      "files": [
+        "rules/index.json",
+        "rules/linting/eslint-strict.json",
+        "rules/linting/prettier-config.json",
+        "rules/linting/editorconfig",
+        "rules/linting/pre-commit-config.yaml"
+      ]
+    },
     "all-github": {
       "name": "Complete GitHub Configuration",
       "description": "All GitHub-related files (meta-bundle)",
@@ -256,78 +324,7 @@
         "templates-git"
       ]
     },
-    "rules-code-quality": {
-      "name": "Code Quality Rules",
-      "description": "Clean code and error handling guidelines",
-      "files": [
-        "rules/code-quality/clean-code.md",
-        "rules/code-quality/error-handling.md"
-      ]
-    },
-    "rules-git-workflow": {
-      "name": "Git Workflow Rules",
-      "description": "Git commit and branch naming conventions",
-      "files": [
-        "rules/git-workflow/commit-messages.md",
-        "rules/git-workflow/branch-naming.md"
-      ]
-    },
-    "rules-testing": {
-      "name": "Testing Rules",
-      "description": "Test coverage and quality assurance standards",
-      "files": [
-        "rules/testing/test-coverage.md"
-      ]
-    },
-    "rules-documentation": {
-      "name": "Documentation Rules",
-      "description": "Documentation and API documentation standards",
-      "files": [
-        "rules/documentation/api-documentation.md"
-      ]
-    },
-    "rules-security": {
-      "name": "Security Rules",
-      "description": "Security best practices and secrets management",
-      "files": [
-        "rules/security/secrets-management.md"
-      ]
-    },
-    "rules-deployment": {
-      "name": "Deployment Rules",
-      "description": "Deployment checklists and procedures",
-      "files": [
-        "rules/deployment/deployment-checklist.md"
-      ]
-    },
-    "rules-ai-agents": {
-      "name": "AI Agent Rules",
-      "description": "Guidelines for AI coding agents",
-      "files": [
-        "rules/ai-agents/context-rules.md"
-      ]
-    },
-    "all-rules": {
-      "name": "All Development Rules",
-      "description": "Complete set of development rules (meta-bundle)",
-      "includes": [
-        "rules-code-quality",
-        "rules-git-workflow",
-        "rules-testing",
-        "rules-documentation",
-        "rules-security",
-        "rules-deployment",
-        "rules-ai-agents"
-      ]
-    },
-    "scripts": {
-      "name": "Shell Scripts and Functions",
-      "description": "Bundle downloader and shell integration scripts",
-      "files": [
-        "scripts/download-bundle.sh",
-        "scripts/install.sh",
-        "scripts/shell-functions.sh",
-        "scripts/quick-setup.sh"
+
       ]
     },
     "complete": {
@@ -344,7 +341,7 @@
         "root-docs",
         "makefile",
         "mcp-server",
-        "scripts"
+
       ]
     }
   }

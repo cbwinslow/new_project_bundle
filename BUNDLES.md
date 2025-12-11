@@ -138,39 +138,7 @@ chmod +x download-bundle.sh
 | `templates-git` | Git submodules and Go shell templates | 2 |
 | `all-templates` | **Meta:** All templates | 11 |
 
-### Development Rules Bundles
 
-| Bundle | Description | Files |
-|--------|-------------|-------|
-| `rules-code-quality` | Clean code and error handling | 2 |
-| `rules-git-workflow` | Commit messages and branch naming | 2 |
-| `rules-testing` | Test coverage requirements | 1 |
-| `rules-documentation` | API documentation standards | 1 |
-| `rules-security` | Secrets management | 1 |
-| `rules-deployment` | Deployment checklist | 1 |
-| `rules-ai-agents` | AI agent guidelines | 1 |
-| `all-rules` | **Meta:** All development rules | 9 |
-
-**Using Rules:**
-```bash
-# List all rules
-npb-list-rules
-
-# Download a specific rule
-npb-download-rule code-quality/clean-code.md
-
-# Download all rules in a category
-npb-download rules-code-quality
-
-# Search for rules
-npb-query commit
-npb-query security
-
-# Browse interactively (requires fzf)
-npb-browse
-```
-
-See [Rules System Documentation](docs/wiki/Rules-System.md) for more details.
 
 ### MCP Server Bundle
 
@@ -191,6 +159,7 @@ See [Rules System Documentation](docs/wiki/Rules-System.md) for more details.
 | `all-github` | All GitHub configurations | 7 bundles |
 | `all-packages` | All package manager files | 7 bundles |
 | `all-templates` | All project templates | 3 bundles |
+| `all-rules` | All development rules | 4 bundles |
 | `complete` | **Everything** in the repository | All bundles |
 
 ## 🔧 Advanced Usage
@@ -452,6 +421,40 @@ bundle-dl all-github
 
 ```bash
 bundle-dl all-templates --output ./docs
+```
+
+### Shell Functions Setup
+
+```bash
+# Download and install shell functions
+bundle-dl shell-functions ~/.local/lib
+
+# Or use the automated installer
+curl -sSL https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/scripts/setup-shell.sh | bash
+```
+
+### Development Rules
+
+```bash
+# Download all rules
+bundle-dl all-rules ./rules
+
+# Download specific rule categories
+bundle-dl rules-github ./.github/workflows
+bundle-dl rules-linting ./
+bundle-dl rules-docker ./
+```
+
+### Complete Project Setup
+
+```bash
+# Get everything
+bundle-dl complete ./my-new-project
+
+# Or get specific components
+bundle-dl all-github
+bundle-dl shell-functions
+bundle-dl all-rules
 ```
 
 ## 🔐 Security

@@ -11,9 +11,9 @@
 
 This repository contains a complete set of GitHub configuration files, workflow scripts, DevOps automation tools, and an **MCP (Model Context Protocol) server** designed to jumpstart new projects with AI agent integration. It includes configurations for:
 
+- **🚀 Shell Functions** - Interactive bash/zsh functions for browsing and downloading bundles
 - **📦 Bundle Downloader** - Download curated file bundles without cloning the whole repo
-- **📋 Development Rules** - Modular, searchable rules for code quality, Git workflow, testing, security, and more
-- **🔧 Shell Integration** - Powerful shell functions for browsing, querying, and downloading bundles/rules
+
 - **🤖 MCP Server** - Built-in Model Context Protocol server with useful tools for AI agents
 - **Issue & PR Templates** - Structured templates for bug reports, features, and questions
 - **GitHub Actions Workflows** - Comprehensive CI/CD, security scanning, and automation (18 workflows)
@@ -129,28 +129,7 @@ templates/
 
 ## 🚀 Getting Started
 
-### Quick Setup (1-Minute Install) ⚡
 
-**Install shell functions for easy access to bundles and rules:**
-
-```bash
-# One-line installation
-curl -sSL https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/scripts/quick-setup.sh | bash
-
-# Then reload your shell
-source ~/.bashrc  # or ~/.zshrc
-```
-
-This gives you powerful commands:
-```bash
-npb-list              # List all bundles
-npb-download <bundle> # Download a bundle
-npb-list-rules        # List development rules
-npb-query <keyword>   # Search for rules
-npb-browse            # Interactive rule browser
-```
-
-### Quick Download (Recommended) 📥
 
 **Don't want to clone the whole repo?** Use our bundle downloader to get only what you need!
 
@@ -280,6 +259,113 @@ This bundle is configured to work with multiple AI code review services:
 1. Install from [GitHub Marketplace](https://github.com/marketplace/coderabbit-ai-code-reviews)
 2. Add to repository
 3. Automatic PR reviews begin immediately
+
+## 🚀 Shell Functions & Interactive Tools
+
+NPB provides powerful shell functions that make it easy to browse, search, and download bundles and rules directly from your terminal.
+
+### Quick Setup
+
+```bash
+# One-command installation
+curl -sSL https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/scripts/setup-shell.sh | bash
+
+# Reload your shell
+source ~/.bashrc  # or ~/.zshrc
+```
+
+### Available Commands
+
+**Bundle Management:**
+- `npb_list_bundles` - List all available bundles
+- `npb_search_bundles <keyword>` - Search for bundles
+- `npb_browse_bundles` - Interactive TUI browser
+- `npb_download_bundle <name> [dir]` - Download a bundle
+- `npb_get <name>` - Quick download to current directory
+
+**Rule Management:**
+- `npb_list_rules [category]` - List development rules
+- `npb_search_rules <keyword>` - Search for rules
+- `npb_browse_rules [category]` - Interactive rule browser
+- `npb_download_rule <id> [dir]` - Download a specific rule
+- `npb_install_rule <id>` - Install rule to NPB directory
+
+**Utilities:**
+- `npb_version` - Show version and status
+- `npb_refresh` - Refresh bundle cache
+- `npb_help` - Show help message
+
+### Convenient Aliases
+
+After installation, these aliases are available:
+
+```bash
+npb              # List bundles
+npb-browse       # Interactive browser
+npb-get docker   # Quick download
+npb-rules        # List rules
+npb-rules-browse # Browse rules
+```
+
+### Examples
+
+```bash
+# Browse and download bundles interactively
+npb-browse
+
+# Quick download common bundles
+npb-get github-workflows-ci
+npb-get docker
+npb-get all-templates
+
+# Search for specific functionality
+npb_search_bundles security
+npb_search_rules eslint
+
+# Download rules for your project
+npb_download_rule gh-ci-basic ./.github/workflows/
+npb_download_rule docker-multistage ./
+```
+
+👉 **[Full Shell Functions Documentation](SHELL_FUNCTIONS.md)**
+
+## 📋 Rules System
+
+NPB includes a comprehensive rules system with curated development rules and best practices.
+
+### Rule Categories
+
+- **GitHub** - Workflow and configuration rules
+- **Docker** - Container and deployment rules
+- **CI/CD** - Pipeline and automation rules
+- **Security** - Security scanning and compliance
+- **Linting** - Code quality and formatting rules
+
+### Browse Rules
+
+```bash
+# List all rules
+npb_list_rules
+
+# Browse by category
+npb_browse_rules github
+npb_browse_rules security
+
+# Search for specific rules
+npb_search_rules codeql
+npb_search_rules eslint
+```
+
+### Rule Examples
+
+Available rules include:
+- `gh-ci-basic` - Basic CI workflow with testing
+- `gh-security-scan` - Comprehensive security scanning
+- `docker-multistage` - Optimized multi-stage builds
+- `sec-secrets-scan` - Secret detection and prevention
+- `lint-eslint-strict` - Strict ESLint configuration
+
+Rules are metadata-tagged and fully searchable through the interactive browser or search functions.
 
 ## 🤖 MCP Server
 
