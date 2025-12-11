@@ -1,0 +1,194 @@
+{
+  "version": "1.0.0",
+  "description": "Development rules and best practices catalog for New Project Bundle",
+  "categories": {
+    "github": {
+      "name": "GitHub Configuration",
+      "description": "GitHub workflows, actions, and repository configuration rules",
+      "rules": [
+        {
+          "id": "gh-ci-basic",
+          "name": "Basic CI Workflow",
+          "description": "Essential continuous integration workflow with linting, testing, and building",
+          "category": "github",
+          "tags": ["ci", "workflow", "testing", "essential"],
+          "file": "github/ci-basic.yml"
+        },
+        {
+          "id": "gh-security-scan",
+          "name": "Security Scanning",
+          "description": "Comprehensive security scanning with CodeQL, dependency checks, and secret scanning",
+          "category": "github",
+          "tags": ["security", "codeql", "workflow"],
+          "file": "github/security-scan.yml"
+        },
+        {
+          "id": "gh-auto-merge",
+          "name": "Auto Merge Dependabot",
+          "description": "Automatically merge Dependabot PRs after tests pass",
+          "category": "github",
+          "tags": ["automation", "dependabot", "workflow"],
+          "file": "github/auto-merge.yml"
+        },
+        {
+          "id": "gh-issue-triage",
+          "name": "Issue Auto-Triage",
+          "description": "Automatically label and assign issues based on content",
+          "category": "github",
+          "tags": ["automation", "issues", "workflow"],
+          "file": "github/issue-triage.yml"
+        }
+      ]
+    },
+    "docker": {
+      "name": "Docker & Containers",
+      "description": "Docker configuration and containerization best practices",
+      "rules": [
+        {
+          "id": "docker-multistage",
+          "name": "Multi-stage Build",
+          "description": "Optimized multi-stage Dockerfile for smaller production images",
+          "category": "docker",
+          "tags": ["dockerfile", "optimization", "production"],
+          "file": "docker/multistage-build.Dockerfile"
+        },
+        {
+          "id": "docker-compose-dev",
+          "name": "Development Docker Compose",
+          "description": "Docker Compose setup for local development with hot reload",
+          "category": "docker",
+          "tags": ["docker-compose", "development", "local"],
+          "file": "docker/docker-compose-dev.yml"
+        },
+        {
+          "id": "docker-security",
+          "name": "Security Hardening",
+          "description": "Security best practices for Docker containers",
+          "category": "docker",
+          "tags": ["security", "hardening", "production"],
+          "file": "docker/security-hardening.md"
+        }
+      ]
+    },
+    "ci-cd": {
+      "name": "CI/CD Pipelines",
+      "description": "Continuous integration and deployment pipeline configurations",
+      "rules": [
+        {
+          "id": "cicd-semantic-release",
+          "name": "Semantic Release",
+          "description": "Automated versioning and changelog generation with semantic-release",
+          "category": "ci-cd",
+          "tags": ["release", "versioning", "automation"],
+          "file": "ci-cd/semantic-release.yml"
+        },
+        {
+          "id": "cicd-deploy-staging",
+          "name": "Staging Deployment",
+          "description": "Automated deployment to staging environment",
+          "category": "ci-cd",
+          "tags": ["deployment", "staging", "automation"],
+          "file": "ci-cd/deploy-staging.yml"
+        },
+        {
+          "id": "cicd-rollback",
+          "name": "Deployment Rollback",
+          "description": "Safe rollback procedure for failed deployments",
+          "category": "ci-cd",
+          "tags": ["deployment", "rollback", "recovery"],
+          "file": "ci-cd/rollback-procedure.md"
+        }
+      ]
+    },
+    "security": {
+      "name": "Security & Compliance",
+      "description": "Security scanning, compliance, and best practices",
+      "rules": [
+        {
+          "id": "sec-secrets-scan",
+          "name": "Secrets Scanning",
+          "description": "Scan for accidentally committed secrets and credentials",
+          "category": "security",
+          "tags": ["secrets", "scanning", "prevention"],
+          "file": "security/secrets-scan.yml"
+        },
+        {
+          "id": "sec-dependency-audit",
+          "name": "Dependency Audit",
+          "description": "Regular security audits of project dependencies",
+          "category": "security",
+          "tags": ["dependencies", "audit", "vulnerabilities"],
+          "file": "security/dependency-audit.yml"
+        },
+        {
+          "id": "sec-sast",
+          "name": "Static Analysis",
+          "description": "Static application security testing (SAST) with multiple tools",
+          "category": "security",
+          "tags": ["sast", "analysis", "code-quality"],
+          "file": "security/sast-analysis.yml"
+        },
+        {
+          "id": "sec-policy",
+          "name": "Security Policy",
+          "description": "Template for SECURITY.md with vulnerability reporting guidelines",
+          "category": "security",
+          "tags": ["policy", "documentation", "reporting"],
+          "file": "security/security-policy.md"
+        }
+      ]
+    },
+    "linting": {
+      "name": "Code Quality & Linting",
+      "description": "Code quality, linting, and formatting rules",
+      "rules": [
+        {
+          "id": "lint-eslint-strict",
+          "name": "Strict ESLint Config",
+          "description": "Comprehensive ESLint configuration for JavaScript/TypeScript",
+          "category": "linting",
+          "tags": ["eslint", "javascript", "typescript"],
+          "file": "linting/eslint-strict.json"
+        },
+        {
+          "id": "lint-prettier",
+          "name": "Prettier Configuration",
+          "description": "Opinionated code formatting with Prettier",
+          "category": "linting",
+          "tags": ["prettier", "formatting", "code-style"],
+          "file": "linting/prettier-config.json"
+        },
+        {
+          "id": "lint-pre-commit",
+          "name": "Pre-commit Hooks",
+          "description": "Comprehensive pre-commit hooks for code quality",
+          "category": "linting",
+          "tags": ["pre-commit", "hooks", "automation"],
+          "file": "linting/pre-commit-config.yaml"
+        },
+        {
+          "id": "lint-editorconfig",
+          "name": "EditorConfig",
+          "description": "Consistent coding styles across different editors and IDEs",
+          "category": "linting",
+          "tags": ["editorconfig", "consistency", "code-style"],
+          "file": "linting/editorconfig"
+        }
+      ]
+    }
+  },
+  "tags": {
+    "ci": "Continuous Integration",
+    "cd": "Continuous Deployment",
+    "security": "Security and Vulnerability Scanning",
+    "automation": "Automated Workflows",
+    "testing": "Automated Testing",
+    "workflow": "GitHub Actions Workflow",
+    "docker": "Docker and Containerization",
+    "linting": "Code Linting and Quality",
+    "formatting": "Code Formatting",
+    "production": "Production Ready",
+    "development": "Development Environment",
+    "essential": "Must-have Configuration"
+  }
+}
