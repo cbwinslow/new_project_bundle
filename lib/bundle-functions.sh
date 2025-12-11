@@ -125,10 +125,12 @@ npb_search_bundles() {
     
     if _npb_has_jq; then
         jq -r --arg keyword "$keyword" '.bundles | to_entries[] | 
-            select(.key | ascii_downcase | contains($keyword | ascii_downcase)) or 
-            select(.value.name | ascii_downcase | contains($keyword | ascii_downcase)) or 
-            select(.value.description | ascii_downcase | contains($keyword | ascii_downcase)) | 
-            "\u001b[1;36m\(.key)\u001b[0m\n  \u001b[1m\(.value.name)\u001b[0m\n  \(.value.description)\n"' \
+            select(
+                (.key | ascii_downcase | contains($keyword | ascii_downcase)) or 
+                ((.value.name // "") | ascii_downcase | contains($keyword | ascii_downcase)) or 
+                ((.value.description // "") | ascii_downcase | contains($keyword | ascii_downcase))
+            ) | 
+            "\u001b[1;36m\(.key)\u001b[0m\n  \u001b[1m\(.value.name // "No name")\u001b[0m\n  \((.value.description // "No description"))\n"' \
             "$manifest"
     else
         grep -i "$keyword" "$manifest" | head -20
