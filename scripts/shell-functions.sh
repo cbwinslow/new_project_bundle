@@ -202,6 +202,9 @@ npb-list-rules() {
             "deployment")
                 echo "  • deployment-checklist.md - Pre-deployment checklist"
                 ;;
+            "ai-agents")
+                echo "  • context-rules.md - AI agent context and behavior guidelines"
+                ;;
         esac
         echo ""
     done
@@ -314,6 +317,13 @@ npb-query() {
                     found=1
                 fi
                 ;;
+            "ai-agents")
+                if echo "ai agent context behavior documentation task" | grep -qi "$search_term"; then
+                    echo -e "${NPB_GREEN}ai-agents/context-rules.md${NPB_NC}"
+                    echo "  AI agent context and behavior guidelines"
+                    found=1
+                fi
+                ;;
         esac
     done
     
@@ -347,6 +357,7 @@ npb-browse() {
         "testing/test-coverage.md|Test coverage requirements"
         "documentation/api-documentation.md|API documentation standards"
         "deployment/deployment-checklist.md|Pre-deployment checklist"
+        "ai-agents/context-rules.md|AI agent context and behavior guidelines"
     )
     
     local selected=$(printf '%s\n' "${rules[@]}" | \

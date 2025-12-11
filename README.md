@@ -12,6 +12,8 @@
 This repository contains a complete set of GitHub configuration files, workflow scripts, DevOps automation tools, and an **MCP (Model Context Protocol) server** designed to jumpstart new projects with AI agent integration. It includes configurations for:
 
 - **📦 Bundle Downloader** - Download curated file bundles without cloning the whole repo
+- **📋 Development Rules** - Modular, searchable rules for code quality, Git workflow, testing, security, and more
+- **🔧 Shell Integration** - Powerful shell functions for browsing, querying, and downloading bundles/rules
 - **🤖 MCP Server** - Built-in Model Context Protocol server with useful tools for AI agents
 - **Issue & PR Templates** - Structured templates for bug reports, features, and questions
 - **GitHub Actions Workflows** - Comprehensive CI/CD, security scanning, and automation (18 workflows)
@@ -127,6 +129,27 @@ templates/
 
 ## 🚀 Getting Started
 
+### Quick Setup (1-Minute Install) ⚡
+
+**Install shell functions for easy access to bundles and rules:**
+
+```bash
+# One-line installation
+curl -sSL https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/scripts/quick-setup.sh | bash
+
+# Then reload your shell
+source ~/.bashrc  # or ~/.zshrc
+```
+
+This gives you powerful commands:
+```bash
+npb-list              # List all bundles
+npb-download <bundle> # Download a bundle
+npb-list-rules        # List development rules
+npb-query <keyword>   # Search for rules
+npb-browse            # Interactive rule browser
+```
+
 ### Quick Download (Recommended) 📥
 
 **Don't want to clone the whole repo?** Use our bundle downloader to get only what you need!
@@ -138,11 +161,12 @@ npx github:cbwinslow/new_project_bundle bundle-downloader
 # Download specific bundles
 npx github:cbwinslow/new_project_bundle bundle-downloader download github-workflows-ci
 
-# Or use shell script (no Node.js required)
-curl -sSL https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/scripts/download-bundle.sh | bash -s -- list
+# Or use shell functions (after setup above)
+npb-download github-workflows-ci
 ```
 
 👉 **[See full bundle documentation](BUNDLES.md)** for all available bundles and download options.
+👉 **[See rules documentation](docs/wiki/Rules-System.md)** for development rules and guidelines.
 
 ### Using this Bundle (Traditional Method)
 
@@ -159,6 +183,80 @@ curl -sSL https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/sc
    - `CODECOV_TOKEN` - For code coverage
    - `SNYK_TOKEN` - For Snyk security scanning
    - Other service-specific tokens as needed
+
+## 📋 Development Rules System
+
+The repository includes a comprehensive, modular rules system for development best practices.
+
+### What Are Rules?
+
+Rules are individual markdown files organized by category:
+- **Code Quality** - Clean code, error handling
+- **Git Workflow** - Commit messages, branch naming
+- **Testing** - Test coverage requirements
+- **Documentation** - API documentation standards
+- **Security** - Secrets management
+- **Deployment** - Deployment checklists
+- **AI Agents** - Guidelines for AI coding agents
+
+### Using Rules
+
+**List all rules:**
+```bash
+npb-list-rules
+```
+
+**Search for rules:**
+```bash
+npb-query commit      # Find commit-related rules
+npb-query security    # Find security rules
+npb-query test        # Find testing rules
+```
+
+**Download specific rules:**
+```bash
+npb-download-rule code-quality/clean-code.md
+npb-download-rule git-workflow/commit-messages.md
+```
+
+**Download all rules in a category:**
+```bash
+npb-download rules-code-quality
+npb-download rules-security
+npb-download all-rules    # Download all rules
+```
+
+**Interactive browsing (requires fzf):**
+```bash
+npb-browse
+```
+
+### Available Rule Bundles
+
+| Bundle | Description | Files |
+|--------|-------------|-------|
+| `rules-code-quality` | Clean code and error handling | 2 |
+| `rules-git-workflow` | Git commit and branch conventions | 2 |
+| `rules-testing` | Test coverage standards | 1 |
+| `rules-documentation` | API documentation standards | 1 |
+| `rules-security` | Security best practices | 1 |
+| `rules-deployment` | Deployment checklists | 1 |
+| `rules-ai-agents` | AI agent guidelines | 1 |
+| `all-rules` | All development rules | 9 |
+
+### Integration with AI Agents
+
+Rules are designed for AI agent consumption:
+
+```markdown
+# Reference in your AI agent config
+Please follow these rules:
+- code-quality/clean-code.md
+- git-workflow/commit-messages.md
+- security/secrets-management.md
+```
+
+See [Rules System Documentation](docs/wiki/Rules-System.md) for more details.
 
 ### AI Code Review Setup
 

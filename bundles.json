@@ -300,6 +300,13 @@
         "rules/deployment/deployment-checklist.md"
       ]
     },
+    "rules-ai-agents": {
+      "name": "AI Agent Rules",
+      "description": "Guidelines for AI coding agents",
+      "files": [
+        "rules/ai-agents/context-rules.md"
+      ]
+    },
     "all-rules": {
       "name": "All Development Rules",
       "description": "Complete set of development rules (meta-bundle)",
@@ -309,7 +316,8 @@
         "rules-testing",
         "rules-documentation",
         "rules-security",
-        "rules-deployment"
+        "rules-deployment",
+        "rules-ai-agents"
       ]
     },
     "scripts": {
@@ -318,7 +326,8 @@
       "files": [
         "scripts/download-bundle.sh",
         "scripts/install.sh",
-        "scripts/shell-functions.sh"
+        "scripts/shell-functions.sh",
+        "scripts/quick-setup.sh"
       ]
     },
     "complete": {
