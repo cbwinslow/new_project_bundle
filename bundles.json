@@ -221,6 +221,74 @@
         "mcp-config.json"
       ]
     },
+    "shell-functions": {
+      "name": "Shell Functions",
+      "description": "Interactive bash/zsh functions for bundle and rule management",
+      "files": [
+        "lib/bundle-functions.sh",
+        "lib/profile-integration.sh",
+        "lib/tui-browser.sh",
+        "lib/rule-manager.sh",
+        "scripts/setup-shell.sh",
+        "scripts/uninstall.sh",
+        "SHELL_FUNCTIONS.md"
+      ]
+    },
+    "rules-all": {
+      "name": "All Development Rules",
+      "description": "Complete set of development rules and best practices",
+      "files": [
+        "rules/index.json",
+        "rules/github/ci-basic.yml",
+        "rules/github/security-scan.yml",
+        "rules/github/auto-merge.yml",
+        "rules/docker/multistage-build.Dockerfile",
+        "rules/docker/docker-compose-dev.yml",
+        "rules/security/secrets-scan.yml",
+        "rules/linting/eslint-strict.json",
+        "rules/linting/prettier-config.json",
+        "rules/linting/editorconfig",
+        "rules/linting/pre-commit-config.yaml"
+      ]
+    },
+    "rules-github": {
+      "name": "GitHub Rules",
+      "description": "GitHub workflow and configuration rules",
+      "files": [
+        "rules/index.json",
+        "rules/github/ci-basic.yml",
+        "rules/github/security-scan.yml",
+        "rules/github/auto-merge.yml"
+      ]
+    },
+    "rules-docker": {
+      "name": "Docker Rules",
+      "description": "Docker and containerization best practices",
+      "files": [
+        "rules/index.json",
+        "rules/docker/multistage-build.Dockerfile",
+        "rules/docker/docker-compose-dev.yml"
+      ]
+    },
+    "rules-security": {
+      "name": "Security Rules",
+      "description": "Security scanning and compliance rules",
+      "files": [
+        "rules/index.json",
+        "rules/security/secrets-scan.yml"
+      ]
+    },
+    "rules-linting": {
+      "name": "Linting Rules",
+      "description": "Code quality and formatting rules",
+      "files": [
+        "rules/index.json",
+        "rules/linting/eslint-strict.json",
+        "rules/linting/prettier-config.json",
+        "rules/linting/editorconfig",
+        "rules/linting/pre-commit-config.yaml"
+      ]
+    },
     "all-github": {
       "name": "Complete GitHub Configuration",
       "description": "All GitHub-related files (meta-bundle)",
@@ -256,6 +324,16 @@
         "templates-git"
       ]
     },
+    "all-rules": {
+      "name": "All Development Rules",
+      "description": "All development rules and best practices (meta-bundle)",
+      "includes": [
+        "rules-github",
+        "rules-docker",
+        "rules-security",
+        "rules-linting"
+      ]
+    },
     "complete": {
       "name": "Complete Bundle",
       "description": "Everything in the repository (meta-bundle)",
@@ -263,12 +341,14 @@
         "all-github",
         "all-packages",
         "all-templates",
+        "all-rules",
         "docker",
         "dotfiles",
         "pre-commit",
         "root-docs",
         "makefile",
-        "mcp-server"
+        "mcp-server",
+        "shell-functions"
       ]
     }
   }

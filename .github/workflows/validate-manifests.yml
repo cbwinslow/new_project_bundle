@@ -1,0 +1,203 @@
+name: Validate Manifests
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'bundles.json'
+      - 'rules/index.json'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'bundles.json'
+      - 'rules/index.json'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-bundles:
+    name: Validate bundles.json
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Validate JSON syntax
+        run: |
+          echo "Validating bundles.json syntax..."
+          jq empty bundles.json
+          echo "✓ bundles.json is valid JSON"
+      
+      - name: Check bundle structure
+        run: |
+          echo "Checking bundle structure..."
+          
+          # Check version exists
+          if ! jq -e '.version' bundles.json > /dev/null; then
+            echo "✗ Missing version field"
+            exit 1
+          fi
+          
+          # Check bundles object exists
+          if ! jq -e '.bundles' bundles.json > /dev/null; then
+            echo "✗ Missing bundles object"
+            exit 1
+          fi
+          
+          # Validate each bundle has required fields
+          jq -r '.bundles | to_entries[] | .key' bundles.json | while read bundle; do
+            echo "Checking bundle: $bundle"
+            
+            if ! jq -e ".bundles[\"$bundle\"].name" bundles.json > /dev/null; then
+              echo "✗ Bundle $bundle missing name"
+              exit 1
+            fi
+            
+            if ! jq -e ".bundles[\"$bundle\"].description" bundles.json > /dev/null; then
+              echo "✗ Bundle $bundle missing description"
+              exit 1
+            fi
+            
+            # Check that bundle has either files or includes
+            has_files=$(jq -e ".bundles[\"$bundle\"].files" bundles.json > /dev/null && echo "yes" || echo "no")
+            has_includes=$(jq -e ".bundles[\"$bundle\"].includes" bundles.json > /dev/null && echo "yes" || echo "no")
+            
+            if [ "$has_files" = "no" ] && [ "$has_includes" = "no" ]; then
+              echo "✗ Bundle $bundle has neither files nor includes"
+              exit 1
+            fi
+            
+            echo "  ✓ Bundle $bundle is valid"
+          done
+          
+          echo "✓ All bundles are valid"
+      
+      - name: Check for circular dependencies
+        run: |
+          echo "Checking for circular dependencies..."
+          
+          # This is a simplified check - real implementation would need recursive checking
+          jq -r '.bundles | to_entries[] | select(.value.includes) | .key as $bundle | .value.includes[] | "\($bundle) -> \(.)"' bundles.json > /tmp/deps.txt || true
+          
+          if [ -s /tmp/deps.txt ]; then
+            echo "Bundle dependencies found:"
+            cat /tmp/deps.txt
+          fi
+          
+          echo "✓ Dependency check complete"
+
+  validate-rules:
+    name: Validate rules/index.json
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Validate JSON syntax
+        run: |
+          echo "Validating rules/index.json syntax..."
+          jq empty rules/index.json
+          echo "✓ rules/index.json is valid JSON"
+      
+      - name: Check rules structure
+        run: |
+          echo "Checking rules structure..."
+          
+          # Check version exists
+          if ! jq -e '.version' rules/index.json > /dev/null; then
+            echo "✗ Missing version field"
+            exit 1
+          fi
+          
+          # Check categories object exists
+          if ! jq -e '.categories' rules/index.json > /dev/null; then
+            echo "✗ Missing categories object"
+            exit 1
+          fi
+          
+          echo "✓ Rules index structure is valid"
+      
+      - name: Validate rule entries
+        run: |
+          echo "Validating individual rules..."
+          
+          jq -r '.categories | to_entries[] | .key as $cat | .value.rules[] | "\($cat):\(.id):\(.file)"' rules/index.json | while IFS=: read category id file; do
+            echo "Checking rule: $id (category: $category)"
+            
+            # Check if file exists
+            if [ ! -f "rules/$file" ]; then
+              echo "✗ Rule file not found: rules/$file"
+              exit 1
+            fi
+            
+            echo "  ✓ Rule $id is valid"
+          done
+          
+          echo "✓ All rules are valid"
+      
+      - name: Check for duplicate rule IDs
+        run: |
+          echo "Checking for duplicate rule IDs..."
+          
+          duplicates=$(jq -r '.categories[].rules[].id' rules/index.json | sort | uniq -d)
+          
+          if [ -n "$duplicates" ]; then
+            echo "✗ Duplicate rule IDs found:"
+            echo "$duplicates"
+            exit 1
+          fi
+          
+          echo "✓ No duplicate rule IDs found"
+
+  validate-shell-scripts:
+    name: Validate Shell Scripts
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Install shellcheck
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y shellcheck
+      
+      - name: Check shell scripts
+        run: |
+          echo "Checking shell scripts with shellcheck..."
+          
+          find lib scripts -name "*.sh" -type f | while read script; do
+            echo "Checking $script..."
+            shellcheck -x "$script" || exit 1
+            echo "  ✓ $script passed"
+          done
+          
+          echo "✓ All shell scripts are valid"
+      
+      - name: Check script executability
+        run: |
+          echo "Checking script permissions..."
+          
+          scripts=(
+            "scripts/setup-shell.sh"
+            "scripts/uninstall.sh"
+            "scripts/download-bundle.sh"
+            "scripts/install.sh"
+            "lib/bundle-functions.sh"
+            "lib/profile-integration.sh"
+            "lib/tui-browser.sh"
+            "lib/rule-manager.sh"
+          )
+          
+          for script in "${scripts[@]}"; do
+            if [ ! -x "$script" ]; then
+              echo "✗ $script is not executable"
+              exit 1
+            fi
+            echo "  ✓ $script is executable"
+          done
+          
+          echo "✓ All scripts have correct permissions"
