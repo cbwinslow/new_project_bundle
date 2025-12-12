@@ -151,6 +151,12 @@ npb-download() {
     
     while IFS= read -r file; do
         if [ -n "$file" ]; then
+            # Validate file path: reject absolute paths, ~, and any '..' segments
+            if [[ "$file" == /* || "$file" == ~* || "$file" == *".."* ]]; then
+                _npb_print_error "Skipping suspicious file path: '$file'"
+                failed=$((failed + 1))
+                continue
+            fi
             local file_url="${NPB_BASE_URL}/${file}"
             local output_path="${output_dir}/${file}"
             
