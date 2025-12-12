@@ -12,9 +12,28 @@ Bundles are curated collections of related files from this repository. Each bund
 
 ## 🚀 Quick Start
 
-There are three ways to download bundles:
+There are four ways to download bundles:
 
-### 1. Interactive CLI Tool (Recommended)
+### 1. Shell Functions (Fastest & Easiest)
+
+Install once, use forever:
+
+```bash
+# Quick installation
+curl -sSL https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/scripts/quick-setup.sh | bash
+
+# Then reload your shell
+source ~/.bashrc  # or ~/.zshrc
+
+# Now use simple commands
+npb-list                              # List all bundles
+npb-download github-workflows-ci      # Download a bundle
+npb-list-rules                        # List development rules
+npb-query commit                      # Search for rules
+npb-browse                            # Interactive browser
+```
+
+### 2. Interactive CLI Tool
 
 The easiest way to explore and download bundles:
 
@@ -32,7 +51,7 @@ This launches an interactive menu where you can:
 - Download by entering a number or name
 - Specify custom output directories
 
-### 2. Command Line Downloads
+### 3. Command Line Downloads
 
 Download specific bundles directly:
 
@@ -50,7 +69,7 @@ npx github:cbwinslow/new_project_bundle bundle-downloader download docker --outp
 npx github:cbwinslow/new_project_bundle bundle-downloader wget
 ```
 
-### 3. Shell Script (wget/curl)
+### 4. Shell Script (wget/curl)
 
 For quick downloads without Node.js:
 
@@ -119,28 +138,19 @@ chmod +x download-bundle.sh
 | `templates-git` | Git submodules and Go shell templates | 2 |
 | `all-templates` | **Meta:** All templates | 11 |
 
-### Shell Functions Bundle
 
-| Bundle | Description | Files |
-|--------|-------------|-------|
-| `shell-functions` | Interactive bash/zsh functions for bundle and rule management | 7 |
-
-### Development Rules Bundles
-
-| Bundle | Description | Files |
-|--------|-------------|-------|
-| `rules-all` | All development rules and best practices | 11 |
-| `rules-github` | GitHub workflow and configuration rules | 4 |
-| `rules-docker` | Docker and containerization best practices | 3 |
-| `rules-security` | Security scanning and compliance rules | 2 |
-| `rules-linting` | Code quality and formatting rules | 5 |
-| `all-rules` | **Meta:** All development rules | 4 bundles |
 
 ### MCP Server Bundle
 
 | Bundle | Description | Files |
 |--------|-------------|-------|
 | `mcp-server` | Complete Model Context Protocol server | 8 |
+
+### Scripts Bundle
+
+| Bundle | Description | Files |
+|--------|-------------|-------|
+| `scripts` | Shell scripts and functions | 4 |
 
 ### Meta Bundles
 
@@ -270,9 +280,70 @@ Example custom bundle:
 }
 ```
 
-## 🌐 Aliases & Shortcuts
+## 🌐 Shell Functions & Quick Access
 
-Add these to your shell profile for quick access:
+The fastest way to use NPB is with shell functions:
+
+### Installation
+
+```bash
+# One-line installation
+curl -sSL https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/scripts/quick-setup.sh | bash
+
+# Reload your shell
+source ~/.bashrc  # or ~/.zshrc
+```
+
+### Available Commands
+
+Once installed, you have these commands:
+
+```bash
+# Bundle commands
+npb-list                    # List all bundles
+npb-download <bundle>       # Download a bundle
+npb-update                  # Update cache
+
+# Rule commands
+npb-list-rules             # List all rules
+npb-download-rule <rule>   # Download a specific rule
+npb-query <keyword>        # Search for rules
+npb-browse                 # Interactive browser (requires fzf)
+
+# Utility commands
+npb-install                # Install to shell profile
+npb-help                   # Show help
+
+# Aliases (shortcuts)
+npb                        # Same as npb-help
+npb-ls                     # Same as npb-list
+npb-dl                     # Same as npb-download
+npb-rules                  # Same as npb-list-rules
+npb-search                 # Same as npb-query
+```
+
+### Examples
+
+```bash
+# List and download bundles
+npb-list
+npb-download github-workflows-ci
+
+# Work with rules
+npb-list-rules
+npb-query commit
+npb-download-rule code-quality/clean-code.md
+npb-browse  # Interactive (requires fzf)
+
+# Configuration
+export NPB_REPO="myuser/my-fork"
+export NPB_BRANCH="develop"
+npb-download docker
+```
+
+### Manual Aliases (Alternative)
+
+If you prefer not to install shell functions, add these aliases:
 
 ```bash
 # ~/.bashrc or ~/.zshrc
@@ -288,7 +359,7 @@ alias npb='npx github:cbwinslow/new_project_bundle bundle-downloader'
 # npb  # Interactive mode
 ```
 
-Or for the shell script:
+Or use the standalone script:
 
 ```bash
 # Download script once

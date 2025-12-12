@@ -324,14 +324,7 @@
         "templates-git"
       ]
     },
-    "all-rules": {
-      "name": "All Development Rules",
-      "description": "All development rules and best practices (meta-bundle)",
-      "includes": [
-        "rules-github",
-        "rules-docker",
-        "rules-security",
-        "rules-linting"
+
       ]
     },
     "complete": {
@@ -348,7 +341,7 @@
         "root-docs",
         "makefile",
         "mcp-server",
-        "shell-functions"
+
       ]
     }
   }
