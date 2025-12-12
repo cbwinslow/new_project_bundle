@@ -82,7 +82,7 @@ if grep -q "NPB_REPO" "$SHELL_CONFIG" 2>/dev/null; then
     print_warning "NPB functions appear to be already installed"
     read -p "Reinstall? (y/N) " -n 1 -r
     echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    if [[ ! "$REPLY" =~ ^[Yy]$ ]]; then
         print_info "Installation cancelled"
         exit 0
     fi
