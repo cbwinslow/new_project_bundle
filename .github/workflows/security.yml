@@ -23,7 +23,7 @@ jobs:
     name: Dependency Scanning
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Run npm audit
         run: |
@@ -42,7 +42,7 @@ jobs:
           args: --severity-threshold=high
 
       - name: Upload Snyk results
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: always()
         continue-on-error: true
         with:
@@ -53,7 +53,7 @@ jobs:
     name: Secret Scanning
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -75,7 +75,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ hashFiles('Dockerfile') != '' }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Build Docker image
         run: docker build -t app:test .
@@ -91,7 +91,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload Trivy scan results
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: always()
         continue-on-error: true
         with:
@@ -102,7 +102,7 @@ jobs:
     name: IaC Scanning
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Run Checkov IaC Scanner
         uses: bridgecrewio/checkov-action@master
@@ -116,7 +116,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload Checkov results
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: always()
         continue-on-error: true
         with:
@@ -127,7 +127,7 @@ jobs:
     name: SAST Scanning
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Run Semgrep
         uses: returntocorp/semgrep-action@v1
@@ -143,10 +143,10 @@ jobs:
     name: License Scanning
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '20'
 
@@ -161,7 +161,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload license report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: license-report
