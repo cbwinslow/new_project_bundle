@@ -19,6 +19,9 @@ import { registerTimeTools } from "./tools/time.js";
 import { registerFetchTools } from "./tools/fetch.js";
 import { registerMemoryTools } from "./tools/memory.js";
 import { registerSystemTools } from "./tools/system.js";
+import { registerGitHubTools } from "./tools/github.js";
+import { registerRulesTools } from "./tools/rules.js";
+import { registerMcpConfigTools } from "./tools/mcp-config.js";
 
 // Server configuration
 const SERVER_NAME = "new-project-bundle-mcp";
@@ -41,6 +44,9 @@ async function main(): Promise<void> {
   registerFetchTools(server);
   registerMemoryTools(server);
   registerSystemTools(server);
+  registerGitHubTools(server);
+  registerRulesTools(server);
+  registerMcpConfigTools(server);
 
   // Create transport for stdio communication
   const transport = new StdioServerTransport();
