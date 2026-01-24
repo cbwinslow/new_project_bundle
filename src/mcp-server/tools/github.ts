@@ -435,7 +435,12 @@ ${userData.twitter_username ? `**Twitter:** @${userData.twitter_username}\n` : "
 
       let content = "Unable to decode content";
       if (fileData.content && fileData.encoding === "base64") {
-        content = Buffer.from(fileData.content, "base64").toString("utf-8");
+        try {
+          content = Buffer.from(fileData.content, "base64").toString("utf-8");
+        } catch (error) {
+          const errorMsg = error instanceof Error ? error.message : String(error);
+          content = `Error decoding file content: ${errorMsg}`;
+        }
       }
 
       return {

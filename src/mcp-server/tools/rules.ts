@@ -10,6 +10,8 @@ import { z } from "zod";
 import { readFile, readdir, stat } from "fs/promises";
 import { join } from "path";
 
+const MAX_DESCRIPTION_LENGTH = 200;
+
 interface RuleMetadata {
   id: string;
   category: string;
@@ -47,9 +49,10 @@ async function scanRulesDirectory(rulesDir: string): Promise<RuleMetadata[]> {
         const title = titleMatch ? titleMatch[1] : file.replace(".md", "");
 
         // Try to find a description (first paragraph after title)
+        // Pattern: # Title followed by one or more newlines, then content until double newline or next heading
         const descMatch = content.match(/^#\s+.+\n+(.+?)(\n\n|\n#)/s);
         const description = descMatch
-          ? descMatch[1].trim().substring(0, 200)
+          ? descMatch[1].trim().substring(0, MAX_DESCRIPTION_LENGTH)
           : "No description";
 
         // Extract tags from content

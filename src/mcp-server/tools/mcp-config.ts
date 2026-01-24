@@ -180,8 +180,9 @@ export function registerMcpConfigTools(server: McpServer): void {
                 },
               };
             }
-          } catch {
+          } catch (error) {
             // File doesn't exist or invalid JSON, use new config
+            console.error("Could not read or merge existing config:", error);
           }
         }
 
