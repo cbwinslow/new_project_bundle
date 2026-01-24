@@ -428,6 +428,29 @@ The MCP server includes the following tool categories:
 - `base64` - Encode/decode base64
 - `json_format` - Format/validate JSON
 
+#### 🐙 GitHub API Tools
+- `github_repo_info` - Get detailed repository information
+- `github_list_issues` - List issues with filtering
+- `github_list_prs` - List pull requests
+- `github_user_info` - Get user/organization information
+- `github_user_repos` - List user's repositories
+- `github_get_file` - Get file contents from repositories
+- `github_search_repos` - Search repositories with query syntax
+
+#### 📋 Rules Management Tools
+- `rules_list` - List all development rules
+- `rules_get` - Get specific rule content
+- `rules_search` - Search rules by keyword
+- `rules_by_category` - Get rules in a category
+- `rules_categories` - List all rule categories
+
+#### ⚙️ MCP Configuration Tools
+- `mcp_generate_config` - Generate client configurations
+- `mcp_install_config` - Install MCP server configs
+- `mcp_check_config` - Check existing configurations
+- `mcp_list_config_paths` - List config file locations
+- `mcp_setup_guide` - Get comprehensive setup instructions
+
 ### Quick Start
 
 1. **Install dependencies:**
@@ -450,6 +473,65 @@ The MCP server includes the following tool categories:
    npm run start:dev
    ```
 
+4. **Explore the tools:**
+   - See [Setup Guide](examples/mcp-tools/setup-guide.md) for detailed configuration
+   - Check [GitHub API Examples](examples/mcp-tools/github-api-examples.md) for GitHub integration
+   - Read [Rules Examples](examples/mcp-tools/rules-examples.md) for rules management
+
+### Key Features
+
+#### Pull Information from GitHub
+
+Use the GitHub API tools to access your repositories and account:
+
+```javascript
+// Get repository information
+github_repo_info({ owner: "username", repo: "project" })
+
+// List your repositories
+github_user_repos({ username: "your-github-username" })
+
+// Search for projects
+github_search_repos({ query: "language:typescript topic:mcp" })
+```
+
+#### Manage Development Rules
+
+Access and organize development rules, conventions, and best practices:
+
+```javascript
+// List all rules
+rules_list({})
+
+// Get specific rule
+rules_get({ ruleId: "code-quality/clean-code" })
+
+// Search rules
+rules_search({ query: "commit messages" })
+```
+
+#### Setup MCP Servers
+
+Tools to configure MCP servers locally and remotely:
+
+```javascript
+// Generate configuration for Claude Desktop
+mcp_generate_config({
+  client: "claude-desktop",
+  serverPath: "/path/to/dist/mcp-server/index.js"
+})
+
+// Install configuration
+mcp_install_config({
+  client: "claude-desktop",
+  serverPath: "/path/to/dist/mcp-server/index.js",
+  merge: true
+})
+
+// Get setup guide
+mcp_setup_guide({ includeRemote: true })
+```
+
 ### Configuration for AI Clients
 
 #### Claude Desktop
@@ -462,11 +544,15 @@ Add to your Claude Desktop config (`~/.config/claude/claude_desktop_config.json`
     "new-project-bundle": {
       "command": "node",
       "args": ["/path/to/new_project_bundle/dist/mcp-server/index.js"],
-      "env": {}
+      "env": {
+        "GITHUB_TOKEN": "your_github_personal_access_token_here"
+      }
     }
   }
 }
 ```
+
+**Note:** Add a GitHub personal access token to the `env` section for higher API rate limits (5,000 requests/hour vs 60). Get a token from GitHub Settings → Developer settings → Personal access tokens.
 
 #### Cursor IDE
 
