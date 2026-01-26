@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.action == 'opened' || github.event.action == 'synchronize'
     steps:
-      - uses: actions/labeler@v5
+      - uses: actions/labeler@v6
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           configuration-path: .github/labeler.yml
@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.action == 'opened' || github.event.action == 'synchronize'
     steps:
-      - uses: actions/github-script@v7
+      - uses: actions/github-script@v8
         with:
           script: |
             const pr = context.payload.pull_request;
@@ -85,7 +85,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.action == 'opened'
     steps:
-      - uses: actions/github-script@v7
+      - uses: actions/github-script@v8
         with:
           script: |
             const pr = context.payload.pull_request;
@@ -134,7 +134,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.action == 'opened' || github.event.action == 'edited'
     steps:
-      - uses: actions/github-script@v7
+      - uses: actions/github-script@v8
         with:
           script: |
             const pr = context.payload.pull_request;
@@ -187,7 +187,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.action == 'opened' || github.event.action == 'ready_for_review'
     steps:
-      - uses: actions/github-script@v7
+      - uses: actions/github-script@v8
         with:
           script: |
             const pr = context.payload.pull_request;
@@ -219,7 +219,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.action == 'synchronize'
     steps:
-      - uses: actions/github-script@v7
+      - uses: actions/github-script@v8
         with:
           script: |
             const pr = context.payload.pull_request;
@@ -271,7 +271,7 @@ jobs:
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
 
-      - uses: actions/github-script@v7
+      - uses: actions/github-script@v8
         env:
           UPDATE_TYPE: ${{ steps.metadata.outputs.update-type }}
         with:
