@@ -54,6 +54,7 @@ This document explains how the bundle downloader system works internally.
 **Purpose:** Central configuration defining all available bundles.
 
 **Structure:**
+
 ```json
 {
   "version": "1.0.0",
@@ -69,6 +70,7 @@ This document explains how the bundle downloader system works internally.
 ```
 
 **Key Features:**
+
 - Version tracking for compatibility
 - Two types of bundles:
   - **File bundles**: Direct file lists
@@ -82,15 +84,18 @@ This document explains how the bundle downloader system works internally.
 **Classes:**
 
 #### `BundleDownloader`
+
 Main class handling all bundle operations.
 
 **Properties:**
+
 - `manifest: BundleManifest` - Loaded bundle definitions
 - `repo: string` - GitHub repository (default: cbwinslow/new_project_bundle)
 - `branch: string` - Git branch (default: main)
 - `outputDir: string` - Download destination
 
 **Methods:**
+
 - `loadManifest()` - Fetch and parse bundles.json from GitHub
 - `listBundles()` - Display all available bundles
 - `downloadBundle(key)` - Download a specific bundle
@@ -99,6 +104,7 @@ Main class handling all bundle operations.
 - `downloadFile(path)` - Download a single file from GitHub raw
 
 **Command-line Interface:**
+
 ```typescript
 Commands:
   interactive  - Launch interactive selector (default)
@@ -118,6 +124,7 @@ Options:
 **Purpose:** Lightweight alternative using only bash, wget/curl, and optionally jq.
 
 **Features:**
+
 - No Node.js dependency
 - Works with wget or curl
 - Optional jq for better JSON parsing
@@ -126,12 +133,14 @@ Options:
 - Error handling
 
 **Functions:**
+
 - `download_file()` - Download single file (wget/curl)
 - `parse_bundle_json()` - Extract files from bundle (jq or grep)
 - `list_bundles()` - Show available bundles
 - `main()` - Entry point and command routing
 
 **Environment Variables:**
+
 - `NPB_REPO` - Override default repository
 - `NPB_BRANCH` - Override default branch
 
@@ -140,12 +149,14 @@ Options:
 **Purpose:** One-line installation to local system.
 
 **Process:**
+
 1. Download `download-bundle.sh` to `~/.local/bin/`
 2. Make executable
 3. Check if directory is in PATH
 4. Provide instructions if not
 
 **Usage:**
+
 ```bash
 curl -sSL https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/scripts/install.sh | bash
 ```
@@ -170,6 +181,7 @@ resolveBundleFiles(bundleKey, visited = Set()):
 ```
 
 **Example:**
+
 ```json
 {
   "bundle-a": {
@@ -185,6 +197,7 @@ resolveBundleFiles(bundleKey, visited = Set()):
 ```
 
 Resolving `meta-bundle`:
+
 1. Check visited (empty) ✓
 2. Add "meta-bundle" to visited
 3. Get bundle definition
@@ -219,16 +232,19 @@ Files are downloaded sequentially in the current implementation to avoid overwhe
 ### 1. GitHub Raw Content API
 
 **URL Pattern:**
+
 ```
 https://raw.githubusercontent.com/{owner}/{repo}/{branch}/{path}
 ```
 
 **Example:**
+
 ```
 https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/.github/workflows/ci.yml
 ```
 
 **Notes:**
+
 - Public repositories: No authentication needed
 - Private repositories: Requires authentication token
 - Rate limits: GitHub has rate limits on raw content
@@ -236,6 +252,7 @@ https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/.github/work
 ### 2. npm/npx Integration
 
 **Package Configuration:**
+
 ```json
 {
   "bin": {
@@ -245,6 +262,7 @@ https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/.github/work
 ```
 
 **Usage:**
+
 ```bash
 # Direct from GitHub (no installation)
 npx github:cbwinslow/new_project_bundle bundle-downloader
@@ -256,11 +274,13 @@ npx bundle-downloader
 ### 3. Shell Environment
 
 **Installation to PATH:**
+
 ```bash
 ~/.local/bin/bundle-downloader
 ```
 
 **Aliases (examples/shell-aliases.sh):**
+
 ```bash
 alias npb='npx github:cbwinslow/new_project_bundle bundle-downloader'
 alias npb-dl='npx ... bundle-downloader download'
@@ -269,6 +289,7 @@ alias npb-dl='npx ... bundle-downloader download'
 ## 📊 Bundle Statistics
 
 Current bundle manifest statistics:
+
 - **27 total bundles**
 - **23 file bundles** (direct file lists)
 - **4 meta bundles** (bundle compositions)
@@ -283,39 +304,46 @@ Current bundle manifest statistics:
 ## 🔐 Security Considerations
 
 ### 1. Content Trust
+
 - Files downloaded from GitHub's official raw content service
 - HTTPS only (enforced)
 - No code execution during download (except shell script itself)
 
 ### 2. Input Validation
+
 - Bundle names validated against manifest
 - File paths sanitized before writing
 - Directory traversal prevented
 
 ### 3. Rate Limiting
+
 - Sequential downloads to respect GitHub API
 - Error handling for 429 (Too Many Requests)
 - Retry logic could be added
 
 ### 4. Dependency Resolution
+
 - Circular dependency detection
 - Maximum recursion depth (implicit via visited set)
 
 ## 🚀 Performance Characteristics
 
 ### CLI Tool (TypeScript)
+
 - **Cold start:** ~2-3 seconds (Node.js startup)
 - **Manifest load:** ~0.5-1 seconds (network)
 - **File download:** ~0.5-2 seconds per file (network)
 - **Memory usage:** ~30-50 MB (Node.js runtime)
 
 ### Shell Script
+
 - **Cold start:** ~0.1 seconds (bash)
 - **Manifest load:** ~0.5-1 seconds (network)
 - **File download:** ~0.5-2 seconds per file (network)
 - **Memory usage:** ~5-10 MB (minimal)
 
 **Optimization Opportunities:**
+
 1. Parallel file downloads (with rate limiting)
 2. Caching manifest locally
 3. Compression during transfer
@@ -324,6 +352,7 @@ Current bundle manifest statistics:
 ## 🔮 Future Enhancements
 
 ### Planned Features
+
 1. **Bundle versioning** - Pin to specific bundle versions
 2. **Diff tool** - Show changes before updating
 3. **Update command** - Update previously downloaded bundles
@@ -334,6 +363,7 @@ Current bundle manifest statistics:
 8. **Templates** - Variable substitution in downloaded files
 
 ### Technical Improvements
+
 1. **Progress bars** - Visual download progress
 2. **Parallel downloads** - With rate limiting
 3. **Resume capability** - Continue interrupted downloads
@@ -346,6 +376,7 @@ Current bundle manifest statistics:
 ### Adding a New Bundle
 
 1. **Edit `bundles.json`:**
+
 ```json
 {
   "my-new-bundle": {
@@ -359,13 +390,15 @@ Current bundle manifest statistics:
 }
 ```
 
-2. **Test locally:**
+1. **Test locally:**
+
 ```bash
 npm run bundle-downloader list
 npm run bundle-downloader download my-new-bundle
 ```
 
-3. **Commit and push:**
+1. **Commit and push:**
+
 ```bash
 git add bundles.json
 git commit -m "feat: add my-new-bundle"
@@ -377,6 +410,7 @@ git push
 The CLI tool is in `src/cli/bundle-downloader.ts`. Key extension points:
 
 **Adding a new command:**
+
 ```typescript
 switch (command) {
   case 'my-command':
@@ -386,6 +420,7 @@ switch (command) {
 ```
 
 **Adding a new option:**
+
 ```typescript
 if (arg === '--my-option' && i + 1 < args.length) {
   myOption = args[++i];

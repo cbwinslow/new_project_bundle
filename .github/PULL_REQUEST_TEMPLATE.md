@@ -26,11 +26,11 @@ Please delete options that are not relevant.
 - [ ] Manual testing
 
 **Test Configuration**:
-* OS:
-* Node version (if applicable):
-* Browser (if applicable):
+- OS:
+- Node version (if applicable):
+- Browser (if applicable):
 
-## Checklist:
+## Checklist
 
 - [ ] My code follows the style guidelines of this project
 - [ ] I have performed a self-review of my code
@@ -42,10 +42,10 @@ Please delete options that are not relevant.
 - [ ] Any dependent changes have been merged and published in downstream modules
 - [ ] I have checked my code and corrected any misspellings
 
-## Screenshots (if applicable):
+## Screenshots (if applicable)
 
 <!-- Add screenshots to help explain your changes -->
 
-## Additional Notes:
+## Additional Notes
 
 <!-- Add any additional notes or context about the pull request here -->

@@ -56,10 +56,10 @@ download_file() {
     local url="$1"
     local output="$2"
     local filename=$(basename "$output")
-    
+
     # Create directory if it doesn't exist
     mkdir -p "$(dirname "$output")"
-    
+
     if command -v wget &> /dev/null; then
         if wget -q -O "$output" "$url" 2>/dev/null; then
             print_success "$filename"
@@ -83,10 +83,10 @@ download_file() {
 parse_bundle_json() {
     local bundle_key="$1"
     local manifest_file="$2"
-    
+
     # Extract files array for the bundle (this is a simplified approach)
     # In production, you'd want to use jq or a proper JSON parser
-    
+
     if command -v jq &> /dev/null; then
         jq -r ".bundles.\"$bundle_key\".files[]?" "$manifest_file" 2>/dev/null
     else
@@ -137,21 +137,21 @@ EOF
 # List bundles
 list_bundles() {
     print_info "Downloading bundle manifest..."
-    
+
     local temp_manifest=$(mktemp)
-    
+
     if download_file "$MANIFEST_URL" "$temp_manifest"; then
         echo ""
         print_success "Available bundles:"
         echo ""
-        
+
         if command -v jq &> /dev/null; then
             jq -r '.bundles | to_entries[] | "  • \(.key)\n    \(.value.name)\n    \(.value.description)\n"' "$temp_manifest"
         else
             print_warning "Install jq for better output formatting"
             grep -o '"[a-z-]*".*:' "$temp_manifest" | head -20
         fi
-        
+
         rm -f "$temp_manifest"
     else
         print_error "Failed to download manifest"
@@ -163,7 +163,7 @@ list_bundles() {
 main() {
     local bundle_name="$1"
     local output_dir="${2:-.}"
-    
+
     # Handle special commands
     case "$bundle_name" in
         "")
@@ -180,12 +180,12 @@ main() {
             exit 0
             ;;
     esac
-    
+
     print_info "Downloading bundle: $bundle_name"
     print_info "Repository: $REPO ($BRANCH)"
     print_info "Output directory: $output_dir"
     echo ""
-    
+
     # Download manifest
     local temp_manifest=$(mktemp)
     if ! download_file "$MANIFEST_URL" "$temp_manifest"; then
@@ -193,7 +193,7 @@ main() {
         rm -f "$temp_manifest"
         exit 1
     fi
-    
+
     # Check if jq is available
     if ! command -v jq &> /dev/null; then
         print_warning "jq is not installed. For full functionality, install jq:"
@@ -202,31 +202,31 @@ main() {
         print_warning "  RHEL/CentOS: sudo yum install jq"
         echo ""
     fi
-    
+
     # Get files for the bundle
     print_info "Resolving bundle files..."
     local files=$(parse_bundle_json "$bundle_name" "$temp_manifest")
-    
+
     if [ -z "$files" ]; then
         print_error "Bundle '$bundle_name' not found or empty"
         print_info "Use '$0 list' to see available bundles"
         rm -f "$temp_manifest"
         exit 1
     fi
-    
+
     # Download each file
     local success=0
     local failed=0
-    
+
     echo ""
     print_info "Downloading files..."
     echo ""
-    
+
     while IFS= read -r file; do
         if [ -n "$file" ]; then
             local file_url="${BASE_URL}/${file}"
             local output_path="${output_dir}/${file}"
-            
+
             if download_file "$file_url" "$output_path"; then
                 success=$((success + 1))
             else
@@ -234,10 +234,10 @@ main() {
             fi
         fi
     done <<< "$files"
-    
+
     echo ""
     print_success "Download complete: $success succeeded, $failed failed"
-    
+
     rm -f "$temp_manifest"
 }
 

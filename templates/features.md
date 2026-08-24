@@ -14,7 +14,7 @@ HOW TO USE THIS TEMPLATE:
 ## Document Information
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | **Project Name** | [Enter Project Name] |
 | **Version** | 1.0.0 |
 | **Last Updated** | [YYYY-MM-DD] |
@@ -36,7 +36,7 @@ HOW TO USE THIS TEMPLATE:
 ### Status Legend
 
 | Status | Emoji | Description |
-|--------|-------|-------------|
+| -------- | ------- | ------------- |
 | Planned | 📋 | Feature is planned but not started |
 | In Progress | 🚧 | Feature is currently being developed |
 | In Review | 👀 | Feature is complete and under review |
@@ -47,7 +47,7 @@ HOW TO USE THIS TEMPLATE:
 ### Feature Overview
 
 | ID | Feature Name | Status | Priority | Sprint/Release | Owner |
-|----|--------------|--------|----------|----------------|-------|
+| ---- | -------------- | -------- | ---------- | ---------------- | ------- |
 | F-001 | [User Authentication] | ✅ Complete | P0 | v1.0 | @developer |
 | F-002 | [Dashboard] | 🚧 In Progress | P0 | v1.1 | @developer |
 | F-003 | [Notifications] | 📋 Planned | P1 | v1.2 | TBD |
@@ -57,7 +57,7 @@ HOW TO USE THIS TEMPLATE:
 ### Priority Definitions
 
 | Priority | Label | Description | SLA |
-|----------|-------|-------------|-----|
+| ---------- | ------- | ------------- | ----- |
 | P0 | Critical | Must have for launch | Current sprint |
 | P1 | High | Important for user experience | Next 2 sprints |
 | P2 | Medium | Nice to have | This quarter |
@@ -248,7 +248,7 @@ Use this template for each feature:
 ### Progress Tracking
 
 | Task | Status | Assignee | Due Date |
-|------|--------|----------|----------|
+| ------ | -------- | ---------- | ---------- |
 | Design | ✅ | @designer | 2024-01-05 |
 | Backend API | ✅ | @backend-dev | 2024-01-10 |
 | Frontend UI | ✅ | @frontend-dev | 2024-01-12 |
@@ -314,7 +314,7 @@ Use this template for each feature:
 ### Progress Tracking
 
 | Task | Status | Assignee | Due Date |
-|------|--------|----------|----------|
+| ------ | -------- | ---------- | ---------- |
 | Design | ✅ | @designer | 2024-01-15 |
 | Backend API | ✅ | @backend-dev | 2024-01-18 |
 | Frontend Components | 🚧 | @frontend-dev | 2024-01-25 |
@@ -349,7 +349,7 @@ Use this template for each feature:
 ### Progress Tracking
 
 | Task | Status | Assignee | Due Date |
-|------|--------|----------|----------|
+| ------ | -------- | ---------- | ---------- |
 | Design | 📋 | TBD | TBD |
 | Backend | 📋 | TBD | TBD |
 | Frontend | 📋 | TBD | TBD |
@@ -399,7 +399,7 @@ Use this template when proposing new features:
 ### Q1 2024
 
 | Feature | Priority | Status | Target |
-|---------|----------|--------|--------|
+| --------- | ---------- | -------- | -------- |
 | User Authentication | P0 | ✅ | Jan |
 | Dashboard | P0 | 🚧 | Feb |
 | Notifications | P1 | 📋 | Mar |
@@ -407,7 +407,7 @@ Use this template when proposing new features:
 ### Q2 2024
 
 | Feature | Priority | Status | Target |
-|---------|----------|--------|--------|
+| --------- | ---------- | -------- | -------- |
 | API Integration | P1 | 📋 | Apr |
 | Reporting | P2 | 📋 | May |
 | Mobile App | P2 | 📋 | Jun |
@@ -415,7 +415,7 @@ Use this template when proposing new features:
 ### Future (Backlog)
 
 | Feature | Priority | Notes |
-|---------|----------|-------|
+| --------- | ---------- | ------- |
 | AI Assistant | P3 | Pending research |
 | Multi-language | P3 | Based on user demand |
 | Advanced Analytics | P3 | Phase 2 |

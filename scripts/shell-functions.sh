@@ -66,9 +66,9 @@ _npb_print_header() {
 _npb_download() {
     local url="$1"
     local output="$2"
-    
+
     mkdir -p "$(dirname "$output")"
-    
+
     if command -v curl &> /dev/null; then
         curl -sSfL "$url" -o "$output" 2>/dev/null
     elif command -v wget &> /dev/null; then
@@ -83,7 +83,7 @@ _npb_download() {
 _npb_update_cache() {
     _npb_print_info "Updating bundle cache..."
     mkdir -p "$NPB_CACHE_DIR"
-    
+
     # Download bundles.json
     if _npb_download "${NPB_BASE_URL}/bundles.json" "$NPB_CACHE_DIR/bundles.json"; then
         _npb_print_success "Cache updated"
@@ -103,9 +103,9 @@ _npb_ensure_cache() {
 # List all bundles
 npb-list() {
     _npb_ensure_cache || return 1
-    
+
     _npb_print_header "📦 Available Bundles"
-    
+
     if command -v jq &> /dev/null; then
         jq -r '.bundles | to_entries[] | "\(.key)|\(.value.name)|\(.value.description)"' \
             "$NPB_CACHE_DIR/bundles.json" | \
@@ -120,35 +120,35 @@ npb-list() {
 npb-download() {
     local bundle_name="$1"
     local output_dir="${2:-.}"
-    
+
     if [ -z "$bundle_name" ]; then
         _npb_print_error "Usage: npb-download <bundle-name> [output-dir]"
         _npb_print_info "Run 'npb-list' to see available bundles"
         return 1
     fi
-    
+
     _npb_ensure_cache || return 1
-    
+
     _npb_print_info "Downloading bundle: $bundle_name"
-    
+
     if ! command -v jq &> /dev/null; then
         _npb_print_error "jq is required for downloading bundles"
         _npb_print_info "Install: brew install jq (macOS) or apt-get install jq (Linux)"
         return 1
     fi
-    
+
     # Get files for bundle
     local files=$(jq -r ".bundles.\"$bundle_name\".files[]?" "$NPB_CACHE_DIR/bundles.json" 2>/dev/null)
-    
+
     if [ -z "$files" ]; then
         _npb_print_error "Bundle '$bundle_name' not found"
         _npb_print_info "Run 'npb-list' to see available bundles"
         return 1
     fi
-    
+
     local success=0
     local failed=0
-    
+
     while IFS= read -r file; do
         if [ -n "$file" ]; then
             # Validate file path: reject absolute paths, ~, and any '..' segments
@@ -159,7 +159,7 @@ npb-download() {
             fi
             local file_url="${NPB_BASE_URL}/${file}"
             local output_path="${output_dir}/${file}"
-            
+
             if _npb_download "$file_url" "$output_path"; then
                 _npb_print_success "$(basename "$file")"
                 success=$((success + 1))
@@ -169,7 +169,7 @@ npb-download() {
             fi
         fi
     done <<< "$files"
-    
+
     echo ""
     _npb_print_success "Downloaded: $success files, $failed failed"
 }
@@ -177,15 +177,15 @@ npb-download() {
 # List all rules
 npb-list-rules() {
     _npb_print_header "📋 Available Rules"
-    
+
     local categories=("code-quality" "git-workflow" "testing" "documentation" "security" "deployment" "ai-agents")
-    
+
     for category in "${categories[@]}"; do
         echo -e "${NPB_BOLD}${NPB_MAGENTA}${category}/${NPB_NC}"
-        
+
         # Download rule index if available, otherwise list known rules
         local rules_url="${NPB_BASE_URL}/rules/${category}/"
-        
+
         # List known rules for each category
         case "$category" in
             "code-quality")
@@ -214,7 +214,7 @@ npb-list-rules() {
         esac
         echo ""
     done
-    
+
     _npb_print_info "Download a rule: npb-download-rule <category/rule-name>"
     _npb_print_info "Example: npb-download-rule code-quality/clean-code.md"
 }
@@ -223,22 +223,22 @@ npb-list-rules() {
 npb-download-rule() {
     local rule_path="$1"
     local output_dir="${2:-.}"
-    
+
     if [ -z "$rule_path" ]; then
         _npb_print_error "Usage: npb-download-rule <category/rule-name> [output-dir]"
         _npb_print_info "Example: npb-download-rule code-quality/clean-code.md"
         _npb_print_info "Run 'npb-list-rules' to see available rules"
         return 1
     fi
-    
+
     local rule_url="${NPB_BASE_URL}/rules/${rule_path}"
     local output_path="${output_dir}/$(basename "$rule_path")"
-    
+
     _npb_print_info "Downloading rule: $rule_path"
-    
+
     if _npb_download "$rule_url" "$output_path"; then
         _npb_print_success "Downloaded to: $output_path"
-        
+
         # Show preview
         if command -v bat &> /dev/null; then
             bat "$output_path"
@@ -256,19 +256,19 @@ npb-download-rule() {
 # Query/search rules
 npb-query() {
     local search_term="$1"
-    
+
     if [ -z "$search_term" ]; then
         _npb_print_error "Usage: npb-query <search-term>"
         _npb_print_info "Example: npb-query commit"
         return 1
     fi
-    
+
     _npb_print_header "🔍 Searching for: $search_term"
-    
+
     # Search in rule names and descriptions
     local categories=("code-quality" "git-workflow" "testing" "documentation" "security" "deployment" "ai-agents")
     local found=0
-    
+
     for category in "${categories[@]}"; do
         case "$category" in
             "code-quality")
@@ -332,12 +332,12 @@ npb-query() {
                 ;;
         esac
     done
-    
+
     if [ $found -eq 0 ]; then
         _npb_print_warning "No rules found matching '$search_term'"
         _npb_print_info "Run 'npb-list-rules' to see all available rules"
     fi
-    
+
     echo ""
 }
 
@@ -349,11 +349,11 @@ npb-browse() {
         _npb_print_info "Alternatively, use 'npb-list-rules' and 'npb-download-rule'"
         return 1
     fi
-    
+
     _npb_print_header "🔍 Interactive Rule Browser"
     _npb_print_info "Use arrow keys to navigate, Enter to download, Esc to cancel"
     echo ""
-    
+
     local rules=(
         "code-quality/clean-code.md|Clean code principles and guidelines"
         "code-quality/error-handling.md|Error handling best practices"
@@ -365,11 +365,11 @@ npb-browse() {
         "deployment/deployment-checklist.md|Pre-deployment checklist"
         "ai-agents/context-rules.md|AI agent context and behavior guidelines"
     )
-    
+
     local selected=$(printf '%s\n' "${rules[@]}" | \
         awk -F'|' '{printf "%-40s %s\n", $1, $2}' | \
         fzf --height 40% --reverse --border --prompt="Select rule: ")
-    
+
     if [ -n "$selected" ]; then
         local rule_path=$(echo "$selected" | awk '{print $1}')
         npb-download-rule "$rule_path"
@@ -379,7 +379,7 @@ npb-browse() {
 # Install NPB functions to shell profile
 npb-install() {
     local shell_config=""
-    
+
     # Detect shell
     if [ -n "$BASH_VERSION" ]; then
         shell_config="$HOME/.bashrc"
@@ -389,9 +389,9 @@ npb-install() {
         _npb_print_error "Unsupported shell. Only bash and zsh are supported."
         return 1
     fi
-    
+
     _npb_print_info "Installing NPB functions to $shell_config"
-    
+
     # Check if already installed
     if grep -q "NPB_REPO" "$shell_config" 2>/dev/null; then
         _npb_print_warning "NPB functions already installed in $shell_config"
@@ -401,7 +401,7 @@ npb-install() {
             return 0
         fi
     fi
-    
+
     # Download and append
     local temp_file=$(mktemp)
     if _npb_download "${NPB_BASE_URL}/scripts/shell-functions.sh" "$temp_file"; then
@@ -410,7 +410,7 @@ npb-install() {
         echo "# Installed on $(date)" >> "$shell_config"
         cat "$temp_file" >> "$shell_config"
         rm -f "$temp_file"
-        
+
         _npb_print_success "Installed successfully!"
         _npb_print_info "Run: source $shell_config"
         _npb_print_info "Or restart your shell"
@@ -424,10 +424,10 @@ npb-install() {
 # Update NPB functions
 npb-update() {
     _npb_print_info "Updating NPB shell functions..."
-    
+
     # Update cache
     _npb_update_cache
-    
+
     # Re-source this file
     local script_path="${BASH_SOURCE[0]:-${(%):-%x}}"
     if [ -f "$script_path" ]; then

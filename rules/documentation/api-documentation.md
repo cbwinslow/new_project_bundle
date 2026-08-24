@@ -1,6 +1,6 @@
 # API Documentation Rules
 
-**Category:** Documentation  
+**Category:** Documentation
 **Tags:** #documentation #api #openapi #swagger
 
 ## Description
@@ -10,6 +10,7 @@ Standards for documenting APIs to ensure they are easy to understand and use.
 ## Rules
 
 ### API Documentation Must Include
+
 - Endpoint URL and HTTP method
 - Request parameters (path, query, body)
 - Request/response examples
@@ -19,12 +20,14 @@ Standards for documenting APIs to ensure they are easy to understand and use.
 - Versioning information
 
 ### Documentation Format
+
 - Use OpenAPI/Swagger specification
 - Keep documentation close to code
 - Auto-generate when possible
 - Version documentation with API
 
 ### Request Documentation
+
 - Parameter names and types
 - Required vs optional parameters
 - Default values
@@ -32,6 +35,7 @@ Standards for documenting APIs to ensure they are easy to understand and use.
 - Example values
 
 ### Response Documentation
+
 - Success response format
 - Error response format
 - Status codes used
@@ -41,6 +45,7 @@ Standards for documenting APIs to ensure they are easy to understand and use.
 ## Examples
 
 ### Good API Documentation
+
 ```yaml
 paths:
   /users/{userId}:
@@ -75,12 +80,14 @@ paths:
 ```
 
 ### Bad API Documentation
+
 ```
 GET /users/123
 Returns user data
 ```
 
 ## Documentation Tools
+
 - Swagger/OpenAPI
 - Postman Collections
 - API Blueprint
@@ -88,12 +95,14 @@ Returns user data
 - GraphQL Schema
 
 ## Keep Updated
+
 - Update docs with code changes
 - Review docs in code reviews
 - Test examples regularly
 - Version documentation
 
 ## Benefits
+
 - Faster integration for consumers
 - Fewer support requests
 - Better developer experience

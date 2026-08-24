@@ -1,6 +1,6 @@
 # Branch Naming Rules
 
-**Category:** Git Workflow  
+**Category:** Git Workflow
 **Tags:** #git #branches #organization
 
 ## Description
@@ -10,11 +10,13 @@ Consistent branch naming conventions for better organization and automation.
 ## Rules
 
 ### Branch Naming Format
+
 ```
 <type>/<short-description>
 ```
 
 ### Branch Types
+
 - `feature/` - New features
 - `fix/` or `bugfix/` - Bug fixes
 - `hotfix/` - Urgent production fixes
@@ -25,6 +27,7 @@ Consistent branch naming conventions for better organization and automation.
 - `chore/` - Maintenance tasks
 
 ### Naming Guidelines
+
 - Use lowercase
 - Use hyphens to separate words
 - Keep it short but descriptive
@@ -32,6 +35,7 @@ Consistent branch naming conventions for better organization and automation.
 - Include issue number if applicable
 
 ### Protected Branches
+
 - `main` - Production-ready code
 - `develop` - Development integration
 - `staging` - Pre-production testing
@@ -39,6 +43,7 @@ Consistent branch naming conventions for better organization and automation.
 ## Examples
 
 ### Good Examples
+
 ```
 feature/user-authentication
 feature/oauth-integration-123
@@ -53,6 +58,7 @@ chore/update-dependencies
 ```
 
 ### Bad Examples
+
 ```
 johns-work
 temp
@@ -63,6 +69,7 @@ my-branch-2
 ```
 
 ## Benefits
+
 - Easy to identify purpose of branch
 - Automated workflows can target specific branch types
 - Better organization in repositories
