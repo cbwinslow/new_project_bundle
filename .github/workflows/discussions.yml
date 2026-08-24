@@ -24,7 +24,7 @@ jobs:
           script: |
             const discussion = context.payload.discussion;
             const author = discussion.user.login;
-            
+
             // Check if this is the user's first discussion
             const query = `
               query($owner: String!, $repo: String!, $author: String!) {
@@ -35,24 +35,24 @@ jobs:
                 }
               }
             `;
-            
+
             const result = await github.graphql(query, {
               owner: context.repo.owner,
               repo: context.repo.repo,
               author: author
             });
-            
+
             if (result.repository.discussions.totalCount === 1) {
               const welcomeMessage = `👋 Welcome @${author}! Thanks for starting your first discussion here.
-              
+
               A community member or maintainer will respond soon. In the meantime:
-              
+
               - Make sure you've provided enough context
               - Check if similar discussions exist
               - Be patient and respectful
-              
+
               Thanks for being part of our community! 🎉`;
-              
+
               // Note: Adding comments to discussions requires GraphQL mutation
               console.log(`Would welcome first-time discussion author: ${author}`);
             }
@@ -68,10 +68,10 @@ jobs:
           script: |
             const discussion = context.payload.discussion;
             const category = discussion.category.name.toLowerCase();
-            
+
             console.log(`Discussion created in category: ${category}`);
             console.log(`Title: ${discussion.title}`);
-            
+
             // Discussions use different labeling than issues
             // This is informational for now
 
@@ -85,7 +85,7 @@ jobs:
         with:
           script: |
             const discussion = context.payload.discussion;
-            
+
             console.log(`Discussion #${discussion.number} was answered!`);
             console.log(`Title: ${discussion.title}`);
             console.log(`Answer by: ${discussion.answer_chosen_by?.login || 'unknown'}`);

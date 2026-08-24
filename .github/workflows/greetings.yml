@@ -33,7 +33,7 @@ jobs:
             If you have any questions, feel free to ask here or join our discussions!
 
             Thanks for being part of our community! 🙏
-          
+
           pr-message: |
             🎉 Hello @${{ github.actor }}! Thank you for your first pull request to this repository!
 

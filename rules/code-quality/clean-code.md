@@ -1,6 +1,6 @@
 # Clean Code Rules
 
-**Category:** Code Quality  
+**Category:** Code Quality
 **Tags:** #clean-code #readability #maintainability
 
 ## Description
@@ -10,24 +10,28 @@ Guidelines for writing clean, maintainable code that's easy to read and understa
 ## Rules
 
 ### Function Design
+
 - Functions should do one thing and do it well
 - Keep functions under 50 lines
 - Use meaningful, descriptive names
 - Maximum 3-4 parameters per function
 
 ### Code Organization
+
 - Avoid deep nesting (max 3 levels)
 - Group related code together
 - Use early returns to reduce nesting
 - Separate concerns into different modules
 
 ### Naming Conventions
+
 - Use meaningful variable names (no single letters except loop counters)
 - Boolean variables should ask a question (isValid, hasPermission)
 - Function names should be verbs (getUserData, calculateTotal)
 - Class names should be nouns (UserManager, DataProcessor)
 
 ### Code Cleanup
+
 - No commented-out code in production
 - Remove console.log/print statements before committing
 - Delete unused imports and variables
@@ -36,6 +40,7 @@ Guidelines for writing clean, maintainable code that's easy to read and understa
 ## Examples
 
 ### Good Example
+
 ```javascript
 function calculateOrderTotal(items, taxRate, discountCode) {
   const subtotal = calculateSubtotal(items);
@@ -46,6 +51,7 @@ function calculateOrderTotal(items, taxRate, discountCode) {
 ```
 
 ### Bad Example
+
 ```javascript
 function calc(i, t, d) {
   let s = 0;
@@ -63,6 +69,7 @@ function calc(i, t, d) {
 ```
 
 ## Benefits
+
 - Easier to understand and maintain
 - Fewer bugs
 - Faster code reviews

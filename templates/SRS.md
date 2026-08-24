@@ -14,7 +14,7 @@ HOW TO USE THIS TEMPLATE:
 ## Document Information
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | **Project Name** | [Enter Project Name] |
 | **Version** | 1.0.0 |
 | **Status** | [ ] Draft [ ] Under Review [ ] Approved |
@@ -65,11 +65,13 @@ Describe the application of the software being specified.
 **Product Name:** [Name]
 
 **What It Will Do:**
+
 - [ ] [Core functionality 1]
 - [ ] [Core functionality 2]
 - [ ] [Core functionality 3]
 
 **What It Won't Do:**
+
 - [Exclusion 1]
 - [Exclusion 2]
 
@@ -80,7 +82,7 @@ Define all terms, acronyms, and abbreviations used in this document.
 -->
 
 | Term | Definition |
-|------|------------|
+| ------ | ------------ |
 | API | Application Programming Interface |
 | SRS | Software Requirements Specification |
 | UI | User Interface |
@@ -150,7 +152,7 @@ Provide a summary of the major functions the software will perform.
 - [ ] All major functions identified
 
 | Function ID | Function Name | Description | Priority |
-|-------------|---------------|-------------|----------|
+| ------------- | --------------- | ------------- | ---------- |
 | F-001 | [Function] | [Description] | High/Medium/Low |
 | F-002 | [Function] | [Description] | High/Medium/Low |
 | F-003 | [Function] | [Description] | High/Medium/Low |
@@ -165,7 +167,7 @@ Identify the various user classes that will use this product.
 - [ ] User characteristics documented
 
 | User Class | Description | Access Level | Technical Proficiency |
-|------------|-------------|--------------|----------------------|
+| ------------ | ------------- | -------------- | ---------------------- |
 | Admin | System administrator | Full | High |
 | User | Standard user | Limited | Medium |
 | Guest | Unauthenticated visitor | Read-only | Low |
@@ -182,7 +184,7 @@ Describe the environment in which the software will operate.
 **Hardware Requirements:**
 
 | Component | Minimum | Recommended |
-|-----------|---------|-------------|
+| ----------- | --------- | ------------- |
 | CPU | [Min] | [Rec] |
 | Memory | [Min] | [Rec] |
 | Storage | [Min] | [Rec] |
@@ -190,7 +192,7 @@ Describe the environment in which the software will operate.
 **Software Requirements:**
 
 | Software | Version | Required/Optional |
-|----------|---------|-------------------|
+| ---------- | --------- | ------------------- |
 | OS | [Version] | Required |
 | Browser | [Version] | Required |
 | [Add more] | [Version] | [Required/Optional] |
@@ -227,7 +229,7 @@ List factors that affect requirements but are outside scope of this SRS.
 **Dependencies:**
 
 | Dependency | Type | Impact if Unavailable |
-|------------|------|----------------------|
+| ------------ | ------ | ---------------------- |
 | [Dependency] | External Service | [Impact] |
 | [Dependency] | Library | [Impact] |
 
@@ -340,7 +342,7 @@ List any business rules that affect the requirements.
 -->
 
 | Rule ID | Rule Description | Affected Requirements |
-|---------|------------------|----------------------|
+| --------- | ------------------ | ---------------------- |
 | BR-001 | [Rule] | FR-XXX |
 | BR-002 | [Rule] | FR-XXX |
 
@@ -458,7 +460,7 @@ Describe any communications functions.
 - [ ] Performance requirements defined
 
 | Metric | Requirement | Measurement Method |
-|--------|-------------|-------------------|
+| -------- | ------------- | ------------------- |
 | Response Time | < 200ms for 95th percentile | APM monitoring |
 | Throughput | 1000 requests/second | Load testing |
 | Concurrent Users | 10,000 simultaneous | Stress testing |
@@ -476,7 +478,7 @@ Describe any communications functions.
 - [ ] Security requirements documented
 
 | Requirement ID | Description | Standard/Compliance |
-|---------------|-------------|---------------------|
+| --------------- | ------------- | --------------------- |
 | SEC-001 | All data in transit must be encrypted | TLS 1.3 |
 | SEC-002 | Passwords must be hashed | bcrypt/Argon2 |
 | SEC-003 | Session tokens must expire | OWASP Guidelines |
@@ -517,7 +519,7 @@ Describe any communications functions.
 - [ ] Database requirements specified
 
 | Requirement | Description |
-|-------------|-------------|
+| ------------- | ------------- |
 | Type | [PostgreSQL/MySQL/MongoDB/etc.] |
 | Backup | Daily automated backups |
 | Retention | [X days/months] |
@@ -528,7 +530,7 @@ Describe any communications functions.
 - [ ] Legal requirements identified
 
 | Requirement | Description | Compliance |
-|-------------|-------------|------------|
+| ------------- | ------------- | ------------ |
 | Data Privacy | User data handling | GDPR/CCPA |
 | Accessibility | UI accessibility | WCAG 2.1 |
 | [Add more] | [Description] | [Compliance] |
@@ -538,7 +540,7 @@ Describe any communications functions.
 - [ ] i18n requirements specified
 
 | Requirement | Description |
-|-------------|-------------|
+| ------------- | ------------- |
 | Languages | [List supported languages] |
 | Date/Time | Localized formatting |
 | Currency | Multi-currency support |

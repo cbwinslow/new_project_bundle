@@ -104,24 +104,29 @@ chmod +x download-bundle.sh
 ## 🎯 What Should I Download?
 
 ### For a New Repository
+
 - `github-core` - Essential GitHub files
 - `github-issue-templates` - Issue templates
 - `root-docs` - README, LICENSE, etc.
 
 ### For CI/CD
+
 - `github-workflows-ci` - CI/CD pipelines
 - `github-workflows-security` - Security scanning
 
 ### For Development
+
 - `dotfiles` - Git config, editor config
 - `pre-commit` - Code quality hooks
 - `package-*` - Package manager files for your language
 
 ### For Documentation
+
 - `templates-docs` - SRS, API docs, runbooks
 - `templates-ai` - AI agent configuration
 
 ### Everything
+
 - `complete` - Get it all!
 
 ## 📚 Learn More

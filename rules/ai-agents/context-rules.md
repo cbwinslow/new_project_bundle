@@ -1,6 +1,6 @@
 # AI Agent Context Rules
 
-**Category:** AI Agents  
+**Category:** AI Agents
 **Tags:** #ai #context #behavior #documentation
 
 ## Description
@@ -82,6 +82,7 @@ Guidelines for AI coding agents to follow when working on projects, ensuring the
 5. Verify each subtask
 
 **Example Task Breakdown:**
+
 ```markdown
 # Main Task: Add user authentication
 
@@ -110,11 +111,13 @@ Guidelines for AI coding agents to follow when working on projects, ensuring the
 - Note issues encountered
 
 **File naming convention:**
+
 ```
 tasks/YYYY-MM-DD-task-description.md
 ```
 
 **Example task log:**
+
 ```markdown
 # Task: Implement Rate Limiting
 Date: 2024-01-15
@@ -155,16 +158,19 @@ API endpoints need rate limiting to prevent abuse.
 **Optionally save tasks to a GitHub repository:**
 
 Set the repository in your configuration:
+
 ```bash
 export TASK_LOG_REPOSITORY="myorg/task-logs"
 ```
 
 Or in code:
+
 ```python
 TASK_LOG_REPOSITORY = os.getenv("TASK_LOG_REPOSITORY", "")
 ```
 
 **Auto-commit completed tasks:**
+
 ```bash
 #!/bin/bash
 # save-task.sh
@@ -175,11 +181,11 @@ TASK_REPO="${TASK_LOG_REPOSITORY}"
 if [ -n "$TASK_REPO" ]; then
   # Clone or navigate to task repository
   TASK_REPO_DIR="${TASK_REPO_DIR:-$HOME/.tasks/${TASK_REPO##*/}}"
-  
+
   if [ ! -d "$TASK_REPO_DIR" ]; then
     git clone "https://github.com/${TASK_REPO}.git" "$TASK_REPO_DIR"
   fi
-  
+
   cd "$TASK_REPO_DIR"
   cp "$TASK_FILE" ./tasks/
   git add tasks/
@@ -225,7 +231,7 @@ AI: Creating new email validation function...
 ### Good: Asking Questions
 
 ```
-AI: The requirement mentions "fast processing" but doesn't specify 
+AI: The requirement mentions "fast processing" but doesn't specify
     a performance target. Should this handle 1000 requests/second
     or is 100 req/s sufficient?
 ```
@@ -246,7 +252,7 @@ AI: This is a complex feature. Let me break it down:
     3. Frontend integration
     4. Testing
     5. Documentation
-    
+
     I'll start with the schema changes and verify before proceeding.
 ```
 

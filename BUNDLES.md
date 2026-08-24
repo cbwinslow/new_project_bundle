@@ -46,6 +46,7 @@ npm run bundle-downloader
 ```
 
 This launches an interactive menu where you can:
+
 - Browse all available bundles
 - See descriptions and file counts
 - Download by entering a number or name
@@ -96,7 +97,7 @@ chmod +x download-bundle.sh
 ### GitHub Configuration Bundles
 
 | Bundle | Description | Files |
-|--------|-------------|-------|
+| -------- | ------------- | ------- |
 | `github-core` | Essential GitHub files (CODEOWNERS, CONTRIBUTING, SECURITY) | 6 |
 | `github-issue-templates` | Complete issue template system | 4 |
 | `github-workflows-ci` | CI/CD workflows | 3 |
@@ -109,7 +110,7 @@ chmod +x download-bundle.sh
 ### Infrastructure Bundles
 
 | Bundle | Description | Files |
-|--------|-------------|-------|
+| -------- | ------------- | ------- |
 | `docker` | Dockerfile and docker-compose | 3 |
 | `dotfiles` | Editor config, git files, env | 7 |
 | `pre-commit` | Pre-commit hooks config | 1 |
@@ -118,7 +119,7 @@ chmod +x download-bundle.sh
 ### Package Manager Bundles
 
 | Bundle | Description | Files |
-|--------|-------------|-------|
+| -------- | ------------- | ------- |
 | `package-nodejs` | package.json, package-lock, tsconfig | 3 |
 | `package-python` | requirements.txt | 1 |
 | `package-ruby` | Gemfile and Gemfile.lock | 2 |
@@ -131,14 +132,12 @@ chmod +x download-bundle.sh
 ### Documentation & Template Bundles
 
 | Bundle | Description | Files |
-|--------|-------------|-------|
+| -------- | ------------- | ------- |
 | `root-docs` | README, LICENSE, CHANGELOG, CODE_OF_CONDUCT | 4 |
 | `templates-docs` | SRS, features, ADR, API, RUNBOOK | 5 |
 | `templates-ai` | AI agent configuration and rules | 4 |
 | `templates-git` | Git submodules and Go shell templates | 2 |
 | `all-templates` | **Meta:** All templates | 11 |
-
-
 
 ### MCP Server Bundle
 
@@ -155,7 +154,7 @@ chmod +x download-bundle.sh
 ### Meta Bundles
 
 | Bundle | Description | Includes |
-|--------|-------------|----------|
+| -------- | ------------- | ---------- |
 | `all-github` | All GitHub configurations | 7 bundles |
 | `all-packages` | All package manager files | 7 bundles |
 | `all-templates` | All project templates | 3 bundles |
@@ -234,6 +233,7 @@ done
 The bundle system is driven by `bundles.json`, which defines all available bundles and their contents. This manifest is version-controlled and updated with each release.
 
 You can view the manifest at:
+
 ```
 https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/bundles.json
 ```

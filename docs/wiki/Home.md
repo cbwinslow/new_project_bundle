@@ -27,14 +27,18 @@ New Project Bundle is a comprehensive collection of:
 ## Key Features
 
 ### 📦 Modular Bundle System
+
 Download only what you need:
+
 - Individual files
 - Curated bundles
 - Complete sets
 - Meta-bundles
 
 ### 📋 Development Rules
+
 Organized, searchable rules for:
+
 - Code quality
 - Git workflows
 - Testing
@@ -43,7 +47,9 @@ Organized, searchable rules for:
 - Deployment
 
 ### 🔧 Shell Integration
+
 Powerful shell functions:
+
 - `npb-list` - List available bundles
 - `npb-download` - Download bundles
 - `npb-query` - Search rules
@@ -51,6 +57,7 @@ Powerful shell functions:
 - `npb-install` - Install to shell profile
 
 ### 🤖 AI Agent Support
+
 - MCP server for AI tool integration
 - Structured rule format for AI consumption
 - Pre-configured GitHub Copilot instructions
@@ -59,6 +66,7 @@ Powerful shell functions:
 ## Quick Start
 
 ### 1. Download the Shell Functions
+
 ```bash
 # For bash
 curl -sSL https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/scripts/shell-functions.sh >> ~/.bashrc
@@ -70,16 +78,19 @@ source ~/.zshrc
 ```
 
 ### 2. Explore Available Bundles
+
 ```bash
 npb-list
 ```
 
 ### 3. Download a Bundle
+
 ```bash
 npb-download github-workflows-ci
 ```
 
 ### 4. Browse Rules
+
 ```bash
 npb-list-rules
 npb-query commit
@@ -91,15 +102,18 @@ npb-browse  # Interactive (requires fzf)
 This wiki is organized into the following sections:
 
 ### For New Users
+
 - [Getting Started](Getting-Started.md) - Installation and first steps
 - [Bundle System](Bundle-System.md) - How to use bundles
 
 ### For Developers
+
 - [Rules System](Rules-System.md) - Development rules
 - [Workflows](Workflows.md) - CI/CD workflows
 - [MCP Server](MCP-Server.md) - AI integration
 
 ### For Contributors
+
 - [Contributing](Contributing.md) - Contribution guidelines
 - [Architecture](Architecture.md) - System architecture
 

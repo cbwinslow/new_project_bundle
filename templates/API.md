@@ -5,7 +5,7 @@
 ## Document Information
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | **API Name** | [Your API Name] |
 | **Version** | v1.0.0 |
 | **Base URL** | `https://api.example.com/v1` |
@@ -36,7 +36,7 @@
 ### Base URLs
 
 | Environment | URL |
-|-------------|-----|
+| ------------- | ----- |
 | Production | `https://api.example.com/v1` |
 | Staging | `https://api.staging.example.com/v1` |
 | Development | `http://localhost:3000/v1` |
@@ -95,7 +95,7 @@ curl -X POST https://api.example.com/oauth/token \
 ## Rate Limiting
 
 | Plan | Rate Limit | Burst |
-|------|------------|-------|
+| ------ | ------------ | ------- |
 | Free | 100 req/min | 10 req/sec |
 | Pro | 1000 req/min | 50 req/sec |
 | Enterprise | Custom | Custom |
@@ -142,7 +142,7 @@ X-RateLimit-Reset: 1640000000
 ### HTTP Status Codes
 
 | Code | Description | Use Case |
-|------|-------------|----------|
+| ------ | ------------- | ---------- |
 | 200 | OK | Successful GET, PUT, PATCH |
 | 201 | Created | Successful POST |
 | 204 | No Content | Successful DELETE |
@@ -158,7 +158,7 @@ X-RateLimit-Reset: 1640000000
 ### Error Codes
 
 | Code | Description |
-|------|-------------|
+| ------ | ------------- |
 | `INVALID_REQUEST` | Request body or parameters are invalid |
 | `AUTHENTICATION_FAILED` | Authentication credentials are invalid |
 | `PERMISSION_DENIED` | User lacks required permissions |
@@ -181,7 +181,7 @@ GET /users
 **Query Parameters:**
 
 | Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
+| ----------- | ------ | ---------- | ------------- |
 | `page` | integer | No | Page number (default: 1) |
 | `per_page` | integer | No | Items per page (default: 20, max: 100) |
 | `sort` | string | No | Sort field (e.g., `created_at`, `-name`) |
@@ -367,7 +367,7 @@ Use this template for documenting additional endpoints:
 ### User
 
 | Field | Type | Description |
-|-------|------|-------------|
+| ------- | ------ | ------------- |
 | `id` | string | Unique identifier (prefix: `usr_`) |
 | `email` | string | User's email address |
 | `name` | string | User's display name |
@@ -388,7 +388,7 @@ Use this template for documenting additional endpoints:
 ### Webhook Events
 
 | Event | Description |
-|-------|-------------|
+| ------- | ------------- |
 | `user.created` | Fired when a new user is created |
 | `user.updated` | Fired when a user is updated |
 | `user.deleted` | Fired when a user is deleted |
@@ -488,6 +488,6 @@ data = response.json()
 
 **Need Help?**
 
-- 📧 Email: api-support@example.com
+- 📧 Email: <api-support@example.com>
 - 💬 Discord: [Join our community](https://discord.gg/example)
 - 📚 Docs: [Full documentation](https://docs.example.com)
