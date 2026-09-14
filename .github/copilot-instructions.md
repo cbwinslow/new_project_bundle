@@ -101,6 +101,7 @@ Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
 ```
 
 Examples:
+
 - `feat(mcp): add new memory search tool`
 - `fix(git): handle empty repository case`
 - `docs: update README with new tools`

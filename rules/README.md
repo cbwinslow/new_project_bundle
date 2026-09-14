@@ -18,28 +18,35 @@ rules/
 ## Available Rules
 
 ### Code Quality
+
 - **clean-code.md** - Principles for writing clean, maintainable code
 - **error-handling.md** - Best practices for error handling and logging
 
 ### Git Workflow
+
 - **commit-messages.md** - Conventional commit message format
 - **branch-naming.md** - Branch naming conventions
 
 ### Testing
+
 - **test-coverage.md** - Test coverage requirements and best practices
 
 ### Documentation
+
 - **api-documentation.md** - API documentation standards
 
 ### Security
+
 - **secrets-management.md** - Handling secrets and credentials securely
 
 ### Deployment
+
 - **deployment-checklist.md** - Pre-deployment checklist and procedures
 
 ## Using Rules
 
 ### Download Individual Rules
+
 ```bash
 # Using wget
 wget https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/rules/code-quality/clean-code.md
@@ -52,6 +59,7 @@ npb-download-rule code-quality/clean-code.md
 ```
 
 ### Download All Rules in a Category
+
 ```bash
 # Using NPB bundle system
 npb-download rules-code-quality
@@ -60,6 +68,7 @@ npb-download rules-security
 ```
 
 ### Search for Rules
+
 ```bash
 # Using NPB query function
 npb-query commit
@@ -68,6 +77,7 @@ npb-query test
 ```
 
 ### Browse Rules Interactively
+
 ```bash
 # Requires fzf
 npb-browse

@@ -70,14 +70,14 @@ jobs:
           if [ -d "dist" ] || [ -d "build" ] || [ -d ".next" ]; then
             echo "## Bundle Size Analysis" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
-            
+
             for dir in dist build .next; do
               if [ -d "$dir" ]; then
                 size=$(du -sh "$dir" | cut -f1)
                 echo "- **$dir**: $size" >> $GITHUB_STEP_SUMMARY
               fi
             done
-            
+
             # List largest files
             echo "" >> $GITHUB_STEP_SUMMARY
             echo "### Largest Files" >> $GITHUB_STEP_SUMMARY
