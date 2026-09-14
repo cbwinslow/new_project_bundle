@@ -158,7 +158,7 @@ Define project-specific commands for AI agents
 -->
 
 | Command | Description |
-|---------|-------------|
+| --------- | ------------- |
 | `/setup` | Initialize development environment |
 | `/test` | Run test suite |
 | `/lint` | Run linting checks |

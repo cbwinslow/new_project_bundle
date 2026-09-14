@@ -376,6 +376,7 @@ Try using a basic tool:
 **Problem:** MCP server doesn't show up in client tools list
 
 **Solutions:**
+
 - Verify Node.js is installed: `node --version`
 - Check server path is absolute, not relative
 - Ensure JSON configuration is valid (use a JSON validator)
@@ -387,6 +388,7 @@ Try using a basic tool:
 **Problem:** `EACCES: permission denied`
 
 **Solutions:**
+
 ```bash
 # Make sure the file is readable
 chmod +r dist/mcp-server/index.js
@@ -400,6 +402,7 @@ node dist/mcp-server/index.js
 **Problem:** `Cannot find module '@modelcontextprotocol/sdk'`
 
 **Solutions:**
+
 ```bash
 # Reinstall dependencies
 rm -rf node_modules package-lock.json
@@ -414,6 +417,7 @@ npm run build
 **Problem:** `API rate limit exceeded`
 
 **Solutions:**
+
 - Add a GitHub token to your configuration
 - Tokens provide 5,000 requests/hour vs 60 without auth
 - Get a token: GitHub Settings → Developer settings → Personal access tokens
@@ -423,6 +427,7 @@ npm run build
 **Problem:** Tools execute but return errors
 
 **Solutions:**
+
 - Check server logs (stderr output)
 - Verify environment variables are set correctly
 - Test manually: `echo '{"tool":"system_info","params":{}}' | node dist/mcp-server/index.js`
@@ -433,6 +438,7 @@ npm run build
 **Problem:** Config file not being read
 
 **Solutions:**
+
 ```bash
 # Verify config file exists
 ls -la ~/.config/claude/claude_desktop_config.json
@@ -482,7 +488,7 @@ DEBUG=mcp:*
 ## Getting Help
 
 - **Documentation:** Check `examples/mcp-tools/` for usage examples
-- **GitHub Issues:** Report bugs at https://github.com/cbwinslow/new_project_bundle/issues
+- **GitHub Issues:** Report bugs at <https://github.com/cbwinslow/new_project_bundle/issues>
 - **Test Tools:** Use `mcp_setup_guide` tool within the MCP server itself for help
 
 ## Next Steps

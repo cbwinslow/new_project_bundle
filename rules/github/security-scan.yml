@@ -21,37 +21,37 @@ jobs:
   codeql:
     name: CodeQL Analysis
     runs-on: ubuntu-latest
-    
+
     strategy:
       fail-fast: false
       matrix:
         language: [ 'javascript' ]
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
+
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
-      
+
       - name: Autobuild
         uses: github/codeql-action/autobuild@v3
-      
+
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
 
   dependency-scan:
     name: Dependency Scan
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Run npm audit
         run: npm audit --audit-level=moderate
-      
+
       - name: Check for known vulnerabilities
         uses: aquasecurity/trivy-action@master
         with:
@@ -59,7 +59,7 @@ jobs:
           scan-ref: '.'
           format: 'sarif'
           output: 'trivy-results.sarif'
-      
+
       - name: Upload Trivy results
         uses: github/codeql-action/upload-sarif@v3
         with:
@@ -68,12 +68,12 @@ jobs:
   secret-scan:
     name: Secret Scan
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      
+
       - name: TruffleHog OSS
         uses: trufflesecurity/trufflehog@main
         with:

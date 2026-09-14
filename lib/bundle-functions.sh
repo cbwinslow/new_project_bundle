@@ -60,7 +60,7 @@ _npb_fetch_manifest() {
     _npb_ensure_cache
     local manifest_file="$NPB_CACHE_DIR/bundles.json"
     local manifest_age=3600  # 1 hour cache
-    
+
     # Check if manifest exists and is recent
     if [ -f "$manifest_file" ]; then
         local file_age=$(($(date +%s) - $(date -r "$manifest_file" +%s 2>/dev/null || stat -f %m "$manifest_file" 2>/dev/null || echo 0)))
@@ -69,7 +69,7 @@ _npb_fetch_manifest() {
             return 0
         fi
     fi
-    
+
     # Download fresh manifest
     if command -v curl &>/dev/null; then
         curl -sSL -o "$manifest_file" "$NPB_MANIFEST_URL" 2>/dev/null
@@ -79,7 +79,7 @@ _npb_fetch_manifest() {
         npb_error "Neither curl nor wget found. Please install one."
         return 1
     fi
-    
+
     if [ $? -eq 0 ]; then
         echo "$manifest_file"
         return 0
@@ -97,11 +97,11 @@ _npb_has_jq() {
 # List all available bundles
 npb_list_bundles() {
     local manifest=$(_npb_fetch_manifest) || return 1
-    
+
     npb_header "\n📦 Available Bundles\n"
-    
+
     if _npb_has_jq; then
-        jq -r '.bundles | to_entries[] | 
+        jq -r '.bundles | to_entries[] |
             "\u001b[1;36m\(.key)\u001b[0m\n  \u001b[1m\(.value.name)\u001b[0m\n  \(.value.description)\n"' \
             "$manifest"
     else
@@ -113,23 +113,23 @@ npb_list_bundles() {
 # Search bundles by keyword
 npb_search_bundles() {
     local keyword="$1"
-    
+
     if [ -z "$keyword" ]; then
         npb_error "Usage: npb_search_bundles <keyword>"
         return 1
     fi
-    
+
     local manifest=$(_npb_fetch_manifest) || return 1
-    
+
     npb_header "\n🔍 Searching for: $keyword\n"
-    
+
     if _npb_has_jq; then
-        jq -r --arg keyword "$keyword" '.bundles | to_entries[] | 
+        jq -r --arg keyword "$keyword" '.bundles | to_entries[] |
             select(
-                (.key | ascii_downcase | contains($keyword | ascii_downcase)) or 
-                ((.value.name // "") | ascii_downcase | contains($keyword | ascii_downcase)) or 
+                (.key | ascii_downcase | contains($keyword | ascii_downcase)) or
+                ((.value.name // "") | ascii_downcase | contains($keyword | ascii_downcase)) or
                 ((.value.description // "") | ascii_downcase | contains($keyword | ascii_downcase))
-            ) | 
+            ) |
             "\u001b[1;36m\(.key)\u001b[0m\n  \u001b[1m\(.value.name // "No name")\u001b[0m\n  \((.value.description // "No description"))\n"' \
             "$manifest"
     else
@@ -140,23 +140,23 @@ npb_search_bundles() {
 # Show detailed info about a bundle
 npb_info_bundle() {
     local bundle_name="$1"
-    
+
     if [ -z "$bundle_name" ]; then
         npb_error "Usage: npb_info_bundle <bundle-name>"
         return 1
     fi
-    
+
     local manifest=$(_npb_fetch_manifest) || return 1
-    
+
     if ! _npb_has_jq; then
         npb_warning "jq is required for this function. Install with: brew install jq / apt install jq"
         return 1
     fi
-    
+
     npb_header "\n📋 Bundle Information: $bundle_name\n"
-    
+
     jq -r --arg bundle "$bundle_name" '
-        .bundles[$bundle] | 
+        .bundles[$bundle] |
         if . then
             "Name: \(.name)\n" +
             "Description: \(.description)\n\n" +
@@ -180,9 +180,9 @@ _npb_download_file() {
     local file_path="$1"
     local output_path="$2"
     local file_url="${NPB_BASE_URL}/${file_path}"
-    
+
     mkdir -p "$(dirname "$output_path")"
-    
+
     if command -v curl &>/dev/null; then
         curl -sSL -o "$output_path" "$file_url" 2>/dev/null
     elif command -v wget &>/dev/null; then
@@ -196,19 +196,19 @@ _npb_download_file() {
 npb_download_bundle() {
     local bundle_name="$1"
     local output_dir="${2:-.}"
-    
+
     if [ -z "$bundle_name" ]; then
         npb_error "Usage: npb_download_bundle <bundle-name> [output-dir]"
         return 1
     fi
-    
+
     local manifest=$(_npb_fetch_manifest) || return 1
-    
+
     if ! _npb_has_jq; then
         npb_error "jq is required for downloading. Install with: brew install jq / apt install jq"
         return 1
     fi
-    
+
     # Get bundle info
     local bundle_exists=$(jq -r --arg b "$bundle_name" '.bundles[$b] != null' "$manifest")
     if [ "$bundle_exists" != "true" ]; then
@@ -216,15 +216,15 @@ npb_download_bundle() {
         npb_info "Use 'npb_list_bundles' to see available bundles"
         return 1
     fi
-    
+
     local bundle_name_display=$(jq -r --arg b "$bundle_name" '.bundles[$b].name' "$manifest")
     local bundle_desc=$(jq -r --arg b "$bundle_name" '.bundles[$b].description' "$manifest")
-    
+
     npb_header "\n📦 Downloading: $bundle_name_display"
     echo "   $bundle_desc"
     echo "   Output: $output_dir"
     echo ""
-    
+
     # Get all files (handling includes recursively)
     local files=$(jq -r --arg b "$bundle_name" '
         def resolve_bundle($name; $seen):
@@ -239,26 +239,26 @@ npb_download_bundle() {
             end;
         resolve_bundle($b; []) | unique | .[]
     ' "$manifest")
-    
+
     if [ -z "$files" ]; then
         npb_error "No files found in bundle"
         return 1
     fi
-    
+
     local total=$(echo "$files" | wc -l | tr -d ' ')
     local current=0
     local success=0
     local failed=0
-    
+
     npb_info "Downloading $total files...\n"
-    
+
     while IFS= read -r file; do
         if [ -n "$file" ]; then
             current=$((current + 1))
             local output_path="${output_dir}/${file}"
-            
+
             printf "  [%3d/%3d] " "$current" "$total"
-            
+
             if _npb_download_file "$file" "$output_path"; then
                 npb_success "$(basename "$file")"
                 success=$((success + 1))
@@ -268,7 +268,7 @@ npb_download_bundle() {
             fi
         fi
     done <<< "$files"
-    
+
     echo ""
     if [ $failed -eq 0 ]; then
         npb_success "Download complete! $success files downloaded to $output_dir"
@@ -293,18 +293,18 @@ npb_refresh() {
 # Show NPB version and status
 npb_version() {
     local manifest=$(_npb_fetch_manifest) || return 1
-    
+
     if _npb_has_jq; then
         local version=$(jq -r '.version' "$manifest")
         echo "New Project Bundle v${version}"
     else
         echo "New Project Bundle"
     fi
-    
+
     echo "Repository: $NPB_REPO"
     echo "Branch: $NPB_BRANCH"
     echo "Cache: $NPB_CACHE_DIR"
-    
+
     if _npb_has_jq; then
         echo "jq: ✓ installed"
     else

@@ -20,11 +20,11 @@ _npb_ensure_rules_dirs() {
 # Fetch rules index
 _npb_fetch_rules_index() {
     _npb_ensure_rules_dirs
-    
+
     local index_file="$NPB_RULES_CACHE/index.json"
     local index_url="${NPB_RULES_BASE_URL}/index.json"
     local index_age=3600  # 1 hour cache
-    
+
     # Check if index exists and is recent
     if [ -f "$index_file" ]; then
         local file_age=$(($(date +%s) - $(date -r "$index_file" +%s 2>/dev/null || stat -f %m "$index_file" 2>/dev/null || echo 0)))
@@ -33,7 +33,7 @@ _npb_fetch_rules_index() {
             return 0
         fi
     fi
-    
+
     # Download fresh index
     if command -v curl &>/dev/null; then
         curl -sSL -o "$index_file" "$index_url" 2>/dev/null
@@ -43,7 +43,7 @@ _npb_fetch_rules_index() {
         npb_error "Neither curl nor wget found"
         return 1
     fi
-    
+
     if [ $? -eq 0 ] && [ -f "$index_file" ]; then
         echo "$index_file"
         return 0
@@ -56,9 +56,9 @@ _npb_fetch_rules_index() {
 # List all available rules
 npb_list_rules() {
     local category="$1"
-    
+
     npb_header "\n📋 Available Development Rules\n"
-    
+
     local index_file
     if ! index_file=$(_npb_fetch_rules_index); then
         npb_info "Rules system is being set up. Available rule categories:"
@@ -72,14 +72,14 @@ npb_list_rules() {
         npb_info "Use: npb_browse_rules <category> to explore rules"
         return 0
     fi
-    
+
     if ! command -v jq &>/dev/null; then
         npb_warning "jq is required for full rule browsing. Install with: brew install jq / apt install jq"
         echo ""
         echo "Available categories: github, docker, ci-cd, security, linting"
         return 1
     fi
-    
+
     if [ -n "$category" ]; then
         jq -r --arg cat "$category" '
             .categories[$cat].rules[] |
@@ -96,25 +96,25 @@ npb_list_rules() {
 # Search rules by keyword
 npb_search_rules() {
     local keyword="$1"
-    
+
     if [ -z "$keyword" ]; then
         npb_error "Usage: npb_search_rules <keyword>"
         return 1
     fi
-    
+
     local index_file
     if ! index_file=$(_npb_fetch_rules_index); then
         npb_error "Rules index not available"
         return 1
     fi
-    
+
     if ! command -v jq &>/dev/null; then
         npb_error "jq is required. Install with: brew install jq / apt install jq"
         return 1
     fi
-    
+
     npb_header "\n🔍 Searching rules for: $keyword\n"
-    
+
     jq -r --arg keyword "$keyword" '
         .categories | to_entries[] |
         .value.rules[] |
@@ -130,25 +130,25 @@ npb_search_rules() {
 # Show rule details
 npb_info_rule() {
     local rule_id="$1"
-    
+
     if [ -z "$rule_id" ]; then
         npb_error "Usage: npb_info_rule <rule-id>"
         return 1
     fi
-    
+
     local index_file
     if ! index_file=$(_npb_fetch_rules_index); then
         npb_error "Rules index not available"
         return 1
     fi
-    
+
     if ! command -v jq &>/dev/null; then
         npb_error "jq is required. Install with: brew install jq / apt install jq"
         return 1
     fi
-    
+
     npb_header "\n📋 Rule Details: $rule_id\n"
-    
+
     jq -r --arg id "$rule_id" '
         .categories | to_entries[] |
         .value.rules[] |
@@ -166,23 +166,23 @@ npb_info_rule() {
 npb_download_rule() {
     local rule_id="$1"
     local output_dir="${2:-.}"
-    
+
     if [ -z "$rule_id" ]; then
         npb_error "Usage: npb_download_rule <rule-id> [output-dir]"
         return 1
     fi
-    
+
     local index_file
     if ! index_file=$(_npb_fetch_rules_index); then
         npb_error "Rules index not available"
         return 1
     fi
-    
+
     if ! command -v jq &>/dev/null; then
         npb_error "jq is required. Install with: brew install jq / apt install jq"
         return 1
     fi
-    
+
     # Get rule file path
     local rule_file=$(jq -r --arg id "$rule_id" '
         .categories | to_entries[] |
@@ -190,22 +190,22 @@ npb_download_rule() {
         select(.id == $id) |
         .file
     ' "$index_file")
-    
+
     if [ -z "$rule_file" ] || [ "$rule_file" = "null" ]; then
         npb_error "Rule '$rule_id' not found"
         return 1
     fi
-    
+
     local rule_url="${NPB_RULES_BASE_URL}/${rule_file}"
     local output_path="${output_dir}/$(basename "$rule_file")"
-    
+
     npb_info "Downloading rule: $rule_id"
     npb_info "From: $rule_url"
     npb_info "To: $output_path"
     echo ""
-    
+
     mkdir -p "$output_dir"
-    
+
     if command -v curl &>/dev/null; then
         curl -sSL -o "$output_path" "$rule_url"
     elif command -v wget &>/dev/null; then
@@ -214,7 +214,7 @@ npb_download_rule() {
         npb_error "Neither curl nor wget found"
         return 1
     fi
-    
+
     if [ -f "$output_path" ]; then
         npb_success "Rule downloaded to $output_path"
     else
@@ -226,16 +226,16 @@ npb_download_rule() {
 # Install a rule (download to NPB rules directory)
 npb_install_rule() {
     local rule_id="$1"
-    
+
     if [ -z "$rule_id" ]; then
         npb_error "Usage: npb_install_rule <rule-id>"
         return 1
     fi
-    
+
     _npb_ensure_rules_dirs
-    
+
     npb_download_rule "$rule_id" "$NPB_RULES_INSTALLED"
-    
+
     if [ $? -eq 0 ]; then
         echo ""
         npb_success "Rule installed to $NPB_RULES_INSTALLED"
@@ -246,23 +246,23 @@ npb_install_rule() {
 # List installed rules
 npb_list_installed_rules() {
     _npb_ensure_rules_dirs
-    
+
     npb_header "\n📦 Installed Rules\n"
-    
+
     if [ ! -d "$NPB_RULES_INSTALLED" ] || [ -z "$(ls -A "$NPB_RULES_INSTALLED" 2>/dev/null)" ]; then
         npb_info "No rules installed yet"
         npb_info "Install rules with: npb_install_rule <rule-id>"
         return 0
     fi
-    
+
     echo "Installed in: $NPB_RULES_INSTALLED"
     echo ""
-    
+
     for file in "$NPB_RULES_INSTALLED"/*; do
         if [ -f "$file" ]; then
             local filename=$(basename "$file")
             local rule_name=$(head -n 10 "$file" | grep -i "^# " | head -n 1 | sed 's/^# *//')
-            
+
             echo -e "${TUI_BOLD}${TUI_CYAN}$filename${TUI_RESET}"
             if [ -n "$rule_name" ]; then
                 echo "  $rule_name"
@@ -275,9 +275,9 @@ npb_list_installed_rules() {
 # Browse rules interactively
 npb_browse_rules() {
     local category="${1:-all}"
-    
+
     npb_header "\n📋 Browse Development Rules\n"
-    
+
     local index_file
     if ! index_file=$(_npb_fetch_rules_index); then
         npb_info "Rules index not yet available. Categories:"
@@ -292,32 +292,32 @@ npb_browse_rules() {
         npb_info "Check back soon or contribute rules to the repository!"
         return 0
     fi
-    
+
     if ! command -v jq &>/dev/null; then
         npb_error "jq is required. Install with: brew install jq / apt install jq"
         return 1
     fi
-    
+
     # Show categories
     local categories=($(jq -r '.categories | keys[]' "$index_file"))
-    
+
     echo "Available categories:"
     echo ""
     for ((i=0; i<${#categories[@]}; i++)); do
         local cat="${categories[$i]}"
         local desc=$(jq -r --arg c "$cat" '.categories[$c].description' "$index_file")
         local count=$(jq -r --arg c "$cat" '.categories[$c].rules | length' "$index_file")
-        
+
         echo "$((i+1)). ${TUI_BOLD}$cat${TUI_RESET} - $desc ${TUI_DIM}($count rules)${TUI_RESET}"
     done
-    
+
     echo ""
     echo "0. Search all rules"
     echo "q. Quit"
     echo ""
-    
+
     read -p "Select category (0-${#categories[@]}): " choice
-    
+
     if [[ "$choice" == "q" ]]; then
         return 0
     elif [[ "$choice" == "0" ]]; then

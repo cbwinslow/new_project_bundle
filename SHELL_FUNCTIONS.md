@@ -41,7 +41,7 @@ curl -O https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/lib/
 curl -O https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/lib/profile-integration.sh
 ```
 
-2. **Add to your shell profile:**
+1. **Add to your shell profile:**
 
 **For Bash (`~/.bashrc`):**
 
@@ -71,7 +71,7 @@ alias npb-browse='npb_browse_bundles'
 alias npb-get='npb_get'
 ```
 
-3. **Reload your shell:**
+1. **Reload your shell:**
 
 ```bash
 source ~/.bashrc  # or source ~/.zshrc
@@ -95,6 +95,7 @@ npb_list_bundles
 ```
 
 Shorthand:
+
 ```bash
 npb
 ```
@@ -110,6 +111,7 @@ npb_search_bundles workflow
 ```
 
 Shorthand:
+
 ```bash
 npb-search docker
 ```
@@ -124,6 +126,7 @@ npb_info_bundle all-templates
 ```
 
 Shorthand:
+
 ```bash
 npb-info docker
 ```
@@ -144,6 +147,7 @@ npb_download_bundle all-templates ./docs
 ```
 
 Shorthand:
+
 ```bash
 npb-dl github-workflows-ci
 npb-dl docker ./my-project
@@ -160,6 +164,7 @@ npb_get docker
 ```
 
 Shorthand:
+
 ```bash
 npb-get docker
 ```
@@ -182,6 +187,7 @@ npb_list_rules linting
 ```
 
 Shorthand:
+
 ```bash
 npb-rules
 npb-rules github
@@ -198,6 +204,7 @@ npb_search_rules ci
 ```
 
 Shorthand:
+
 ```bash
 npb-rules-search security
 ```
@@ -255,11 +262,13 @@ npb_browse_bundles
 ```
 
 Shorthand:
+
 ```bash
 npb-browse
 ```
 
 **Navigation:**
+
 - `n` - Next page
 - `p` - Previous page
 - `i` - Show bundle info
@@ -288,6 +297,7 @@ npb_browse_rules docker
 ```
 
 Shorthand:
+
 ```bash
 npb-rules-browse
 npb-rules-browse security

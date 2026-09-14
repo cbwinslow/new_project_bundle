@@ -123,7 +123,7 @@ func (c *MyCommand) Execute(args []string) error {
 }
 ```
 
-2. Import the command in the registry:
+1. Import the command in the registry:
 
 ```go
 // internal/commands/commands.go
@@ -161,7 +161,7 @@ aliases:
 ## Environment Variables
 
 | Variable | Description | Default |
-|----------|-------------|---------|
+| ---------- | ------------- | --------- |
 | `SHELL_CONFIG` | Config file path | `~/.go-shell/config.yaml` |
 | `SHELL_HISTORY` | History file path | `~/.go-shell/history` |
 | `SHELL_DEBUG` | Enable debug mode | `false` |
