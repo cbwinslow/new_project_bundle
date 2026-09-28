@@ -17,6 +17,7 @@ Pull information from your GitHub repositories and account:
 - **github_search_repos** - Search GitHub with powerful query syntax
 
 **Example Use Cases:**
+
 - Monitor your repositories' activity
 - Research and discover projects
 - Access documentation from any GitHub repo
@@ -33,6 +34,7 @@ Organize and access development rules, conventions, and best practices:
 - **rules_categories** - List all rule categories
 
 **Example Use Cases:**
+
 - Onboard new team members with project conventions
 - Reference rules during code reviews
 - Configure AI coding agents with project standards
@@ -49,12 +51,14 @@ Setup and manage MCP servers locally and remotely:
 - **mcp_setup_guide** - Get comprehensive setup instructions
 
 **Supported Clients:**
+
 - Claude Desktop
 - Cursor IDE
 - Cline (VS Code extension)
 - Generic MCP clients
 
 **Deployment Options:**
+
 - Local setup
 - Remote setup via SSH tunnel
 - Docker deployment
@@ -104,16 +108,19 @@ Three new example guides:
 ### Files Added
 
 **Source Code:**
+
 - `src/mcp-server/tools/github.ts` (519 lines)
 - `src/mcp-server/tools/rules.ts` (325 lines)
 - `src/mcp-server/tools/mcp-config.ts` (415 lines)
 
 **Documentation:**
+
 - `examples/mcp-tools/github-api-examples.md` (253 lines)
 - `examples/mcp-tools/rules-examples.md` (440 lines)
 - `examples/mcp-tools/setup-guide.md` (496 lines)
 
 **Updates:**
+
 - `src/mcp-server/index.ts` - Register new tools
 - `README.md` - Document new features
 
@@ -122,12 +129,14 @@ Three new example guides:
 ## Getting Started
 
 1. **Build the project:**
+
    ```bash
    npm install
    npm run build
    ```
 
 2. **Configure your AI client:**
+
    ```bash
    # Get configuration path
    node dist/mcp-server/index.js
@@ -160,6 +169,7 @@ Add a GitHub personal access token for higher rate limits:
 ```
 
 **Benefits:**
+
 - 5,000 requests/hour (vs 60 without auth)
 - Access to private repositories
 - Access to organization data
@@ -184,5 +194,5 @@ Add a GitHub personal access token for higher rate limits:
 ## Support
 
 - **Documentation:** See `examples/mcp-tools/` directory
-- **Issues:** Report at https://github.com/cbwinslow/new_project_bundle/issues
+- **Issues:** Report at <https://github.com/cbwinslow/new_project_bundle/issues>
 - **Setup Help:** Use `mcp_setup_guide` tool within MCP server

@@ -22,6 +22,7 @@ Real-world scenarios and solutions using the bundle downloader.
 **Scenario:** You're creating a brand new GitHub repository and want to set it up with best practices.
 
 **Solution:**
+
 ```bash
 # Essential files
 npx github:cbwinslow/new_project_bundle bundle-downloader download github-core
@@ -44,6 +45,7 @@ npx github:cbwinslow/new_project_bundle bundle-downloader download github-workfl
 **Scenario:** Your project has been around for a while but lacks proper CI/CD pipelines.
 
 **Solution:**
+
 ```bash
 # Add CI/CD workflows
 npx github:cbwinslow/new_project_bundle bundle-downloader download github-workflows-ci
@@ -64,6 +66,7 @@ npx github:cbwinslow/new_project_bundle bundle-downloader download github-workfl
 **Scenario:** You need to add security scanning and vulnerability detection to your project.
 
 **Solution:**
+
 ```bash
 # Security workflows (CodeQL, dependency scanning)
 npx github:cbwinslow/new_project_bundle bundle-downloader download github-workflows-security
@@ -84,6 +87,7 @@ npx github:cbwinslow/new_project_bundle bundle-downloader download github-config
 **Scenario:** New developers joining your team need a consistent development environment setup.
 
 **Create a setup script:**
+
 ```bash
 #!/bin/bash
 # team-setup.sh
@@ -113,6 +117,7 @@ echo "✓ Setup complete! Read docs/README.md to get started."
 **Scenario:** Your monorepo contains Node.js, Python, and Go services.
 
 **Solution:**
+
 ```bash
 # Get package files for all languages
 npx github:cbwinslow/new_project_bundle bundle-downloader download package-nodejs
@@ -137,6 +142,7 @@ npx github:cbwinslow/new_project_bundle bundle-downloader download github-workfl
 **Scenario:** Your project needs comprehensive documentation templates.
 
 **Solution:**
+
 ```bash
 # Create docs directory
 mkdir -p docs
@@ -152,6 +158,7 @@ npx github:cbwinslow/new_project_bundle bundle-downloader download github-workfl
 ```
 
 **Files you get:**
+
 - `docs/SRS.md` - Software Requirements Specification
 - `docs/API.md` - API documentation template
 - `docs/ADR.md` - Architecture Decision Records
@@ -167,6 +174,7 @@ npx github:cbwinslow/new_project_bundle bundle-downloader download github-workfl
 **Scenario:** You're open-sourcing an internal project and need proper community files.
 
 **Solution:**
+
 ```bash
 # Essential open source files
 npx github:cbwinslow/new_project_bundle bundle-downloader download github-core
@@ -196,6 +204,7 @@ npx github:cbwinslow/new_project_bundle bundle-downloader download github-workfl
 **Scenario:** You need to containerize your application.
 
 **Solution:**
+
 ```bash
 # Get Docker files
 npx github:cbwinslow/new_project_bundle bundle-downloader download docker
@@ -217,6 +226,7 @@ npx github:cbwinslow/new_project_bundle bundle-downloader download docker
 **Scenario:** Migrating from Jenkins/GitLab CI to GitHub Actions.
 
 **Solution:**
+
 ```bash
 # Get all workflow examples
 npx github:cbwinslow/new_project_bundle bundle-downloader download all-github
@@ -239,6 +249,7 @@ npx github:cbwinslow/new_project_bundle bundle-downloader download all-github
 **Scenario:** You want to configure AI coding assistants for your project.
 
 **Solution:**
+
 ```bash
 # Get AI agent templates
 npx github:cbwinslow/new_project_bundle bundle-downloader download templates-ai
@@ -268,6 +279,7 @@ cp templates/rules.md .github/
 **Problem:** Your organization needs custom bundles.
 
 **Solution:**
+
 ```bash
 # 1. Fork the repository
 # 2. Clone your fork
@@ -304,6 +316,7 @@ npx github:yourorg/new_project_bundle bundle-downloader download my-org-standard
 **Problem:** Setting up 10 new microservices with the same configuration.
 
 **Solution:**
+
 ```bash
 #!/bin/bash
 # setup-microservices.sh
@@ -319,24 +332,24 @@ for service in "${SERVICES[@]}"; do
   echo "Setting up $service..."
   mkdir -p "$service"
   cd "$service"
-  
+
   # Initialize git
   git init
-  
+
   # Download bundles
   npx github:cbwinslow/new_project_bundle bundle-downloader download github-core
   npx github:cbwinslow/new_project_bundle bundle-downloader download github-workflows-ci
   npx github:cbwinslow/new_project_bundle bundle-downloader download docker
   npx github:cbwinslow/new_project_bundle bundle-downloader download package-nodejs
-  
+
   # Customize
   sed -i "s/new-project-bundle/$service/g" package.json
   sed -i "s/new-project-bundle/$service/g" README.md
-  
+
   # Initial commit
   git add .
   git commit -m "Initial setup for $service"
-  
+
   cd ..
 done
 

@@ -5,14 +5,17 @@ This directory contains practical examples and utilities for using the bundle do
 ## 📂 Files
 
 ### QUICK_START.md
+
 A condensed quick start guide with the most common use cases and commands. Perfect for getting started in under 5 minutes.
 
 **Use when:** You want to quickly understand how to use the bundle downloader.
 
 ### download-examples.sh
+
 Executable script demonstrating various download scenarios with real commands.
 
 **Usage:**
+
 ```bash
 # Review the examples
 cat examples/download-examples.sh
@@ -24,9 +27,11 @@ cat examples/download-examples.sh
 **Use when:** You want to see working examples of different download scenarios.
 
 ### shell-aliases.sh
+
 Pre-configured shell aliases for quick access to bundle downloads.
 
 **Usage:**
+
 ```bash
 # One-time use
 source examples/shell-aliases.sh
@@ -37,6 +42,7 @@ source ~/.bashrc
 ```
 
 **Available aliases:**
+
 - `npb` - Interactive mode
 - `npb-dl <bundle>` - Download bundle
 - `npb-list` - List bundles
@@ -135,15 +141,18 @@ alias my-docs='npb-to templates-docs ./docs && npb-to templates-ai ./docs/ai'
 ## 🆘 Troubleshooting
 
 ### "Command not found: npb"
+
 - Make sure you've sourced the aliases file: `source examples/shell-aliases.sh`
 - Or add it to your shell rc file permanently
 
 ### "Failed to fetch manifest"
+
 - Check your internet connection
 - Verify the repository name is correct
 - Check if GitHub is accessible from your location
 
 ### "Permission denied"
+
 - Make scripts executable: `chmod +x examples/*.sh`
 - Check write permissions in the output directory
 
@@ -156,6 +165,7 @@ Have a useful example or workflow? Contribute it!
 3. Submit a pull request
 
 **Example contributions:**
+
 - Team-specific setup scripts
 - Language-specific workflows
 - Integration examples (VS Code, IntelliJ, etc.)

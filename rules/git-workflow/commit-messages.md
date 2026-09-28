@@ -1,6 +1,6 @@
 # Commit Message Rules
 
-**Category:** Git Workflow  
+**Category:** Git Workflow
 **Tags:** #git #commits #conventional-commits
 
 ## Description
@@ -10,6 +10,7 @@ Guidelines for writing clear, consistent commit messages using Conventional Comm
 ## Rules
 
 ### Conventional Commits Format
+
 ```
 <type>(<scope>): <subject>
 
@@ -19,6 +20,7 @@ Guidelines for writing clear, consistent commit messages using Conventional Comm
 ```
 
 ### Types
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation changes
@@ -32,6 +34,7 @@ Guidelines for writing clear, consistent commit messages using Conventional Comm
 - `revert`: Reverts a previous commit
 
 ### Subject Line
+
 - Use imperative mood ("add" not "added" or "adds")
 - Don't capitalize first letter
 - No period at the end
@@ -39,17 +42,20 @@ Guidelines for writing clear, consistent commit messages using Conventional Comm
 - Be specific and descriptive
 
 ### Body (Optional)
+
 - Wrap at 72 characters
 - Explain what and why, not how
 - Separate from subject with blank line
 
 ### Footer (Optional)
+
 - Reference issues: `Fixes #123`
 - Breaking changes: `BREAKING CHANGE: description`
 
 ## Examples
 
 ### Good Examples
+
 ```
 feat(auth): add OAuth2 authentication support
 
@@ -71,6 +77,7 @@ docs: update installation instructions for Docker setup
 ```
 
 ### Bad Examples
+
 ```
 Updated stuff
 ```
@@ -84,6 +91,7 @@ WIP - still working on this
 ```
 
 ## Benefits
+
 - Clear project history
 - Easy to generate changelogs
 - Better collaboration
