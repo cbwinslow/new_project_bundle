@@ -14,6 +14,7 @@ npb-install
 ```
 
 This command:
+
 1. Detects your shell (bash or zsh)
 2. Downloads the latest shell-functions.sh
 3. Appends it to ~/.bashrc or ~/.zshrc
@@ -22,12 +23,14 @@ This command:
 ### Manual Installation
 
 #### For Bash
+
 ```bash
 curl -sSL https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/scripts/shell-functions.sh >> ~/.bashrc
 source ~/.bashrc
 ```
 
 #### For Zsh
+
 ```bash
 curl -sSL https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/scripts/shell-functions.sh >> ~/.zshrc
 source ~/.zshrc
@@ -38,6 +41,7 @@ source ~/.zshrc
 ### Bundle Management
 
 #### npb-list
+
 List all available bundles with descriptions.
 
 ```bash
@@ -45,6 +49,7 @@ npb-list
 ```
 
 #### npb-download
+
 Download a bundle to the current or specified directory.
 
 ```bash
@@ -58,6 +63,7 @@ npb-download docker ./my-project
 ### Rule Management
 
 #### npb-list-rules
+
 List all available development rules organized by category.
 
 ```bash
@@ -65,6 +71,7 @@ npb-list-rules
 ```
 
 #### npb-download-rule
+
 Download a specific rule file.
 
 ```bash
@@ -72,6 +79,7 @@ npb-download-rule code-quality/clean-code.md
 ```
 
 #### npb-query
+
 Search for rules by keyword.
 
 ```bash
@@ -79,6 +87,7 @@ npb-query commit
 ```
 
 #### npb-browse
+
 Interactive rule browser using fzf (fuzzy finder).
 
 ```bash
@@ -88,6 +97,7 @@ npb-browse
 ### Utility Functions
 
 #### npb-update
+
 Update the cached bundle manifest and reload functions.
 
 ```bash
@@ -95,6 +105,7 @@ npb-update
 ```
 
 #### npb-help
+
 Display help information for all available functions.
 
 ```bash
@@ -145,11 +156,13 @@ npb-download-rule code-quality/clean-code.md ./my-project/docs/
 If commands like `npb-list` are not found:
 
 1. Verify installation:
+
    ```bash
    grep "NPB_REPO" ~/.bashrc   # or ~/.zshrc
    ```
 
 2. Reload your shell:
+
    ```bash
    source ~/.bashrc   # or source ~/.zshrc
    ```
