@@ -5,6 +5,7 @@ The New Project Bundle includes a comprehensive, modular rules system for develo
 ## Overview
 
 Rules are organized into categories and provided as individual markdown files that can be:
+
 - Downloaded individually
 - Downloaded by category
 - Searched and queried
@@ -14,74 +15,92 @@ Rules are organized into categories and provided as individual markdown files th
 ## Rule Categories
 
 ### Code Quality
+
 Guidelines for writing clean, maintainable code.
 
 **Available Rules:**
+
 - `clean-code.md` - Clean code principles and naming conventions
 - `error-handling.md` - Error handling and logging best practices
 
 **Download:**
+
 ```bash
 npb-download rules-code-quality
 npb-download-rule code-quality/clean-code.md
 ```
 
 ### Git Workflow
+
 Standards for version control and collaboration.
 
 **Available Rules:**
+
 - `commit-messages.md` - Conventional commit format
 - `branch-naming.md` - Branch naming conventions
 
 **Download:**
+
 ```bash
 npb-download rules-git-workflow
 npb-download-rule git-workflow/commit-messages.md
 ```
 
 ### Testing
+
 Testing standards and coverage requirements.
 
 **Available Rules:**
+
 - `test-coverage.md` - Test coverage requirements and best practices
 
 **Download:**
+
 ```bash
 npb-download rules-testing
 npb-download-rule testing/test-coverage.md
 ```
 
 ### Documentation
+
 Documentation standards and API documentation.
 
 **Available Rules:**
+
 - `api-documentation.md` - API documentation standards (OpenAPI/Swagger)
 
 **Download:**
+
 ```bash
 npb-download rules-documentation
 npb-download-rule documentation/api-documentation.md
 ```
 
 ### Security
+
 Security best practices and secrets management.
 
 **Available Rules:**
+
 - `secrets-management.md` - Handling secrets and credentials
 
 **Download:**
+
 ```bash
 npb-download rules-security
 npb-download-rule security/secrets-management.md
 ```
 
 ### Deployment
+
 Deployment checklists and procedures.
 
 **Available Rules:**
+
 - `deployment-checklist.md` - Pre-deployment checklist
 
 **Download:**
+
 ```bash
 npb-download rules-deployment
 npb-download-rule deployment/deployment-checklist.md
@@ -205,6 +224,7 @@ npb-download all-rules ./docs/rules/
 ### Clean Code Rule
 
 The clean code rule covers:
+
 - Function design (single responsibility, size limits)
 - Naming conventions (meaningful names, verbs for functions)
 - Code organization (nesting limits, grouping)
@@ -213,6 +233,7 @@ The clean code rule covers:
 ### Commit Messages Rule
 
 The commit message rule defines:
+
 - Conventional Commits format
 - Valid commit types (feat, fix, docs, etc.)
 - Subject line guidelines
@@ -222,6 +243,7 @@ The commit message rule defines:
 ### Secrets Management Rule
 
 The secrets management rule includes:
+
 - Never commit secrets
 - Environment variable usage
 - Secret storage solutions
@@ -282,7 +304,7 @@ See [Contributing](Contributing.md) for more details.
 Rules are organized into downloadable bundles:
 
 | Bundle | Description | Files |
-|--------|-------------|-------|
+| -------- | ------------- | ------- |
 | `rules-code-quality` | Clean code and error handling | 2 |
 | `rules-git-workflow` | Git and version control | 2 |
 | `rules-testing` | Testing standards | 1 |

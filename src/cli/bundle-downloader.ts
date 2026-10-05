@@ -2,7 +2,7 @@
 
 /**
  * Bundle Downloader CLI
- * 
+ *
  * Interactive CLI tool to download file bundles from the new_project_bundle repository
  */
 
@@ -46,7 +46,7 @@ class BundleDownloader {
    */
   async loadManifest(): Promise<void> {
     const manifestUrl = `${GITHUB_RAW_URL}/${this.repo}/${this.branch}/bundles.json`;
-    
+
     try {
       const response = await fetch(manifestUrl);
       if (!response.ok) {
@@ -70,7 +70,7 @@ class BundleDownloader {
     }
 
     console.log('\n📦 Available Bundles:\n');
-    
+
     const bundles = Object.entries(this.manifest.bundles);
     bundles.forEach(([key, bundle], index) => {
       const fileCount = this.getBundleFileCount(key);
@@ -87,12 +87,12 @@ class BundleDownloader {
    */
   private getBundleFileCount(bundleKey: string): number {
     if (!this.manifest) return 0;
-    
+
     const bundle = this.manifest.bundles[bundleKey];
     if (!bundle) return 0;
 
     let count = bundle.files?.length || 0;
-    
+
     if (bundle.includes) {
       for (const includedKey of bundle.includes) {
         count += this.getBundleFileCount(includedKey);
@@ -108,7 +108,7 @@ class BundleDownloader {
   private resolveBundleFiles(bundleKey: string, visited = new Set<string>()): string[] {
     if (!this.manifest) return [];
     if (visited.has(bundleKey)) return []; // Prevent circular dependencies
-    
+
     visited.add(bundleKey);
     const bundle = this.manifest.bundles[bundleKey];
     if (!bundle) return [];
@@ -145,13 +145,13 @@ class BundleDownloader {
       }
 
       const content = await response.text();
-      
+
       // Create directory if it doesn't exist
       await mkdir(dirname(outputPath), { recursive: true });
-      
+
       // Write file
       await writeFile(outputPath, content, 'utf-8');
-      
+
       console.log(`  ✓ ${filePath}`);
       return true;
     } catch (error) {
@@ -201,7 +201,7 @@ class BundleDownloader {
    */
   async interactive(): Promise<void> {
     await this.loadManifest();
-    
+
     const rl = createInterface({
       input: process.stdin,
       output: process.stdout
@@ -217,7 +217,7 @@ class BundleDownloader {
 
     while (running) {
       this.listBundles();
-      
+
       const answer = await question(
         'Enter bundle name or number (or "quit" to exit): '
       );
@@ -263,10 +263,10 @@ function generateWgetCommands(): void {
   console.log('📥 Wget-style download examples:\n');
   console.log('# Download bundles.json manifest');
   console.log(`wget https://raw.githubusercontent.com/${DEFAULT_REPO}/${DEFAULT_BRANCH}/bundles.json\n`);
-  
+
   console.log('# Download a specific file');
   console.log(`wget https://raw.githubusercontent.com/${DEFAULT_REPO}/${DEFAULT_BRANCH}/.github/workflows/ci.yml\n`);
-  
+
   console.log('# Download multiple files (create a script)');
   console.log('cat > download.sh << \'EOF\'');
   console.log('#!/bin/bash');
@@ -324,7 +324,7 @@ EXAMPLES:
  */
 async function main() {
   const args = process.argv.slice(2);
-  
+
   // Parse arguments
   let command = 'interactive';
   let bundleName = '';
@@ -334,7 +334,7 @@ async function main() {
 
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
-    
+
     if (arg === '--repo' && i + 1 < args.length) {
       repo = args[++i];
     } else if (arg === '--branch' && i + 1 < args.length) {

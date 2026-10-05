@@ -30,7 +30,7 @@ services:
       - redis
     networks:
       - app-network
-  
+
   db:
     image: postgres:16-alpine
     environment:
@@ -48,7 +48,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-  
+
   redis:
     image: redis:7-alpine
     ports:
@@ -62,7 +62,7 @@ services:
       interval: 10s
       timeout: 3s
       retries: 5
-  
+
   # Optional: pgAdmin for database management
   pgadmin:
     image: dpage/pgadmin4:latest
