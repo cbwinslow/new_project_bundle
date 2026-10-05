@@ -49,7 +49,7 @@ detect_shell() {
 # Get profile file
 get_profile_file() {
     local shell_name=$(detect_shell)
-    
+
     case "$shell_name" in
         bash)
             if [ -f "$HOME/.bashrc" ]; then
@@ -77,27 +77,27 @@ remove_from_profile() {
     local profile_file="$1"
     local marker_start="# >>> New Project Bundle >>>"
     local marker_end="# <<< New Project Bundle <<<"
-    
+
     if [ ! -f "$profile_file" ]; then
         print_warning "Profile file not found: $profile_file"
         return 1
     fi
-    
+
     if ! grep -q "$marker_start" "$profile_file"; then
         print_warning "NPB integration not found in $profile_file"
         return 0
     fi
-    
+
     print_info "Removing NPB integration from $profile_file..."
-    
+
     # Create backup
     cp "$profile_file" "${profile_file}.bak.$(date +%Y%m%d_%H%M%S)"
     print_info "Backup created: ${profile_file}.bak.*"
-    
+
     # Remove NPB section
     awk "/$marker_start/,/$marker_end/ {next} {print}" "$profile_file" > "${profile_file}.tmp"
     mv "${profile_file}.tmp" "$profile_file"
-    
+
     print_success "NPB integration removed from $profile_file"
 }
 
@@ -106,12 +106,12 @@ main() {
     echo ""
     print_header "New Project Bundle - Uninstall"
     echo ""
-    
+
     local profile_file=$(get_profile_file)
     local install_dir="${NPB_INSTALL_DIR:-$HOME/.local/lib}"
     local cache_dir="${NPB_CACHE_DIR:-$HOME/.cache/npb}"
     local data_dir="${NPB_DATA_DIR:-$HOME/.local/share/npb}"
-    
+
     print_warning "This will remove NPB shell functions and integration"
     echo ""
     echo "  Profile: $profile_file"
@@ -119,33 +119,33 @@ main() {
     echo "  Cache:   $cache_dir"
     echo "  Data:    $data_dir"
     echo ""
-    
+
     read -p "Continue with uninstall? (y/N) " -n 1 -r
     echo ""
-    
+
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
         print_info "Uninstall cancelled"
         exit 0
     fi
-    
+
     echo ""
     print_header "Removing NPB..."
     echo ""
-    
+
     # Remove from profile
     remove_from_profile "$profile_file"
-    
+
     # Remove installed files
     if [ -d "$install_dir" ]; then
         print_info "Removing shell function libraries from $install_dir..."
-        
+
         local files=(
             "$install_dir/bundle-functions.sh"
             "$install_dir/profile-integration.sh"
             "$install_dir/tui-browser.sh"
             "$install_dir/rule-manager.sh"
         )
-        
+
         for file in "${files[@]}"; do
             if [ -f "$file" ]; then
                 rm -f "$file"
@@ -153,7 +153,7 @@ main() {
             fi
         done
     fi
-    
+
     # Remove cache
     read -p "Remove cache directory? ($cache_dir) (y/N) " -n 1 -r
     echo ""
@@ -163,7 +163,7 @@ main() {
             print_success "Cache removed"
         fi
     fi
-    
+
     # Remove data/installed rules
     read -p "Remove installed rules? ($data_dir) (y/N) " -n 1 -r
     echo ""
@@ -173,7 +173,7 @@ main() {
             print_success "Installed rules removed"
         fi
     fi
-    
+
     echo ""
     print_header "Uninstall Complete"
     echo ""
@@ -186,7 +186,7 @@ main() {
     print_info "You can reinstall anytime with:"
     echo "  curl -sSL https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/scripts/setup-shell.sh | bash"
     echo ""
-    
+
     print_success "Thank you for using New Project Bundle! 👋"
     echo ""
 }

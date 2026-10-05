@@ -5,7 +5,7 @@
 ## Document Information
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | **Service** | [Service Name] |
 | **Version** | 1.0.0 |
 | **Last Updated** | YYYY-MM-DD |
@@ -34,7 +34,7 @@
 ### Dependencies
 
 | Dependency | Type | Critical | Notes |
-|------------|------|----------|-------|
+| ------------ | ------ | ---------- | ------- |
 | PostgreSQL | Database | Yes | Primary data store |
 | Redis | Cache | Yes | Session and cache |
 | External API | Service | No | Feature X integration |
@@ -42,7 +42,7 @@
 ### SLAs
 
 | Metric | Target | Alerting Threshold |
-|--------|--------|-------------------|
+| -------- | -------- | ------------------- |
 | Availability | 99.9% | < 99.5% |
 | Latency (p95) | < 200ms | > 500ms |
 | Error Rate | < 0.1% | > 1% |
@@ -75,7 +75,7 @@
 ### Key Components
 
 | Component | Purpose | Health Check |
-|-----------|---------|--------------|
+| ----------- | --------- | -------------- |
 | App Server | API handling | `GET /health` |
 | Worker | Background jobs | Queue depth < 1000 |
 | Database | Data persistence | Connections < 80% |
@@ -88,7 +88,7 @@
 ### Dashboards
 
 | Dashboard | URL | Purpose |
-|-----------|-----|---------|
+| ----------- | ----- | --------- |
 | Main Dashboard | [Link] | Overview metrics |
 | Error Dashboard | [Link] | Error analysis |
 | Performance | [Link] | Latency & throughput |
@@ -96,7 +96,7 @@
 ### Key Metrics
 
 | Metric | Query/Location | Normal Range |
-|--------|---------------|--------------|
+| -------- | --------------- | -------------- |
 | Request Rate | `sum(rate(http_requests_total[5m]))` | 100-1000 req/s |
 | Error Rate | `sum(rate(http_requests_total{status=~"5.."}[5m]))` | < 1 req/s |
 | Latency p95 | `histogram_quantile(0.95, rate(http_duration_seconds_bucket[5m]))` | < 200ms |
@@ -104,7 +104,7 @@
 ### Alert Severity Levels
 
 | Level | Response Time | Escalation |
-|-------|--------------|------------|
+| ------- | -------------- | ------------ |
 | P1 - Critical | Immediate | Page on-call |
 | P2 - High | 15 minutes | Page on-call |
 | P3 - Medium | 1 hour | Slack notification |
@@ -327,7 +327,7 @@ kubectl logs deployment/app | grep ERROR
 ### Escalation Path
 
 | Level | Contact | Method | Response Time |
-|-------|---------|--------|---------------|
+| ------- | --------- | -------- | --------------- |
 | L1 | On-Call Engineer | PagerDuty | 5 min |
 | L2 | Team Lead | Phone | 15 min |
 | L3 | Engineering Manager | Phone | 30 min |
@@ -336,18 +336,18 @@ kubectl logs deployment/app | grep ERROR
 ### Key Contacts
 
 | Role | Name | Contact |
-|------|------|---------|
+| ------ | ------ | --------- |
 | On-Call Schedule | [Link] | PagerDuty |
 | Team Slack | #team-oncall | Slack |
 | DBA | Database Team | #dba-support |
-| Security | Security Team | security@example.com |
+| Security | Security Team | <security@example.com> |
 
 ### External Contacts
 
 | Service | Support | SLA |
 |---------|---------|-----|
 | AWS Support | [Case Portal] | Business (< 1hr for Urgent) |
-| Database Vendor | support@vendor.com | 24/7 |
+| Database Vendor | <support@vendor.com> | 24/7 |
 
 ---
 

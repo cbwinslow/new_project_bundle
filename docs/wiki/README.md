@@ -5,19 +5,23 @@ Welcome to the New Project Bundle Wiki! Use the links below to navigate the docu
 ## Quick Links
 
 ### Getting Started
+
 - **[Home](Home.md)** - Wiki home page and overview
 - **[Getting Started](Getting-Started.md)** - Installation and first steps
 
 ### Core Systems
+
 - **[Bundle System](Bundle-System.md)** - How to use the bundle downloader
 - **[Rules System](Rules-System.md)** - Development rules and guidelines
 - **[Shell Integration](Shell-Integration.md)** - Shell functions for bash/zsh
 
 ### Advanced Topics
+
 - **[Workflows](Workflows.md)** - GitHub Actions workflows (coming soon)
 - **[MCP Server](MCP-Server.md)** - Model Context Protocol server (coming soon)
 
 ### Contributing
+
 - **[Contributing](Contributing.md)** - How to contribute (coming soon)
 - **[Architecture](Architecture.md)** - System architecture (coming soon)
 

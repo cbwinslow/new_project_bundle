@@ -17,18 +17,21 @@ Welcome to New Project Bundle! This guide will help you get started quickly.
 Choose your shell and run the appropriate command:
 
 **For Bash:**
+
 ```bash
 curl -sSL https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/scripts/shell-functions.sh >> ~/.bashrc
 source ~/.bashrc
 ```
 
 **For Zsh:**
+
 ```bash
 curl -sSL https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/scripts/shell-functions.sh >> ~/.zshrc
 source ~/.zshrc
 ```
 
 You should see:
+
 ```
 ℹ New Project Bundle functions loaded. Type 'npb-help' for usage.
 ```
@@ -257,6 +260,7 @@ Now that you're set up:
 ### "Command not found: npb-list"
 
 **Solution**: Source your shell config file:
+
 ```bash
 source ~/.bashrc  # or ~/.zshrc
 ```
@@ -266,16 +270,20 @@ Or restart your terminal.
 ### "Failed to download manifest"
 
 **Solutions**:
+
 1. Check internet connection
 2. Verify GitHub is accessible:
+
    ```bash
    curl https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/bundles.json
    ```
+
 3. Check if you're behind a proxy
 
 ### "jq: command not found"
 
 **Solution**: Install jq for better formatting:
+
 ```bash
 # macOS
 brew install jq
@@ -289,6 +297,7 @@ sudo apt-get install jq
 ### Downloads fail silently
 
 **Solution**: Check you have curl or wget:
+
 ```bash
 which curl
 which wget

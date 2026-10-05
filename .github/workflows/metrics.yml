@@ -25,21 +25,21 @@ jobs:
         with:
           script: |
             const { owner, repo } = context.repo;
-            
+
             // Get repository info
             const repoInfo = await github.rest.repos.get({ owner, repo });
-            
+
             // Get contributors
             const contributors = await github.rest.repos.listContributors({
               owner,
               repo,
               per_page: 100
             });
-            
+
             // Get recent issues
             const thirtyDaysAgo = new Date();
             thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-            
+
             const issues = await github.rest.issues.listForRepo({
               owner,
               repo,
@@ -47,23 +47,23 @@ jobs:
               since: thirtyDaysAgo.toISOString(),
               per_page: 100
             });
-            
+
             const openIssues = issues.data.filter(i => !i.pull_request && i.state === 'open');
             const closedIssues = issues.data.filter(i => !i.pull_request && i.state === 'closed');
             const openPRs = issues.data.filter(i => i.pull_request && i.state === 'open');
             const mergedPRs = issues.data.filter(i => i.pull_request && i.state === 'closed');
-            
+
             // Get releases
             const releases = await github.rest.repos.listReleases({
               owner,
               repo,
               per_page: 10
             });
-            
+
             // Generate summary
             let summary = `# Repository Metrics Report\n\n`;
             summary += `**Generated:** ${new Date().toISOString()}\n\n`;
-            
+
             summary += `## Overview\n\n`;
             summary += `| Metric | Value |\n`;
             summary += `|--------|-------|\n`;
@@ -73,7 +73,7 @@ jobs:
             summary += `| Open Issues | ${repoInfo.data.open_issues_count} |\n`;
             summary += `| Contributors | ${contributors.data.length} |\n`;
             summary += `| Size | ${(repoInfo.data.size / 1024).toFixed(2)} MB |\n\n`;
-            
+
             summary += `## Last 30 Days Activity\n\n`;
             summary += `| Metric | Count |\n`;
             summary += `|--------|-------|\n`;
@@ -81,7 +81,7 @@ jobs:
             summary += `| Closed Issues | ${closedIssues.length} |\n`;
             summary += `| Open PRs | ${openPRs.length} |\n`;
             summary += `| Merged PRs | ${mergedPRs.length} |\n\n`;
-            
+
             summary += `## Top Contributors\n\n`;
             summary += `| Contributor | Contributions |\n`;
             summary += `|-------------|---------------|\n`;
@@ -89,12 +89,12 @@ jobs:
               summary += `| @${contributor.login} | ${contributor.contributions} |\n`;
             }
             summary += `\n`;
-            
+
             summary += `## Recent Releases\n\n`;
             for (const release of releases.data.slice(0, 5)) {
               summary += `- **${release.tag_name}** - ${new Date(release.published_at).toLocaleDateString()}\n`;
             }
-            
+
             console.log(summary);
             core.summary.addRaw(summary);
             await core.summary.write();

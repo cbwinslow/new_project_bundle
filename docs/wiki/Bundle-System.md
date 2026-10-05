@@ -15,7 +15,7 @@ Bundles are organized sets of related files:
 ### GitHub Configuration Bundles
 
 | Bundle | Files | Description |
-|--------|-------|-------------|
+| -------- | ------- | ------------- |
 | `github-core` | 6 | CODEOWNERS, CONTRIBUTING, FUNDING, PR template, SECURITY, SUPPORT |
 | `github-issue-templates` | 4 | Bug reports, feature requests, questions |
 | `github-workflows-ci` | 3 | CI, CD, and release workflows |
@@ -28,7 +28,7 @@ Bundles are organized sets of related files:
 ### Infrastructure Bundles
 
 | Bundle | Files | Description |
-|--------|-------|-------------|
+| -------- | ------- | ------------- |
 | `docker` | 3 | Dockerfile, docker-compose, .dockerignore |
 | `dotfiles` | 7 | .editorconfig, .gitignore, .env.example, etc. |
 | `pre-commit` | 1 | Pre-commit hooks configuration |
@@ -37,7 +37,7 @@ Bundles are organized sets of related files:
 ### Package Manager Bundles
 
 | Bundle | Files | Description |
-|--------|-------|-------------|
+| -------- | ------- | ------------- |
 | `package-nodejs` | 3 | package.json, package-lock.json, tsconfig.json |
 | `package-python` | 1 | requirements.txt |
 | `package-ruby` | 2 | Gemfile, Gemfile.lock |
@@ -50,7 +50,7 @@ Bundles are organized sets of related files:
 ### Documentation & Templates
 
 | Bundle | Files | Description |
-|--------|-------|-------------|
+| -------- | ------- | ------------- |
 | `root-docs` | 4 | README, LICENSE, CHANGELOG, CODE_OF_CONDUCT |
 | `templates-docs` | 5 | SRS, features, ADR, API, RUNBOOK templates |
 | `templates-ai` | 4 | AI agent configuration and rules |
@@ -60,7 +60,7 @@ Bundles are organized sets of related files:
 ### Rules Bundles
 
 | Bundle | Files | Description |
-|--------|-------|-------------|
+| -------- | ------- | ------------- |
 | `rules-code-quality` | 2 | Clean code and error handling |
 | `rules-git-workflow` | 2 | Commit messages and branch naming |
 | `rules-testing` | 1 | Test coverage requirements |
@@ -86,11 +86,13 @@ Bundles are organized sets of related files:
 ### Using Shell Functions
 
 **List available bundles:**
+
 ```bash
 npb-list
 ```
 
 **Download a bundle:**
+
 ```bash
 # To current directory
 npb-download github-workflows-ci
@@ -105,6 +107,7 @@ npb-download all-github
 ### Using Shell Script
 
 **Download and run:**
+
 ```bash
 # List bundles
 curl -sSL https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/scripts/download-bundle.sh | bash -s -- list
@@ -114,6 +117,7 @@ curl -sSL https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/sc
 ```
 
 **Save script first:**
+
 ```bash
 curl -O https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/scripts/download-bundle.sh
 chmod +x download-bundle.sh
@@ -125,16 +129,19 @@ chmod +x download-bundle.sh
 ### Using Node.js CLI
 
 **Interactive mode:**
+
 ```bash
 npx github:cbwinslow/new_project_bundle bundle-downloader
 ```
 
 **Direct download:**
+
 ```bash
 npx github:cbwinslow/new_project_bundle bundle-downloader download github-workflows-ci
 ```
 
 **With options:**
+
 ```bash
 npx github:cbwinslow/new_project_bundle bundle-downloader download docker \
   --output ./my-project \
@@ -161,6 +168,7 @@ All bundles are defined in `bundles.json`:
 ```
 
 **View the manifest:**
+
 ```bash
 curl https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/bundles.json | jq
 ```
@@ -194,6 +202,7 @@ Create your own bundle manifest:
 
 1. **Fork the repository**
 2. **Edit bundles.json**:
+
    ```json
    {
      "my-custom-bundle": {
@@ -207,7 +216,9 @@ Create your own bundle manifest:
      }
    }
    ```
+
 3. **Use your fork**:
+
    ```bash
    NPB_REPO=myuser/my-fork npb-download my-custom-bundle
    ```
@@ -320,6 +331,7 @@ ping github.com
 ### Partial Downloads
 
 If some files fail to download:
+
 - Check file paths in bundles.json
 - Verify files exist in the repository
 - Check network connectivity

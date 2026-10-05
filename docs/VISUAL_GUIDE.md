@@ -5,6 +5,7 @@ This guide provides visual representations of how the bundle system works.
 ## 🎬 Quick Demo
 
 ### Interactive Mode
+
 ```
 $ npx github:cbwinslow/new_project_bundle bundle-downloader
 
@@ -134,6 +135,7 @@ bundles.json
 ## 🌳 File Tree After Downloads
 
 ### Example: Download github-workflows-ci
+
 ```
 ./downloaded-bundles/
 └── .github/
@@ -144,6 +146,7 @@ bundles.json
 ```
 
 ### Example: Download all-github
+
 ```
 ./downloaded-bundles/
 └── .github/
@@ -186,6 +189,7 @@ bundles.json
 ```
 
 ### Example: Download complete (everything)
+
 ```
 ./downloaded-bundles/
 ├── .github/
@@ -251,6 +255,7 @@ bundles.json
 ## 🎯 Common Workflows Visualized
 
 ### Workflow 1: New Node.js Project Setup
+
 ```
 Start
   │
@@ -272,6 +277,7 @@ Ready to Code! 🎉
 ```
 
 ### Workflow 2: Adding Security to Existing Project
+
 ```
 Existing Project
   │
