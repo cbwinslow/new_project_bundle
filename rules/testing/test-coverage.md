@@ -1,6 +1,6 @@
 # Test Coverage Rules
 
-**Category:** Testing  
+**Category:** Testing
 **Tags:** #testing #coverage #quality-assurance
 
 ## Description
@@ -10,12 +10,14 @@ Guidelines for maintaining adequate test coverage and writing effective tests.
 ## Rules
 
 ### Coverage Requirements
+
 - Minimum 80% code coverage for critical paths
 - 100% coverage for security-related code
 - 100% coverage for data validation logic
 - Track coverage trends over time
 
 ### What to Test
+
 - All public APIs
 - Edge cases and boundary conditions
 - Error handling paths
@@ -23,12 +25,14 @@ Guidelines for maintaining adequate test coverage and writing effective tests.
 - Critical business logic
 
 ### What Not to Over-Test
+
 - Simple getters/setters
 - Third-party library internals
 - Generated code
 - Configuration files
 
 ### Test Organization
+
 - Mirror production code structure
 - Group related tests
 - Use descriptive test names
@@ -37,6 +41,7 @@ Guidelines for maintaining adequate test coverage and writing effective tests.
 ## Examples
 
 ### Good Test Example
+
 ```python
 def test_user_registration_with_valid_email():
     """Test that user can register with valid email"""
@@ -57,6 +62,7 @@ def test_user_registration_with_weak_password():
 ```
 
 ### Bad Test Example
+
 ```python
 def test_user():
     # Too broad, tests everything at once
@@ -68,18 +74,21 @@ def test_user():
 ```
 
 ## Coverage Tools
+
 - Python: `pytest-cov`, `coverage.py`
 - JavaScript: `jest`, `nyc`, `istanbul`
 - Go: built-in `go test -cover`
 - Java: `JaCoCo`, `Cobertura`
 
 ## Reporting
+
 - Generate HTML coverage reports
 - Track coverage in CI/CD
 - Fail builds if coverage drops
 - Review uncovered lines in PRs
 
 ## Benefits
+
 - Catch bugs early
 - Safe refactoring
 - Living documentation
