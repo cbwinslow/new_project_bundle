@@ -44,15 +44,20 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 
 1. Fork the repository
 2. Clone your fork:
+
    ```bash
    git clone https://github.com/your-username/new_project_bundle.git
    cd new_project_bundle
    ```
+
 3. Add the upstream remote:
+
    ```bash
    git remote add upstream https://github.com/cbwinslow/new_project_bundle.git
    ```
+
 4. Install dependencies (if applicable):
+
    ```bash
    npm install  # or pip install -r requirements.txt, etc.
    ```
@@ -79,6 +84,7 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/) speci
 ```
 
 Types:
+
 - `feat`: A new feature
 - `fix`: A bug fix
 - `docs`: Documentation only changes
@@ -92,6 +98,7 @@ Types:
 - `revert`: Reverts a previous commit
 
 Examples:
+
 ```
 feat(auth): add login functionality
 fix(api): handle null response from server
@@ -141,6 +148,7 @@ docs: update contributing guidelines
 ## Recognition
 
 Contributors will be recognized in our:
+
 - README contributors section
 - Release notes
 - GitHub contributors page
@@ -148,6 +156,7 @@ Contributors will be recognized in our:
 ## Questions?
 
 Don't hesitate to ask questions! You can:
+
 - Open a GitHub Discussion
 - Comment on relevant issues
 - Reach out to maintainers

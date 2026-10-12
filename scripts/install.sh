@@ -2,7 +2,7 @@
 
 #
 # Quick Install Script for Bundle Downloader
-# 
+#
 # Usage:
 #   curl -sSL https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/scripts/install.sh | bash
 #   wget -qO- https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/scripts/install.sh | bash
