@@ -21,6 +21,7 @@ Get detailed information about any GitHub repository:
 ```
 
 **Example Response:**
+
 ```
 # cbwinslow/new_project_bundle
 
@@ -75,6 +76,7 @@ Fetch information about any GitHub user or organization:
 ```
 
 **Example Response:**
+
 ```
 # The Octocat (@octocat)
 
@@ -130,6 +132,7 @@ Search for repositories using GitHub's query syntax:
 ```
 
 **Query Examples:**
+
 - `"language:python machine learning"` - Python ML projects
 - `"user:facebook"` - All repos from Facebook
 - `"stars:>5000 forks:>1000"` - Popular projects

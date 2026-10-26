@@ -69,7 +69,7 @@ jobs:
             // This is a placeholder for OpenAI-based code review
             // You would need to implement the actual API call
             console.log('OpenAI review would run here with proper API configuration');
-            
+
             // Example comment structure:
             // await github.rest.pulls.createReview({
             //   owner: context.repo.owner,
@@ -93,14 +93,14 @@ jobs:
         with:
           script: |
             const pr = context.payload.pull_request;
-            
+
             // Analyze the PR
             const { data: files } = await github.rest.pulls.listFiles({
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: pr.number
             });
-            
+
             // Categorize changes
             const stats = {
               additions: 0,
@@ -108,15 +108,15 @@ jobs:
               fileTypes: {},
               complexity: 'low'
             };
-            
+
             for (const file of files) {
               stats.additions += file.additions;
               stats.deletions += file.deletions;
-              
+
               const ext = file.filename.split('.').pop() || 'unknown';
               stats.fileTypes[ext] = (stats.fileTypes[ext] || 0) + 1;
             }
-            
+
             // Determine complexity
             const totalChanges = stats.additions + stats.deletions;
             if (totalChanges > 500) {
@@ -124,22 +124,22 @@ jobs:
             } else if (totalChanges > 100) {
               stats.complexity = 'medium';
             }
-            
+
             // Generate summary
             const summary = `## PR Analysis Summary
-            
+
             📊 **Statistics:**
             - Lines added: +${stats.additions}
             - Lines removed: -${stats.deletions}
             - Files changed: ${files.length}
             - Complexity: ${stats.complexity}
-            
+
             📁 **File Types:**
             ${Object.entries(stats.fileTypes).map(([ext, count]) => `- .${ext}: ${count} file(s)`).join('\n')}
-            
+
             ${stats.complexity === 'high' ? '⚠️ **Note:** This is a large PR. Consider breaking it into smaller PRs for easier review.' : ''}
             `;
-            
+
             // Post as comment
             await github.rest.issues.createComment({
               owner: context.repo.owner,
