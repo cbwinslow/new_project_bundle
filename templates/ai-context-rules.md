@@ -7,7 +7,7 @@
 ## Document Information
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | **Version** | 1.0.0 |
 | **Last Updated** | 2024-12-03 |
 | **Category** | AI Agent Behavior & Context |
@@ -52,6 +52,7 @@ TASK_LOG_PATH: "tasks/"
 **Description**: Before making ANY changes or writing ANY code, the AI agent MUST read and understand the project documentation.
 
 **Required Reading Order**:
+
 1. `README.md` - Project overview and setup
 2. `CONTRIBUTING.md` - Contribution guidelines
 3. `.github/copilot-instructions.md` - AI-specific instructions
@@ -61,6 +62,7 @@ TASK_LOG_PATH: "tasks/"
 7. Any domain-specific documentation in `docs/` or `templates/`
 
 **Rationale**: Loading documentation into context ensures the AI agent understands:
+
 - Project architecture and patterns
 - Coding conventions and standards
 - Existing utilities and functions
@@ -72,6 +74,7 @@ TASK_LOG_PATH: "tasks/"
 **Description**: Before implementing ANY feature, search for existing documentation that might inform your approach.
 
 **Search Locations**:
+
 ```
 ./README.md
 ./docs/
@@ -84,6 +87,7 @@ TASK_LOG_PATH: "tasks/"
 ```
 
 **Actions**:
+
 1. Search for keywords related to your task
 2. Read any relevant documentation found
 3. Note any constraints or requirements discovered
@@ -94,6 +98,7 @@ TASK_LOG_PATH: "tasks/"
 **Description**: Before writing new code, search the codebase for similar implementations.
 
 **Search Strategy**:
+
 ```bash
 # Search for similar function names
 grep -r "functionName" --include="*.ts" --include="*.js"
@@ -114,6 +119,7 @@ grep -r "import.*ModuleName" --include="*.ts" --include="*.js"
 **Description**: AI agents must NEVER delete files, directories, data, or significant code without explicit user permission.
 
 **Prohibited Actions** (without permission):
+
 ```
 ❌ rm -rf / rm -r / rmdir commands
 ❌ DELETE queries on databases
@@ -126,6 +132,7 @@ grep -r "import.*ModuleName" --include="*.ts" --include="*.js"
 ```
 
 **Required Before Destructive Actions**:
+
 1. Explain what will be deleted
 2. Explain why deletion is necessary
 3. Propose alternatives if possible
@@ -137,6 +144,7 @@ grep -r "import.*ModuleName" --include="*.ts" --include="*.js"
 **Description**: Never remove or significantly modify working code unless absolutely necessary and user-approved.
 
 **Guidelines**:
+
 ```
 ✅ Add new code alongside existing code
 ✅ Deprecate before removing
@@ -150,6 +158,7 @@ grep -r "import.*ModuleName" --include="*.ts" --include="*.js"
 **Description**: AI agents must not take shortcuts that compromise code quality, security, or functionality.
 
 **Prohibited Shortcuts**:
+
 ```
 ❌ Disabling security checks
 ❌ Skipping input validation
@@ -166,6 +175,7 @@ grep -r "import.*ModuleName" --include="*.ts" --include="*.js"
 **Description**: When possible, make changes that are easily reversible.
 
 **Strategies**:
+
 ```
 ✅ Use version control effectively
 ✅ Create feature branches
@@ -183,6 +193,7 @@ grep -r "import.*ModuleName" --include="*.ts" --include="*.js"
 **Description**: Before creating ANY new function, utility, or tool, search extensively for existing implementations.
 
 **Search Strategy**:
+
 ```bash
 # 1. Search project codebase
 grep -r "functionName" --include="*.ts" --include="*.js" .
@@ -202,6 +213,7 @@ grep -r "similar pattern" .
 **Description**: Always use existing project utilities instead of creating duplicates.
 
 **Common Utility Locations**:
+
 ```
 src/utils/
 src/helpers/
@@ -212,6 +224,7 @@ src/core/
 ```
 
 **Before Creating New Utility**:
+
 1. List all files in utility directories
 2. Read relevant utility files
 3. Check if existing utility can be extended
@@ -222,12 +235,14 @@ src/core/
 **Description**: Use libraries already in the project before adding new ones.
 
 **Checklist**:
+
 1. Review `package.json` (npm), `requirements.txt` (pip), `Cargo.toml` (Rust), etc.
 2. Check if existing dependency provides needed functionality
 3. Read existing dependency documentation
 4. Only add new dependency if absolutely necessary
 
 **Example**:
+
 ```javascript
 // ❌ Bad - adding lodash when native array methods exist
 import _ from 'lodash';
@@ -242,8 +257,9 @@ const filtered = arr.filter(fn);
 **Description**: Never reimplement functionality that already exists in the project or standard libraries.
 
 **Common Reinventions to Avoid**:
+
 | Need | Don't Reinvent | Use Instead |
-|------|----------------|-------------|
+| ------ | ---------------- | ------------- |
 | UUID generation | Custom function | `crypto.randomUUID()` or existing lib |
 | Date formatting | Custom parser | Existing date lib in project |
 | Validation | Custom validators | Project's validation utils |
@@ -256,6 +272,7 @@ const filtered = arr.filter(fn);
 **Description**: When existing code is close but not exact, extend it rather than duplicate.
 
 **Strategies**:
+
 ```javascript
 // ❌ Bad - duplicating entire function
 function formatDateUS(date) {
@@ -278,6 +295,7 @@ const formatDateUS = (date) => formatDate(date, 'en-US');
 **Description**: When uncertain about ANY aspect of implementation, ASK the user before proceeding.
 
 **Situations to Ask**:
+
 ```
 ? Unclear requirements
 ? Multiple valid approaches
@@ -291,6 +309,7 @@ const formatDateUS = (date) => formatDate(date, 'en-US');
 ```
 
 **How to Ask**:
+
 ```markdown
 I need clarification before proceeding:
 
@@ -307,13 +326,14 @@ I need clarification before proceeding:
 **Description**: Never assume meaning when requirements are ambiguous.
 
 **Ambiguity Examples**:
+
 ```
 Ambiguous: "Make it faster"
-Ask: "What is the current performance? What is the target? 
+Ask: "What is the current performance? What is the target?
       Which operations should be optimized?"
 
 Ambiguous: "Add user authentication"
-Ask: "What auth methods? OAuth? JWT? Sessions? 
+Ask: "What auth methods? OAuth? JWT? Sessions?
       Which providers? What roles/permissions?"
 
 Ambiguous: "Fix the bug"
@@ -326,6 +346,7 @@ Ask: "Which bug specifically? Can you provide steps to reproduce?
 **Description**: Always confirm with user before making significant architectural or design changes.
 
 **Major Changes Include**:
+
 - Database schema changes
 - API contract changes
 - Authentication/authorization changes
@@ -339,6 +360,7 @@ Ask: "Which bug specifically? Can you provide steps to reproduce?
 **Description**: When making assumptions (after reasonable effort to clarify), document them clearly.
 
 **Format**:
+
 ```javascript
 /**
  * ASSUMPTION: User IDs are always UUIDs
@@ -357,6 +379,7 @@ Ask: "Which bug specifically? Can you provide steps to reproduce?
 **Description**: Apply critical thinking to every task before implementation.
 
 **Analysis Framework**:
+
 ```markdown
 1. **Understand**: What is the actual problem?
 2. **Context**: What constraints exist?
@@ -372,6 +395,7 @@ Ask: "Which bug specifically? Can you provide steps to reproduce?
 **Description**: Don't blindly execute prompts - analyze if they make sense.
 
 **Questions to Ask**:
+
 ```
 - Does this request align with project goals?
 - Is this the best approach to solve the underlying problem?
@@ -386,6 +410,7 @@ Ask: "Which bug specifically? Can you provide steps to reproduce?
 **Description**: Always think about edge cases and error conditions.
 
 **Common Edge Cases**:
+
 ```
 - Empty inputs (null, undefined, "", [], {})
 - Boundary values (0, -1, MAX_INT)
@@ -404,6 +429,7 @@ Ask: "Which bug specifically? Can you provide steps to reproduce?
 **Description**: Every change should be evaluated for security implications.
 
 **Security Checklist**:
+
 ```
 □ Input validation
 □ Output encoding
@@ -422,6 +448,7 @@ Ask: "Which bug specifically? Can you provide steps to reproduce?
 **Description**: Think about performance implications of changes.
 
 **Performance Considerations**:
+
 ```
 - Time complexity of algorithms
 - Space complexity
@@ -441,6 +468,7 @@ Ask: "Which bug specifically? Can you provide steps to reproduce?
 **Description**: Every complex task MUST be broken down into smaller, manageable subtasks.
 
 **Task Breakdown Format**:
+
 ```markdown
 # Task: [Task Title]
 
@@ -469,6 +497,7 @@ Ask: "Which bug specifically? Can you provide steps to reproduce?
 **Description**: For every task, create a structured TODO list before coding.
 
 **TODO List Template**:
+
 ```markdown
 # TODO: [Feature/Fix Name]
 
@@ -501,8 +530,9 @@ Status: In Progress | Completed | Blocked
 **Description**: Estimate effort and prioritize subtasks.
 
 **Estimation Scale**:
+
 | Effort | Description | Time Estimate |
-|--------|-------------|---------------|
+| -------- | ------------- | --------------- |
 | XS | Trivial change | < 30 min |
 | S | Small, straightforward | 30 min - 2 hrs |
 | M | Medium complexity | 2-4 hrs |
@@ -514,6 +544,7 @@ Status: In Progress | Completed | Blocked
 **Description**: Map out dependencies between subtasks before starting.
 
 **Dependency Types**:
+
 ```
 → Blocking: Task B cannot start until Task A completes
 ⟷ Related: Tasks share resources/context
@@ -531,6 +562,7 @@ Status: In Progress | Completed | Blocked
 **File Location**: `tasks/` directory in project root
 
 **File Naming Convention**:
+
 ```
 tasks/
 ├── YYYY-MM-DD-task-title.md      # Individual task files
@@ -544,6 +576,7 @@ tasks/
 **Description**: Update task files as work progresses.
 
 **Update Requirements**:
+
 ```markdown
 # In task file:
 
@@ -561,6 +594,7 @@ tasks/
 **Description**: Document the solution approach and key decisions in the task file.
 
 **Solution Documentation Format**:
+
 ```markdown
 ## Solution
 
@@ -589,6 +623,7 @@ tasks/
 **Description**: Document related concepts, tokens, and references.
 
 **Token Documentation**:
+
 ```markdown
 ## Related Tokens/Concepts
 
@@ -605,6 +640,7 @@ tasks/
 **Description**: Upon task completion, save the task file to the configured repository.
 
 **Workflow**:
+
 ```markdown
 1. Complete all subtasks
 2. Document final solution
@@ -615,6 +651,7 @@ tasks/
 ```
 
 **Commit Message Format**:
+
 ```
 docs(tasks): complete [task-name]
 
@@ -632,6 +669,7 @@ docs(tasks): complete [task-name]
 **Description**: Always use available tools to gather information before writing code or scripts.
 
 **Tool Usage Order**:
+
 1. **Search tools**: Find existing code/docs
 2. **Read tools**: Understand context
 3. **Analyze tools**: Understand patterns
@@ -643,6 +681,7 @@ docs(tasks): complete [task-name]
 **Description**: Collect all relevant information before implementing.
 
 **Information Gathering Checklist**:
+
 ```
 □ Read relevant documentation
 □ Search codebase for similar patterns
@@ -658,6 +697,7 @@ docs(tasks): complete [task-name]
 **Description**: Validate assumptions and approach before writing significant code.
 
 **Validation Steps**:
+
 ```
 1. Verify understanding of requirements
 2. Check proposed approach with user if significant
@@ -671,6 +711,7 @@ docs(tasks): complete [task-name]
 **Description**: Make small changes and verify at each step.
 
 **Iteration Pattern**:
+
 ```
 1. Make small change
 2. Run tests/verification
@@ -687,6 +728,7 @@ docs(tasks): complete [task-name]
 **Description**: Load the most important context first to ensure it's available.
 
 **Priority Order**:
+
 1. Project configuration (package.json, tsconfig.json)
 2. README and CONTRIBUTING guides
 3. Relevant source files for the task
@@ -698,6 +740,7 @@ docs(tasks): complete [task-name]
 **Description**: When loading large files, extract and summarize key sections.
 
 **Summarization Strategy**:
+
 ```
 - Extract function signatures and docstrings
 - Note key exports
@@ -711,6 +754,7 @@ docs(tasks): complete [task-name]
 **Description**: Reference file paths and line numbers rather than duplicating large code blocks.
 
 **Example**:
+
 ```markdown
 The user validation logic is in `src/utils/validation.ts` (lines 50-75).
 Key functions:
@@ -722,19 +766,22 @@ Key functions:
 
 ## Compliance Summary
 
-### Before Starting Any Task:
+### Before Starting Any Task
+
 1. [ ] Read project documentation
 2. [ ] Search for existing implementations
 3. [ ] Create task breakdown
 4. [ ] Log task to tasks/ directory
 
-### During Implementation:
+### During Implementation
+
 1. [ ] Use existing tools and utilities
 2. [ ] Ask questions when unsure
 3. [ ] Apply critical reasoning
 4. [ ] Update task log with progress
 
-### Before Completing:
+### Before Completing
+
 1. [ ] Verify all subtasks complete
 2. [ ] Document solution in task file
 3. [ ] Link related tokens/concepts
