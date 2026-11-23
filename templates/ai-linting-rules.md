@@ -7,7 +7,7 @@
 ## Document Information
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | **Version** | 1.0.0 |
 | **Last Updated** | 2024-12-03 |
 | **Category** | Code Quality & Linting |
@@ -40,7 +40,7 @@ This document establishes mandatory code quality rules that all AI agents MUST f
 ### Rule Priority Levels
 
 | Level | Meaning | Action |
-|-------|---------|--------|
+| ------- | --------- | -------- |
 | 🔴 **CRITICAL** | Must never violate | Block commit/merge |
 | 🟠 **REQUIRED** | Should always follow | Request fix before merge |
 | 🟡 **RECOMMENDED** | Best practice | Comment for improvement |
@@ -55,6 +55,7 @@ This document establishes mandatory code quality rules that all AI agents MUST f
 **Description**: All code must use consistent indentation within a file and follow project-defined standards.
 
 **Requirements**:
+
 ```
 ✅ Follow .editorconfig settings for each file type
 ✅ Use 2 spaces for JavaScript/TypeScript/JSON/YAML/HTML/CSS
@@ -64,6 +65,7 @@ This document establishes mandatory code quality rules that all AI agents MUST f
 ```
 
 **Detection**:
+
 ```bash
 # Check with EditorConfig
 editorconfig-checker .
@@ -77,6 +79,7 @@ editorconfig-checker .
 **Description**: Use consistent spacing around operators for readability.
 
 **Examples**:
+
 ```javascript
 // ❌ Bad - inconsistent spacing
 const x=1+2;
@@ -90,6 +93,7 @@ const z = 5 + 6;
 ```
 
 **ESLint Rules**:
+
 ```json
 {
   "space-infix-ops": "error",
@@ -103,6 +107,7 @@ const z = 5 + 6;
 **Description**: Use consistent spacing in function declarations and calls.
 
 **Examples**:
+
 ```javascript
 // ❌ Bad
 function foo( a,b,c ){
@@ -126,7 +131,7 @@ function foo(a, b, c) {
 **Default Settings by Language**:
 
 | Language | Style | Size |
-|----------|-------|------|
+| ---------- | ------- | ------ |
 | JavaScript/TypeScript | Spaces | 2 |
 | Python | Spaces | 4 |
 | Go | Tabs | 4 |
@@ -141,6 +146,7 @@ function foo(a, b, c) {
 **Description**: Within a single file, never mix tabs and spaces for indentation.
 
 **Detection**:
+
 ```bash
 # Find files with mixed indentation
 grep -rn $'^\t' --include='*.js' . && grep -rn '^  ' --include='*.js' .
@@ -155,13 +161,15 @@ grep -rn $'^\t' --include='*.js' . && grep -rn '^  ' --include='*.js' .
 **Description**: Lines should not exceed the configured maximum length.
 
 **Defaults**:
+
 | File Type | Max Length | Exception |
-|-----------|------------|-----------|
+| ----------- | ------------ | ----------- |
 | Code files | 100 chars | Long strings, URLs |
 | Markdown | 120 chars | Tables, URLs |
 | JSON | 120 chars | Complex nested structures |
 
 **ESLint Rule**:
+
 ```json
 {
   "max-len": ["error", {
@@ -180,6 +188,7 @@ grep -rn $'^\t' --include='*.js' . && grep -rn '^  ' --include='*.js' .
 **Description**: When wrapping lines, follow consistent patterns.
 
 **Examples**:
+
 ```javascript
 // ❌ Bad - inconsistent wrapping
 const result = someLongFunctionName(arg1, arg2,
@@ -203,6 +212,7 @@ const result = someLongFunctionName(
 **Description**: Lines must not have trailing whitespace (spaces or tabs at end of line).
 
 **Detection**:
+
 ```bash
 # Find trailing whitespace
 grep -rn ' $' --include='*.js' .
@@ -210,6 +220,7 @@ grep -rn '\t$' --include='*.js' .
 ```
 
 **ESLint Rule**:
+
 ```json
 {
   "no-trailing-spaces": "error"
@@ -221,6 +232,7 @@ grep -rn '\t$' --include='*.js' .
 **Description**: Use exactly one blank line between logical sections, functions, and classes.
 
 **Examples**:
+
 ```javascript
 // ❌ Bad - multiple blank lines
 function foo() {}
@@ -236,6 +248,7 @@ function bar() {}
 ```
 
 **ESLint Rule**:
+
 ```json
 {
   "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0, "maxBOF": 0 }]
@@ -247,6 +260,7 @@ function bar() {}
 **Description**: All files must end with exactly one newline character.
 
 **ESLint Rule**:
+
 ```json
 {
   "eol-last": ["error", "always"]
@@ -258,6 +272,7 @@ function bar() {}
 **Description**: No whitespace before commas, semicolons, or colons.
 
 **Examples**:
+
 ```javascript
 // ❌ Bad
 const arr = [1 , 2 , 3] ;
@@ -277,6 +292,7 @@ const obj = { key: value };
 **Description**: Never use multiple semicolons in a row.
 
 **Examples**:
+
 ```javascript
 // ❌ Bad
 const x = 1;;
@@ -288,6 +304,7 @@ const y = 2;
 ```
 
 **ESLint Rule**:
+
 ```json
 {
   "no-extra-semi": "error"
@@ -299,6 +316,7 @@ const y = 2;
 **Description**: Do not duplicate operators (except for valid operators like `++`, `--`, `===`).
 
 **Examples**:
+
 ```javascript
 // ❌ Bad - accidental duplication
 const x = 1 ++ 2;  // Invalid
@@ -316,6 +334,7 @@ const z = x || y;
 **Description**: Avoid unnecessary nested or duplicate brackets.
 
 **Examples**:
+
 ```javascript
 // ❌ Bad
 const x = ((value));
@@ -333,6 +352,7 @@ const obj = { key: value };
 **Description**: Do not use duplicate or mismatched quotes.
 
 **Examples**:
+
 ```javascript
 // ❌ Bad
 const str = ""hello"";
@@ -353,10 +373,12 @@ const str2 = 'world';
 **Description**: All comments must be free of spelling errors.
 
 **Tools**:
+
 - cspell for spell checking
 - Project dictionary in `.github/cspell.json`
 
 **Configuration**:
+
 ```json
 {
   "version": "0.2",
@@ -371,6 +393,7 @@ const str2 = 'world';
 **Description**: User-facing strings should be spell-checked.
 
 **Examples**:
+
 ```javascript
 // ❌ Bad - typos
 const msg = "Plese enter your pasword";
@@ -386,8 +409,9 @@ const err = "Invalid input received";
 **Description**: Use correct spelling in identifiers and follow naming conventions.
 
 **Patterns**:
+
 | Type | Convention | Example |
-|------|------------|---------|
+| ------ | ------------ | --------- |
 | Variables | camelCase | `userName`, `isValid` |
 | Constants | UPPER_SNAKE_CASE | `MAX_RETRIES`, `API_URL` |
 | Functions | camelCase | `getUserById`, `validateInput` |
@@ -400,6 +424,7 @@ const err = "Invalid input received";
 **Description**: Detect and correct common programming typos.
 
 **Common Typos to Watch**:
+
 ```
 ❌ lenght → ✅ length
 ❌ widht → ✅ width
@@ -425,12 +450,14 @@ const err = "Invalid input received";
 **Description**: All opening brackets must have matching closing brackets.
 
 **Types**:
+
 - Parentheses: `( )`
 - Square brackets: `[ ]`
 - Curly braces: `{ }`
 - Angle brackets: `< >`
 
 **Detection**:
+
 ```javascript
 // ❌ Unbalanced
 if (condition {
@@ -448,6 +475,7 @@ if (condition) {
 **Description**: Strings must have matching opening and closing quotes.
 
 **Examples**:
+
 ```javascript
 // ❌ Bad
 const str = "hello';
@@ -463,6 +491,7 @@ const str2 = 'world';
 **Description**: Template literals must use backticks and have valid expressions.
 
 **Examples**:
+
 ```javascript
 // ❌ Bad
 const msg = "Hello ${name}";  // Wrong quotes for template
@@ -478,6 +507,7 @@ const greeting = `Hello ${name}`;
 **Description**: Do not write code after return, throw, break, or continue statements.
 
 **ESLint Rule**:
+
 ```json
 {
   "no-unreachable": "error"
@@ -489,6 +519,7 @@ const greeting = `Hello ${name}`;
 **Description**: Variables must be properly declared before use.
 
 **ESLint Rules**:
+
 ```json
 {
   "no-undef": "error",
@@ -506,6 +537,7 @@ const greeting = `Hello ${name}`;
 **Description**: Follow the project's ESLint configuration.
 
 **Recommended Base Configuration** (`.eslintrc.json`):
+
 ```json
 {
   "env": {
@@ -554,6 +586,7 @@ const greeting = `Hello ${name}`;
 **Description**: For TypeScript projects, use additional TypeScript-specific rules.
 
 **TypeScript Configuration**:
+
 ```json
 {
   "extends": [
@@ -577,6 +610,7 @@ const greeting = `Hello ${name}`;
 **Description**: When disabling ESLint rules, always provide a justification.
 
 **Examples**:
+
 ```javascript
 // ❌ Bad - no explanation
 // eslint-disable-next-line no-console
@@ -594,7 +628,7 @@ console.log(value);
 ### JavaScript/TypeScript Rules
 
 | Rule ID | Description | Severity |
-|---------|-------------|----------|
+| --------- | ------------- | ---------- |
 | L-080 | Use `const` over `let` when variable is not reassigned | 🟠 REQUIRED |
 | L-081 | No `var` declarations | 🔴 CRITICAL |
 | L-082 | Use strict equality (`===` and `!==`) | 🔴 CRITICAL |
@@ -606,7 +640,7 @@ console.log(value);
 ### Python Rules
 
 | Rule ID | Description | Severity |
-|---------|-------------|----------|
+| --------- | ------------- | ---------- |
 | L-090 | Follow PEP 8 style guide | 🔴 CRITICAL |
 | L-091 | Use 4 spaces for indentation | 🔴 CRITICAL |
 | L-092 | Maximum line length of 88 (Black default) or 79 (PEP 8) | 🟠 REQUIRED |
@@ -617,7 +651,7 @@ console.log(value);
 ### Go Rules
 
 | Rule ID | Description | Severity |
-|---------|-------------|----------|
+| --------- | ------------- | ---------- |
 | L-100 | Run `go fmt` before committing | 🔴 CRITICAL |
 | L-101 | Run `go vet` to catch common mistakes | 🔴 CRITICAL |
 | L-102 | Use `golangci-lint` for comprehensive linting | 🟠 REQUIRED |
@@ -633,8 +667,9 @@ console.log(value);
 **Description**: Use project-configured formatters before committing code.
 
 **Language Formatters**:
+
 | Language | Formatter | Command |
-|----------|-----------|---------|
+| ---------- | ----------- | --------- |
 | JavaScript/TypeScript | Prettier | `npx prettier --write .` |
 | Python | Black | `black .` |
 | Go | gofmt | `go fmt ./...` |
@@ -647,6 +682,7 @@ console.log(value);
 **Description**: Configure IDE/editor to format on save.
 
 **VS Code Settings**:
+
 ```json
 {
   "editor.formatOnSave": true,
@@ -666,12 +702,14 @@ console.log(value);
 **Description**: Ensure pre-commit hooks pass before committing.
 
 **Setup**:
+
 ```bash
 pip install pre-commit
 pre-commit install
 ```
 
 **Run Manually**:
+
 ```bash
 pre-commit run --all-files
 ```
@@ -681,7 +719,7 @@ pre-commit run --all-files
 **Description**: The following checks must pass:
 
 | Check | Purpose |
-|-------|---------|
+| ------- | --------- |
 | trailing-whitespace | Remove trailing whitespace |
 | end-of-file-fixer | Ensure newline at end of file |
 | check-yaml | Validate YAML syntax |

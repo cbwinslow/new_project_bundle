@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
 - Initial project structure
 - GitHub Actions workflows for CI/CD
 - Issue and PR templates
@@ -15,23 +16,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Documentation templates
 
 ### Changed
+
 - Nothing yet
 
 ### Deprecated
+
 - Nothing yet
 
 ### Removed
+
 - Nothing yet
 
 ### Fixed
+
 - Nothing yet
 
 ### Security
+
 - Nothing yet
 
 ## [1.0.0] - YYYY-MM-DD
 
 ### Added
+
 - Complete DevOps project bundle
 - 18 GitHub Actions workflows
 - Comprehensive documentation

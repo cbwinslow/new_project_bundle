@@ -25,7 +25,7 @@ _npb_detect_shell() {
 # Get the appropriate profile file
 _npb_get_profile_file() {
     local shell_name=$(_npb_detect_shell)
-    
+
     case "$shell_name" in
         bash)
             if [ -f "$HOME/.bashrc" ]; then
@@ -51,12 +51,12 @@ _npb_get_profile_file() {
 # Check if NPB is already integrated
 _npb_is_integrated() {
     local profile_file=$(_npb_get_profile_file)
-    
+
     if [ -f "$profile_file" ]; then
         grep -q "bundle-functions.sh" "$profile_file" 2>/dev/null
         return $?
     fi
-    
+
     return 1
 }
 
@@ -65,11 +65,11 @@ npb_setup_profile() {
     local install_dir="${1:-$HOME/.local/lib}"
     local profile_file=$(_npb_get_profile_file)
     local shell_name=$(_npb_detect_shell)
-    
+
     pi_info "Setting up New Project Bundle for $shell_name"
     pi_info "Profile file: $profile_file"
     echo ""
-    
+
     # Check if already integrated
     if _npb_is_integrated; then
         pi_warning "NPB is already integrated in your profile"
@@ -80,17 +80,17 @@ npb_setup_profile() {
             return 0
         fi
     fi
-    
+
     # Download bundle-functions.sh to install directory
     mkdir -p "$install_dir"
     local functions_file="$install_dir/bundle-functions.sh"
-    
+
     pi_info "Downloading bundle-functions.sh..."
-    
+
     local repo="${NPB_REPO:-cbwinslow/new_project_bundle}"
     local branch="${NPB_BRANCH:-main}"
     local url="https://raw.githubusercontent.com/$repo/$branch/lib/bundle-functions.sh"
-    
+
     if command -v curl &>/dev/null; then
         curl -sSL -o "$functions_file" "$url"
     elif command -v wget &>/dev/null; then
@@ -99,19 +99,19 @@ npb_setup_profile() {
         pi_error "Neither curl nor wget found"
         return 1
     fi
-    
+
     if [ ! -f "$functions_file" ]; then
         pi_error "Failed to download bundle-functions.sh"
         return 1
     fi
-    
+
     pi_success "Downloaded to $functions_file"
-    
+
     # Add source command to profile
     local source_line="source \"$functions_file\""
     local marker_start="# >>> New Project Bundle >>>"
     local marker_end="# <<< New Project Bundle <<<"
-    
+
     # Remove old integration if exists
     if [ -f "$profile_file" ] && grep -q "$marker_start" "$profile_file"; then
         pi_info "Removing old integration..."
@@ -119,7 +119,7 @@ npb_setup_profile() {
         awk "/$marker_start/,/$marker_end/ {next} {print}" "$profile_file" > "${profile_file}.tmp"
         mv "${profile_file}.tmp" "$profile_file"
     fi
-    
+
     # Add new integration
     cat >> "$profile_file" << EOF
 
@@ -129,7 +129,7 @@ $marker_start
 $source_line
 $marker_end
 EOF
-    
+
     pi_success "Added NPB integration to $profile_file"
     echo ""
     pi_info "To activate immediately, run:"
@@ -190,10 +190,10 @@ EOF
 npb_update_profile() {
     local install_dir="${1:-$HOME/.local/lib}"
     local shell_name=$(_npb_detect_shell)
-    
+
     echo "Detected shell: $shell_name"
     echo ""
-    
+
     case "$shell_name" in
         bash)
             npb_setup_bash "$install_dir"
@@ -214,23 +214,23 @@ npb_remove_integration() {
     local profile_file=$(_npb_get_profile_file)
     local marker_start="# >>> New Project Bundle >>>"
     local marker_end="# <<< New Project Bundle <<<"
-    
+
     if [ ! -f "$profile_file" ]; then
         pi_warning "Profile file not found: $profile_file"
         return 1
     fi
-    
+
     if ! grep -q "$marker_start" "$profile_file"; then
         pi_warning "NPB integration not found in $profile_file"
         return 0
     fi
-    
+
     pi_info "Removing NPB integration from $profile_file..."
-    
+
     # Create temp file without NPB section
     awk "/$marker_start/,/$marker_end/ {next} {print}" "$profile_file" > "${profile_file}.tmp"
     mv "${profile_file}.tmp" "$profile_file"
-    
+
     pi_success "NPB integration removed"
     pi_info "Restart your terminal or run: source $profile_file"
 }
@@ -239,14 +239,14 @@ npb_remove_integration() {
 npb_status() {
     local profile_file=$(_npb_get_profile_file)
     local shell_name=$(_npb_detect_shell)
-    
+
     echo "Shell: $shell_name"
     echo "Profile: $profile_file"
     echo ""
-    
+
     if _npb_is_integrated; then
         pi_success "NPB is integrated in your profile"
-        
+
         # Show which functions are available
         if command -v npb_list_bundles &>/dev/null; then
             pi_success "NPB functions are loaded"

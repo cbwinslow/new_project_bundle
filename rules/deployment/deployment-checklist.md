@@ -1,6 +1,6 @@
 # Deployment Checklist Rules
 
-**Category:** Deployment  
+**Category:** Deployment
 **Tags:** #deployment #production #checklist #release
 
 ## Description
@@ -10,6 +10,7 @@ Pre-deployment checklist to ensure safe and successful releases.
 ## Pre-Deployment Checklist
 
 ### Code Quality
+
 - [ ] All tests pass in CI/CD
 - [ ] Code review approved
 - [ ] No merge conflicts
@@ -18,6 +19,7 @@ Pre-deployment checklist to ensure safe and successful releases.
 - [ ] Performance tests pass
 
 ### Documentation
+
 - [ ] CHANGELOG.md updated
 - [ ] API documentation updated
 - [ ] README updated (if needed)
@@ -25,6 +27,7 @@ Pre-deployment checklist to ensure safe and successful releases.
 - [ ] Runbook updated
 
 ### Configuration
+
 - [ ] Environment variables documented
 - [ ] Secrets rotated (if needed)
 - [ ] Feature flags configured
@@ -32,6 +35,7 @@ Pre-deployment checklist to ensure safe and successful releases.
 - [ ] Configuration files updated
 
 ### Testing
+
 - [ ] Integration tests pass
 - [ ] E2E tests pass
 - [ ] Load testing completed (for major changes)
@@ -39,6 +43,7 @@ Pre-deployment checklist to ensure safe and successful releases.
 - [ ] Tested in staging environment
 
 ### Monitoring & Alerts
+
 - [ ] Monitoring dashboards ready
 - [ ] Alerts configured
 - [ ] Log aggregation working
@@ -46,6 +51,7 @@ Pre-deployment checklist to ensure safe and successful releases.
 - [ ] Performance monitoring active
 
 ### Rollback Plan
+
 - [ ] Rollback procedure documented
 - [ ] Database rollback plan ready
 - [ ] Previous version tagged
@@ -53,6 +59,7 @@ Pre-deployment checklist to ensure safe and successful releases.
 - [ ] Team notified of deployment
 
 ### Communication
+
 - [ ] Stakeholders notified
 - [ ] Maintenance window scheduled (if needed)
 - [ ] User communication prepared
@@ -82,6 +89,7 @@ Pre-deployment checklist to ensure safe and successful releases.
 ## Emergency Procedures
 
 ### If Issues Found
+
 1. Assess severity
 2. Attempt quick fix if minor
 3. Rollback if critical
@@ -89,6 +97,7 @@ Pre-deployment checklist to ensure safe and successful releases.
 5. Post-mortem after resolution
 
 ### Rollback Triggers
+
 - Critical functionality broken
 - Error rate spike >10%
 - Performance degradation >50%
@@ -98,6 +107,7 @@ Pre-deployment checklist to ensure safe and successful releases.
 ## Examples
 
 ### Good Deployment
+
 ```bash
 # 1. Verify staging
 ./scripts/verify-staging.sh
@@ -113,6 +123,7 @@ Pre-deployment checklist to ensure safe and successful releases.
 ```
 
 ### Deployment Notes Template
+
 ```
 ## Deployment v2.3.0
 
@@ -138,6 +149,7 @@ git checkout v2.2.1 && ./scripts/deploy.sh production
 ```
 
 ## Benefits
+
 - Fewer production incidents
 - Faster issue detection
 - Clearer rollback path

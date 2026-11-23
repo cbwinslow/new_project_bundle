@@ -36,6 +36,7 @@ Get a complete list of all available rules:
 ```
 
 **Example Output:**
+
 ```markdown
 # Development Rules
 
@@ -81,6 +82,7 @@ Retrieve the full content of a rule:
 ```
 
 **Example Output:**
+
 ```markdown
 # Commit Message Convention
 
@@ -106,6 +108,7 @@ Search for rules by keyword:
 ```
 
 Searches in:
+
 - Rule titles
 - Descriptions
 - Tags
@@ -132,6 +135,7 @@ See all available rule categories:
 ```
 
 **Example Output:**
+
 ```markdown
 # Rule Categories
 
@@ -252,7 +256,7 @@ Use a custom rules location:
 ```javascript
 // Point to a different directory
 rules_list({ rulesDir: "/path/to/custom/rules" })
-rules_get({ 
+rules_get({
   ruleId: "category/rule",
   rulesDir: "/path/to/custom/rules"
 })
@@ -307,6 +311,7 @@ github_get_file({
 ## Common Rule Categories
 
 ### code-quality
+
 - Clean code principles
 - Error handling
 - Code organization
@@ -314,6 +319,7 @@ github_get_file({
 - Comments and documentation
 
 ### git-workflow
+
 - Commit messages
 - Branch naming
 - Pull request process
@@ -321,6 +327,7 @@ github_get_file({
 - Merge strategies
 
 ### testing
+
 - Test coverage requirements
 - Testing best practices
 - Unit test guidelines
@@ -328,6 +335,7 @@ github_get_file({
 - Test naming conventions
 
 ### security
+
 - Secrets management
 - Authentication patterns
 - Input validation
@@ -335,6 +343,7 @@ github_get_file({
 - Vulnerability handling
 
 ### documentation
+
 - API documentation
 - README standards
 - Code comments
@@ -342,6 +351,7 @@ github_get_file({
 - Runbook creation
 
 ### deployment
+
 - Deployment checklist
 - Environment configuration
 - Release process
@@ -349,6 +359,7 @@ github_get_file({
 - Monitoring setup
 
 ### ai-agents
+
 - AI agent guidelines
 - Context rules
 - Tool usage patterns

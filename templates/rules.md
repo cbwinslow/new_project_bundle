@@ -297,7 +297,7 @@ Rules can be exempted with:
 ## Rule Violations
 
 | Severity | Action |
-|----------|--------|
+| ---------- | -------- |
 | Minor | Comment on PR, request fix |
 | Major | Block PR, require fix |
 | Critical | Revert changes, security review |

@@ -65,31 +65,31 @@ npb_browse_bundles() {
         npb_error "Failed to fetch bundle manifest"
         return 1
     }
-    
+
     if ! command -v jq &>/dev/null; then
         npb_error "jq is required for the TUI browser. Install with: brew install jq / apt install jq"
         return 1
     fi
-    
+
     # Get bundle list
     local bundles=($(jq -r '.bundles | keys[]' "$manifest_file"))
     local total_bundles=${#bundles[@]}
     local current_page=0
     local page_size=15
     local total_pages=$(( (total_bundles + page_size - 1) / page_size ))
-    
+
     while true; do
         _tui_clear
         _tui_get_terminal_size
-        
+
         _tui_draw_header "📦 New Project Bundle Browser - Page $((current_page + 1))/$total_pages"
         echo ""
-        
+
         # Calculate range for current page
         local start=$((current_page * page_size))
         local end=$((start + page_size))
         [ $end -gt $total_bundles ] && end=$total_bundles
-        
+
         # Display bundles for current page
         for ((i=start; i<end; i++)); do
             local bundle_key="${bundles[$i]}"
@@ -100,25 +100,25 @@ npb_browse_bundles() {
                     if ($seen | index($name)) then 0
                     else
                         (.bundles[$name].files // [] | length) +
-                        ((.bundles[$name].includes // []) | 
+                        ((.bundles[$name].includes // []) |
                          map(count_files(.; $seen + [$name])) | add // 0)
                     end;
                 count_files($k; [])
             ' "$manifest_file")
-            
+
             local display_num=$((i + 1))
             echo -e "${TUI_BOLD}${TUI_CYAN}[$display_num]${TUI_RESET} ${TUI_BOLD}$bundle_key${TUI_RESET}"
             echo -e "     ${TUI_GREEN}$bundle_name${TUI_RESET}"
             echo -e "     $bundle_desc ${TUI_DIM}($file_count files)${TUI_RESET}"
             echo ""
         done
-        
+
         _tui_draw_footer "Commands: [n]ext page [p]rev page [#]download bundle [i]nfo [s]earch [q]uit"
-        
+
         # Read user input
         read -p "Enter command: " -n 1 -r cmd
         echo ""
-        
+
         case "$cmd" in
             n|N)
                 [ $current_page -lt $((total_pages - 1)) ] && current_page=$((current_page + 1))
@@ -171,7 +171,7 @@ _tui_menu_select() {
     local options=("$@")
     local selected=0
     local total=${#options[@]}
-    
+
     # Check if we have arrow key support
     if ! command -v tput &>/dev/null; then
         # Fallback to simple numbered selection
@@ -186,13 +186,13 @@ _tui_menu_select() {
         fi
         return 1
     fi
-    
+
     # Interactive menu with arrow keys (simplified version)
     while true; do
         _tui_clear
         _tui_draw_header "$title"
         echo ""
-        
+
         for ((i=0; i<total; i++)); do
             if [ $i -eq $selected ]; then
                 echo -e "${TUI_REVERSE}${TUI_BOLD} → ${options[$i]} ${TUI_RESET}"
@@ -200,13 +200,13 @@ _tui_menu_select() {
                 echo -e "   ${options[$i]}"
             fi
         done
-        
+
         echo ""
         _tui_draw_footer "Use ↑/↓ or j/k to navigate, Enter to select, q to quit"
-        
+
         # Read single character
         read -rsn1 key
-        
+
         case "$key" in
             A|k)  # Up arrow or k
                 [ $selected -gt 0 ] && selected=$((selected - 1))
@@ -231,9 +231,9 @@ npb_quick_download() {
         npb_error "jq is required. Install with: brew install jq / apt install jq"
         return 1
     fi
-    
+
     local manifest=$(_npb_fetch_manifest) || return 1
-    
+
     # Get popular bundles
     local bundles=("all-github" "github-workflows-ci" "docker" "all-templates" "dotfiles" "mcp-server")
     local labels=(
@@ -244,22 +244,22 @@ npb_quick_download() {
         "Essential Dotfiles"
         "MCP Server"
     )
-    
+
     echo ""
     npb_header "📦 Quick Download Menu"
     echo ""
-    
+
     for ((i=0; i<${#bundles[@]}; i++)); do
         echo "$((i+1)). ${labels[$i]}"
         echo "   ${TUI_DIM}Bundle: ${bundles[$i]}${TUI_RESET}"
         echo ""
     done
-    
+
     echo "0. Custom bundle"
     echo ""
-    
+
     read -p "Select option (0-${#bundles[@]}): " choice
-    
+
     if [[ "$choice" == "0" ]]; then
         npb_browse_bundles
     elif [[ "$choice" =~ ^[0-9]+$ ]] && [ "$choice" -gt 0 ] && [ "$choice" -le "${#bundles[@]}" ]; then
