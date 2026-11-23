@@ -26,21 +26,21 @@ jobs:
           script: |
             // This script requires a project number and project token
             // You can customize this to work with your GitHub Project
-            
+
             const item = context.payload.issue || context.payload.pull_request;
             const isIssue = context.payload.issue !== undefined;
-            
+
             console.log(`Adding ${isIssue ? 'issue' : 'PR'} #${item.number} to project board...`);
-            
+
             // Add labels based on type
             const labels = [];
-            
+
             if (isIssue) {
               labels.push('in-backlog');
             } else {
               labels.push('in-review');
             }
-            
+
             if (labels.length > 0) {
               await github.rest.issues.addLabels({
                 owner: context.repo.owner,
@@ -61,7 +61,7 @@ jobs:
           script: |
             const issue = context.payload.issue;
             const label = context.payload.label;
-            
+
             // Define status transitions based on labels
             const statusLabels = {
               'in-progress': 'In Progress',
@@ -69,10 +69,10 @@ jobs:
               'blocked': 'Blocked',
               'done': 'Done'
             };
-            
+
             if (label && statusLabels[label.name]) {
               console.log(`Issue #${issue.number} status changed to: ${statusLabels[label.name]}`);
-              
+
               // Remove other status labels
               for (const statusLabel of Object.keys(statusLabels)) {
                 if (statusLabel !== label.name) {
@@ -97,16 +97,16 @@ jobs:
           script: |
             const pr = context.payload.pull_request;
             const body = pr.body || '';
-            
+
             // Find linked issues
             const issuePattern = /(close[sd]?|fix(e[sd])?|resolve[sd]?)\s*#(\d+)/gi;
             let match;
             const linkedIssues = [];
-            
+
             while ((match = issuePattern.exec(body)) !== null) {
               linkedIssues.push(parseInt(match[3]));
             }
-            
+
             for (const issueNumber of linkedIssues) {
               try {
                 // Add completion comment
@@ -116,7 +116,7 @@ jobs:
                   issue_number: issueNumber,
                   body: `🎉 This issue was addressed in PR #${pr.number} by @${pr.user.login}`
                 });
-                
+
                 // Update labels
                 await github.rest.issues.addLabels({
                   owner: context.repo.owner,
@@ -124,7 +124,7 @@ jobs:
                   issue_number: issueNumber,
                   labels: ['done']
                 });
-                
+
                 console.log(`Processed linked issue #${issueNumber}`);
               } catch (error) {
                 console.log(`Could not process issue #${issueNumber}: ${error.message}`);
@@ -143,21 +143,21 @@ jobs:
             const item = context.payload.issue || context.payload.pull_request;
             const isIssue = context.payload.issue !== undefined;
             const isPR = context.payload.pull_request !== undefined;
-            
+
             // Determine completion label
             let completionLabel = 'done';
-            
+
             if (isPR) {
               completionLabel = context.payload.pull_request.merged ? 'merged' : 'closed';
             }
-            
+
             if (isIssue && context.payload.issue.state_reason === 'not_planned') {
               completionLabel = 'wont-fix';
             }
-            
+
             // Remove in-progress type labels
             const labelsToRemove = ['in-progress', 'in-review', 'in-backlog', 'needs-triage'];
-            
+
             for (const label of labelsToRemove) {
               await github.rest.issues.removeLabel({
                 owner: context.repo.owner,
@@ -166,7 +166,7 @@ jobs:
                 name: label
               }).catch(() => {});
             }
-            
+
             // Add completion label
             await github.rest.issues.addLabels({
               owner: context.repo.owner,
@@ -174,7 +174,7 @@ jobs:
               issue_number: item.number,
               labels: [completionLabel]
             });
-            
+
             console.log(`${isIssue ? 'Issue' : 'PR'} #${item.number} marked as ${completionLabel}`);
 
   # Move back to backlog when reopened
@@ -187,10 +187,10 @@ jobs:
         with:
           script: |
             const item = context.payload.issue || context.payload.pull_request;
-            
+
             // Remove completion labels
             const labelsToRemove = ['done', 'merged', 'closed', 'wont-fix'];
-            
+
             for (const label of labelsToRemove) {
               await github.rest.issues.removeLabel({
                 owner: context.repo.owner,
@@ -199,7 +199,7 @@ jobs:
                 name: label
               }).catch(() => {});
             }
-            
+
             // Add backlog label
             await github.rest.issues.addLabels({
               owner: context.repo.owner,
@@ -207,5 +207,5 @@ jobs:
               issue_number: item.number,
               labels: ['in-backlog']
             });
-            
+
             console.log(`Item #${item.number} moved back to backlog`);

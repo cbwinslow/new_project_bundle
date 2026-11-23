@@ -129,8 +129,6 @@ templates/
 
 ## 🚀 Getting Started
 
-
-
 **Don't want to clone the whole repo?** Use our bundle downloader to get only what you need!
 
 ```bash
@@ -170,6 +168,7 @@ The repository includes a comprehensive, modular rules system for development be
 ### What Are Rules?
 
 Rules are individual markdown files organized by category:
+
 - **Code Quality** - Clean code, error handling
 - **Git Workflow** - Commit messages, branch naming
 - **Testing** - Test coverage requirements
@@ -181,11 +180,13 @@ Rules are individual markdown files organized by category:
 ### Using Rules
 
 **List all rules:**
+
 ```bash
 npb-list-rules
 ```
 
 **Search for rules:**
+
 ```bash
 npb-query commit      # Find commit-related rules
 npb-query security    # Find security rules
@@ -193,12 +194,14 @@ npb-query test        # Find testing rules
 ```
 
 **Download specific rules:**
+
 ```bash
 npb-download-rule code-quality/clean-code.md
 npb-download-rule git-workflow/commit-messages.md
 ```
 
 **Download all rules in a category:**
+
 ```bash
 npb-download rules-code-quality
 npb-download rules-security
@@ -206,6 +209,7 @@ npb-download all-rules    # Download all rules
 ```
 
 **Interactive browsing (requires fzf):**
+
 ```bash
 npb-browse
 ```
@@ -213,7 +217,7 @@ npb-browse
 ### Available Rule Bundles
 
 | Bundle | Description | Files |
-|--------|-------------|-------|
+| -------- | ------------- | ------- |
 | `rules-code-quality` | Clean code and error handling | 2 |
 | `rules-git-workflow` | Git commit and branch conventions | 2 |
 | `rules-testing` | Test coverage standards | 1 |
@@ -242,20 +246,24 @@ See [Rules System Documentation](docs/wiki/Rules-System.md) for more details.
 This bundle is configured to work with multiple AI code review services:
 
 #### GitHub Copilot
+
 - Built-in to GitHub Enterprise
 - Automatically provides code suggestions and review comments
 
 #### OpenHands (formerly OpenDevin)
+
 1. Visit [OpenHands GitHub Repository](https://github.com/All-Hands-AI/OpenHands)
 2. Follow the installation instructions for self-hosted deployment
 3. Configure repository access for AI-assisted development
 
 #### Google Gemini Code Assist
+
 1. Set up via Google Cloud Console
 2. Install the GitHub App
 3. Configure in repository settings
 
 #### CodeRabbit
+
 1. Install from [GitHub Marketplace](https://github.com/marketplace/coderabbit-ai-code-reviews)
 2. Add to repository
 3. Automatic PR reviews begin immediately
@@ -277,6 +285,7 @@ source ~/.bashrc  # or ~/.zshrc
 ### Available Commands
 
 **Bundle Management:**
+
 - `npb_list_bundles` - List all available bundles
 - `npb_search_bundles <keyword>` - Search for bundles
 - `npb_browse_bundles` - Interactive TUI browser
@@ -284,6 +293,7 @@ source ~/.bashrc  # or ~/.zshrc
 - `npb_get <name>` - Quick download to current directory
 
 **Rule Management:**
+
 - `npb_list_rules [category]` - List development rules
 - `npb_search_rules <keyword>` - Search for rules
 - `npb_browse_rules [category]` - Interactive rule browser
@@ -291,6 +301,7 @@ source ~/.bashrc  # or ~/.zshrc
 - `npb_install_rule <id>` - Install rule to NPB directory
 
 **Utilities:**
+
 - `npb_version` - Show version and status
 - `npb_refresh` - Refresh bundle cache
 - `npb_help` - Show help message
@@ -359,6 +370,7 @@ npb_search_rules eslint
 ### Rule Examples
 
 Available rules include:
+
 - `gh-ci-basic` - Basic CI workflow with testing
 - `gh-security-scan` - Comprehensive security scanning
 - `docker-multistage` - Optimized multi-stage builds
@@ -380,6 +392,7 @@ MCP (Model Context Protocol) is a standardized protocol that allows AI models to
 The MCP server includes the following tool categories:
 
 #### 📁 File System Tools
+
 - `read_file` - Read file contents
 - `write_file` - Write content to files
 - `list_directory` - List directory contents
@@ -387,6 +400,7 @@ The MCP server includes the following tool categories:
 - `search_files` - Search for files by pattern
 
 #### 🔧 Git Tools
+
 - `git_status` - Get repository status
 - `git_log` - View commit history
 - `git_diff` - Show changes
@@ -396,6 +410,7 @@ The MCP server includes the following tool categories:
 - `git_blame` - Show line-by-line blame
 
 #### ⏰ Time Tools
+
 - `get_current_time` - Get current time in any timezone
 - `convert_timezone` - Convert between timezones
 - `time_difference` - Calculate time differences
@@ -403,12 +418,14 @@ The MCP server includes the following tool categories:
 - `list_timezones` - List available timezones
 
 #### 🌐 Fetch Tools
+
 - `http_get` - Fetch content via HTTP GET
 - `http_post` - Send data via HTTP POST
 - `check_url` - Check URL availability
 - `fetch_webpage` - Extract text from webpages
 
 #### 🧠 Memory Tools
+
 - `memory_set` - Store values with tags
 - `memory_get` - Retrieve stored values
 - `memory_delete` - Delete values
@@ -419,6 +436,7 @@ The MCP server includes the following tool categories:
 - `memory_stats` - Get memory statistics
 
 #### 💻 System Tools
+
 - `system_info` - Get system information
 - `get_env` - Get environment variables
 - `list_env` - List environment variables
@@ -429,6 +447,7 @@ The MCP server includes the following tool categories:
 - `json_format` - Format/validate JSON
 
 #### 🐙 GitHub API Tools
+
 - `github_repo_info` - Get detailed repository information
 - `github_list_issues` - List issues with filtering
 - `github_list_prs` - List pull requests
@@ -438,6 +457,7 @@ The MCP server includes the following tool categories:
 - `github_search_repos` - Search repositories with query syntax
 
 #### 📋 Rules Management Tools
+
 - `rules_list` - List all development rules
 - `rules_get` - Get specific rule content
 - `rules_search` - Search rules by keyword
@@ -445,6 +465,7 @@ The MCP server includes the following tool categories:
 - `rules_categories` - List all rule categories
 
 #### ⚙️ MCP Configuration Tools
+
 - `mcp_generate_config` - Generate client configurations
 - `mcp_install_config` - Install MCP server configs
 - `mcp_check_config` - Check existing configurations
@@ -454,21 +475,25 @@ The MCP server includes the following tool categories:
 ### Quick Start
 
 1. **Install dependencies:**
+
    ```bash
    npm install
    ```
 
 2. **Build the server:**
+
    ```bash
    npm run build
    ```
 
 3. **Run the server:**
+
    ```bash
    npm start
    ```
 
    Or for development:
+
    ```bash
    npm run start:dev
    ```
@@ -586,7 +611,7 @@ Use the provided `mcp-config.json` as a template for your MCP client configurati
 ### Security Workflows
 
 | Workflow | Description | Trigger |
-|----------|-------------|---------|
+| ---------- | ------------- | --------- |
 | `codeql.yml` | CodeQL security analysis | Push, PR, scheduled |
 | `security.yml` | Comprehensive security scans | Push, PR, scheduled |
 | `dependency-updates.yml` | Dependency vulnerability checks | PR |
@@ -594,7 +619,7 @@ Use the provided `mcp-config.json` as a template for your MCP client configurati
 ### Automation Workflows
 
 | Workflow | Description | Trigger |
-|----------|-------------|---------|
+| ---------- | ------------- | --------- |
 | `issue-triage.yml` | Auto-label and triage issues | Issue opened |
 | `pull-request.yml` | PR labeling and automation | PR events |
 | `project-automation.yml` | Project board sync | Issue/PR events |
@@ -605,7 +630,7 @@ Use the provided `mcp-config.json` as a template for your MCP client configurati
 ### Quality Workflows
 
 | Workflow | Description | Trigger |
-|----------|-------------|---------|
+| ---------- | ------------- | --------- |
 | `docs.yml` | Build and deploy documentation | Push, PR |
 | `performance.yml` | Lighthouse and bundle analysis | Push, PR |
 | `ai-review.yml` | AI-assisted code review | PR |
@@ -619,7 +644,7 @@ The bundle includes comprehensive templates for project documentation:
 ### Documentation Templates
 
 | Template | Purpose |
-|----------|---------|
+| ---------- | --------- |
 | `templates/agents.md` | AI coding agent configuration and guidelines |
 | `templates/rules.md` | Project development rules and standards |
 | `templates/ai-linting-rules.md` | **NEW** Comprehensive linting, formatting, spacing, and code quality rules for AI agents |
@@ -644,6 +669,7 @@ This bundle includes a comprehensive AI agent rules system designed to ensure co
 #### Linting & Code Quality Rules (`ai-linting-rules.md`)
 
 Covers all aspects of code formatting and quality:
+
 - **Indentation & Spacing**: Tabs vs spaces, consistent indentation
 - **Line Length & Wrapping**: Maximum line lengths, wrapping styles
 - **Whitespace Rules**: Trailing whitespace, blank lines
@@ -656,6 +682,7 @@ Covers all aspects of code formatting and quality:
 #### Context & Behavior Rules (`ai-context-rules.md`)
 
 Guides AI agent behavior for better outcomes:
+
 - **Documentation First**: Always read project docs before coding
 - **Non-Destructive Actions**: Never delete without permission
 - **Use Existing Tools**: Discover before creating new utilities
@@ -754,6 +781,7 @@ pre-commit run --all-files
 ```
 
 Included hooks:
+
 - Trailing whitespace removal
 - End of file fixer
 - YAML/JSON validation

@@ -8,7 +8,7 @@
 #
 # Usage:
 #   curl -sSL https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/scripts/quick-setup.sh | bash
-#   
+#
 # Or download and run:
 #   curl -O https://raw.githubusercontent.com/cbwinslow/new_project_bundle/main/scripts/quick-setup.sh
 #   chmod +x quick-setup.sh
@@ -181,24 +181,24 @@ if [ ${#BUNDLES[@]} -gt 0 ]; then
     else
         OUTPUT_DIR="."
     fi
-    
+
     print_info "Downloading bundles to: $OUTPUT_DIR"
     echo ""
-    
+
     # Note: Functions need to be sourced in parent shell
     # User will need to run: source $SHELL_CONFIG before using npb commands
     # Or restart their terminal
-    
+
     print_warning "Note: Shell functions will be available after reloading your shell"
     print_info "Run: source $SHELL_CONFIG"
     print_info "Or restart your terminal"
     echo ""
-    
+
     # Download bundles using wget/curl directly
     REPO="${NPB_REPO:-cbwinslow/new_project_bundle}"
     BRANCH="${NPB_BRANCH:-main}"
     BASE_URL="https://raw.githubusercontent.com/${REPO}/${BRANCH}"
-    
+
     for bundle in "${BUNDLES[@]}"; do
         print_info "To download $bundle, run after reloading:"
         echo "  npb-download $bundle $OUTPUT_DIR"

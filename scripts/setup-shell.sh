@@ -58,7 +58,7 @@ detect_shell() {
 # Get profile file
 get_profile_file() {
     local shell_name=$(detect_shell)
-    
+
     case "$shell_name" in
         bash)
             if [ -f "$HOME/.bashrc" ]; then
@@ -85,9 +85,9 @@ get_profile_file() {
 download_file() {
     local url="$1"
     local output="$2"
-    
+
     mkdir -p "$(dirname "$output")"
-    
+
     if command -v curl &>/dev/null; then
         curl -sSL -o "$output" "$url"
     elif command -v wget &>/dev/null; then
@@ -106,15 +106,15 @@ main() {
     print_header "║     New Project Bundle - Shell Functions Setup              ║"
     print_header "╚══════════════════════════════════════════════════════════════╝"
     echo ""
-    
+
     local shell_name=$(detect_shell)
     local profile_file=$(get_profile_file)
-    
+
     print_info "Detected shell: ${BOLD}$shell_name${NC}"
     print_info "Profile file: ${BOLD}$profile_file${NC}"
     print_info "Install directory: ${BOLD}$INSTALL_DIR${NC}"
     echo ""
-    
+
     # Check for existing installation
     if [ -f "$INSTALL_DIR/bundle-functions.sh" ]; then
         print_warning "NPB functions already installed in $INSTALL_DIR"
@@ -125,24 +125,24 @@ main() {
             exit 0
         fi
     fi
-    
+
     # Create install directory
     print_info "Creating install directory..."
     mkdir -p "$INSTALL_DIR"
     print_success "Directory created"
-    
+
     # Download shell function libraries
     echo ""
     print_header "📥 Downloading NPB shell libraries..."
     echo ""
-    
+
     local files=(
         "bundle-functions.sh"
         "profile-integration.sh"
         "tui-browser.sh"
         "rule-manager.sh"
     )
-    
+
     for file in "${files[@]}"; do
         print_info "Downloading $file..."
         if download_file "${BASE_URL}/lib/${file}" "$INSTALL_DIR/$file"; then
@@ -153,25 +153,25 @@ main() {
             exit 1
         fi
     done
-    
+
     echo ""
     print_header "⚙️  Configuring shell profile..."
     echo ""
-    
+
     # Check if already integrated
     local marker_start="# >>> New Project Bundle >>>"
     local marker_end="# <<< New Project Bundle <<<"
-    
+
     if [ -f "$profile_file" ] && grep -q "$marker_start" "$profile_file"; then
         print_info "Removing old NPB integration..."
         awk "/$marker_start/,/$marker_end/ {next} {print}" "$profile_file" > "${profile_file}.tmp"
         mv "${profile_file}.tmp" "$profile_file"
         print_success "Old integration removed"
     fi
-    
+
     # Add NPB integration
     print_info "Adding NPB integration to $profile_file..."
-    
+
     cat >> "$profile_file" << EOF
 
 $marker_start
@@ -206,26 +206,26 @@ alias npb-rules-browse='npb_browse_rules'
 
 $marker_end
 EOF
-    
+
     print_success "NPB integration added"
-    
+
     # Success message
     echo ""
     print_header "╔══════════════════════════════════════════════════════════════╗"
     print_header "║                  Installation Complete! ✓                   ║"
     print_header "╚══════════════════════════════════════════════════════════════╝"
     echo ""
-    
+
     print_success "NPB shell functions installed successfully!"
     echo ""
-    
+
     print_info "To activate immediately, run:"
     echo ""
     echo "  ${BOLD}source $profile_file${NC}"
     echo ""
     print_info "Or restart your terminal"
     echo ""
-    
+
     print_header "🚀 Quick Start Commands:"
     echo ""
     echo "  ${BOLD}npb${NC}                    - List all available bundles"
@@ -236,14 +236,14 @@ EOF
     echo "  ${BOLD}npb-rules-browse${NC}       - Browse and download rules"
     echo "  ${BOLD}npb_help${NC}               - Show all available commands"
     echo ""
-    
+
     print_header "📚 Examples:"
     echo ""
     echo "  ${BOLD}npb-get github-workflows-ci${NC}"
     echo "  ${BOLD}npb-search docker${NC}"
     echo "  ${BOLD}npb_download_bundle all-templates ./docs${NC}"
     echo ""
-    
+
     # Check for jq
     if ! command -v jq &>/dev/null; then
         print_warning "jq is not installed"
@@ -254,11 +254,11 @@ EOF
         echo "  • RHEL/CentOS: ${BOLD}sudo yum install jq${NC}"
         echo ""
     fi
-    
+
     print_info "For more information, visit:"
     echo "  https://github.com/${REPO}"
     echo ""
-    
+
     print_success "Happy coding! 🎉"
     echo ""
 }

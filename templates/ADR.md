@@ -5,7 +5,7 @@
 ## Document Information
 
 | Field | Value |
-|-------|-------|
+| ------- | ------- |
 | **ADR Number** | ADR-XXX |
 | **Title** | [Short descriptive title] |
 | **Status** | Proposed | Accepted | Deprecated | Superseded |
@@ -117,7 +117,7 @@ Be specific and unambiguous.
 ## Comparison Matrix
 
 | Criterion | Weight | Option 1 | Option 2 | Option 3 |
-|-----------|--------|----------|----------|----------|
+| ----------- | -------- | ---------- | ---------- | ---------- |
 | Performance | 20% | ⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐ |
 | Scalability | 20% | ⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
 | Maintainability | 15% | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ |
@@ -204,7 +204,7 @@ Be specific and unambiguous.
 ## Sign-off
 
 | Role | Name | Date |
-|------|------|------|
+| ------ | ------ | ------ |
 | Technical Lead | | |
 | Architect | | |
 | Product Owner | | |

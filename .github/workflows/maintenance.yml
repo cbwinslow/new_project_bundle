@@ -34,16 +34,16 @@ jobs:
         with:
           script: |
             const { owner, repo } = context.repo;
-            
+
             const caches = await github.rest.actions.getActionsCacheList({
               owner,
               repo,
               per_page: 100
             });
-            
+
             const thirtyDaysAgo = new Date();
             thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-            
+
             let deletedCount = 0;
             for (const cache of caches.data.actions_caches) {
               const lastAccessed = new Date(cache.last_accessed_at);
@@ -57,7 +57,7 @@ jobs:
                 console.log(`Deleted cache: ${cache.key}`);
               }
             }
-            
+
             console.log(`Deleted ${deletedCount} old caches`);
 
   # Clean up old workflow run artifacts
@@ -70,16 +70,16 @@ jobs:
         with:
           script: |
             const { owner, repo } = context.repo;
-            
+
             const artifacts = await github.rest.actions.listArtifactsForRepo({
               owner,
               repo,
               per_page: 100
             });
-            
+
             const sevenDaysAgo = new Date();
             sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-            
+
             let deletedCount = 0;
             for (const artifact of artifacts.data.artifacts) {
               const createdAt = new Date(artifact.created_at);
@@ -93,7 +93,7 @@ jobs:
                 console.log(`Deleted artifact: ${artifact.name}`);
               }
             }
-            
+
             console.log(`Deleted ${deletedCount} old artifacts`);
 
   # Clean up stale branches
@@ -110,30 +110,30 @@ jobs:
         with:
           script: |
             const { owner, repo } = context.repo;
-            
+
             const branches = await github.rest.repos.listBranches({
               owner,
               repo,
               per_page: 100
             });
-            
+
             const protectedBranches = ['main', 'master', 'develop', 'staging', 'production'];
             const ninetyDaysAgo = new Date();
             ninetyDaysAgo.setDate(ninetyDaysAgo.getDate() - 90);
-            
+
             for (const branch of branches.data) {
               if (protectedBranches.includes(branch.name)) continue;
               if (branch.protected) continue;
-              
+
               // Get the last commit on the branch
               const commit = await github.rest.repos.getCommit({
                 owner,
                 repo,
                 ref: branch.commit.sha
               });
-              
+
               const commitDate = new Date(commit.data.commit.committer.date);
-              
+
               if (commitDate < ninetyDaysAgo) {
                 console.log(`Stale branch: ${branch.name} (last commit: ${commitDate.toISOString()})`);
                 // Uncomment to actually delete:
